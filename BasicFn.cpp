@@ -1,3 +1,4 @@
+#pragma once
 #include "BasicFn.hpp"
 
 namespace base
@@ -37,6 +38,7 @@ void base::quitSDL()
     SDL_DestroyWindow(base::window);
     SDL_Quit();
 }
+
 SDL_Texture *base::Load_Image( std::string &filePath )
 {
     SDL_Surface *surface = nullptr;
