@@ -1,5 +1,0 @@
-# depslib dependency file v1.0
-1709385854 source:d:\codeblock\gameprojectltnc\main.cpp
-	<iostream>
-	<SDL.h>
-

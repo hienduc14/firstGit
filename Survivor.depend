@@ -1,0 +1,17 @@
+# depslib dependency file v1.0
+1709385854 source:d:\codeblock\gameprojectltnc\main.cpp
+	<iostream>
+	<SDL.h>
+
+1709739286 source:d:\codeblock\survivor\main.cpp
+	<SDL.h>
+	"BasicFn.hpp"
+
+1709739313 d:\codeblock\survivor\basicfn.hpp
+	<SDL.h>
+	<SDL_image.h>
+	<string>
+
+1709739254 source:d:\codeblock\survivor\basicfn.cpp
+	"BasicFn.hpp"
+
