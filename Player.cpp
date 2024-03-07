@@ -18,24 +18,11 @@ void Player::ResetInput(){ a_x = 0; a_y = 0; }
 
 void Player::KeyInput( SDL_Event Events )
 {
-    if(Events.type == SDL_KEYDOWN)
-    {
-        switch (Events.key.keysym.sym){
-        case SDLK_UP:       a_y -= v_Player; break;
-        case SDLK_DOWN:     a_y += v_Player; break;
-        case SDLK_LEFT:     a_x -= v_Player; break;
-        case SDLK_RIGHT:    a_x += v_Player; break;
-        }
-    }
-//    else if(Events.type == SDL_KEYUP)
-//    {
-//        switch (Events.key.keysym.sym){
-//        case SDLK_UP:       a_y += v_Player; break;
-//        case SDLK_DOWN:     a_y -= v_Player; break;
-//        case SDLK_LEFT:     a_x += v_Player; break;
-//        case SDLK_RIGHT:    a_x -= v_Player; break;
-//        }
-//    }
+    const Uint8* state = SDL_GetKeyboardState(nullptr);
+    if( state[SDL_SCANCODE_W] || state[SDL_SCANCODE_UP] )       a_y -= v_Player;
+    if( state[SDL_SCANCODE_S] || state[SDL_SCANCODE_DOWN] )     a_y += v_Player;
+    if( state[SDL_SCANCODE_A] || state[SDL_SCANCODE_LEFT] )     a_x -= v_Player;
+    if( state[SDL_SCANCODE_D] || state[SDL_SCANCODE_RIGHT] )    a_x += v_Player;
 }
 
 void Player::Move( Map &BackGr )

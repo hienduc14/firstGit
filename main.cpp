@@ -13,9 +13,6 @@ int main( int argc, char* args[] )
     std::string x = "map.jpg";
 
     Map BackGr;
-//    BackGr.drawObj();
-//    SDL_RenderPresent(base::renderer);
-//    SDL_Delay(1000);
     Player player;
 
     bool quit = false;
@@ -28,9 +25,11 @@ int main( int argc, char* args[] )
                 quit = true;
                 break;
             }
-            player.ResetInput();
-            player.KeyInput(base::g_event);
+
         }
+        player.ResetInput();
+        player.KeyInput(base::g_event);
+
         player.Move(BackGr);
 
         BackGr.drawObj();
