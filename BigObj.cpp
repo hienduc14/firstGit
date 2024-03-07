@@ -16,7 +16,7 @@ void BigObj::drawObj()
 {
     SDL_RenderCopy(base::renderer, texture, NULL, &rect);
 }
-void BigObj::SetTexture( std::string &filePath )
+void BigObj::SetTexture( const char* filePath )
 {
     texture = base::Load_Image( filePath );
 }

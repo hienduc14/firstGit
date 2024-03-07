@@ -44,5 +44,5 @@ int main( int argc, char* args[] )
 
     // thoat chuong trinh
     base::quitSDL();
-    return 1;
+    return 0;
 }

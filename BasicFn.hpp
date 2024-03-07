@@ -13,5 +13,5 @@ namespace base
     extern SDL_Event g_event;
     void initSDL();
     void quitSDL();
-    SDL_Texture *Load_Image( std::string &filePath );
+    SDL_Texture *Load_Image( const char* filePath );
 }

@@ -16,7 +16,7 @@ public :
     void SetRect(int x, int y, int w, int h){ this->rect = {x, y, w, h}; };
     SDL_Rect GetRect(){ return this->rect; };
 
-    void SetTexture( std::string &filePath );
+    void SetTexture( const char* filePath );
     SDL_Texture* GetTexture(){ return this->texture; };
 
     // ve hinh anh tu texture

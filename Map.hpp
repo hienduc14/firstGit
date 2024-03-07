@@ -11,7 +11,7 @@ private :
     int x, y;
     const int MapWidth = SCREEN_WIDTH;
     const int MapHeight = SCREEN_HEIGHT;
-    std::string MapImg = "EndlessMap.png";
+    const char* MapImg = "EndlessMap.png";
 public :
     void MapMove( int u, int v );
 };

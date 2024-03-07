@@ -13,7 +13,7 @@ private :
     int v_Player = 5;
     const int PlayerWidth = 150;
     const int PlayerHeight = 100;
-    std::string PlayerImg = "player.jpg";
+    const char* PlayerImg = "player.jpg";
 public :
     void ResetInput();
     void KeyInput( SDL_Event Events );

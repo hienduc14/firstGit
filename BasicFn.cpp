@@ -39,18 +39,9 @@ void base::quitSDL()
     SDL_Quit();
 }
 
-SDL_Texture *base::Load_Image( std::string &filePath )
+SDL_Texture *base::Load_Image( const char* filePath )
 {
-    SDL_Surface *surface = nullptr;
     SDL_Texture *screen = nullptr;
-    // load anh vao surface
-    surface = IMG_Load(filePath.c_str());
-
-    if (surface != NULL)
-    {
-        //gan surface vao texture roi t
-	    screen = SDL_CreateTextureFromSurface(base::renderer, surface);
-		SDL_FreeSurface(surface);
-	}
+    screen = IMG_LoadTexture(base::renderer, filePath);
 	return screen;
 };
