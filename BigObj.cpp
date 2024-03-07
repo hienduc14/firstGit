@@ -1,4 +1,3 @@
-#pragma once
 #include "BigObj.hpp"
 
 BigObj::BigObj(){

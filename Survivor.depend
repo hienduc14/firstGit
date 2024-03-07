@@ -3,22 +3,31 @@
 	<iostream>
 	<SDL.h>
 
-1709748464 source:d:\codeblock\survivor\main.cpp
+1709796390 source:d:\codeblock\survivor\main.cpp
 	<SDL.h>
 	"BasicFn.hpp"
 	"BigObj.hpp"
+	"Player.hpp"
+	<iostream>
 
-1709739313 d:\codeblock\survivor\basicfn.hpp
+1709784849 d:\codeblock\survivor\basicfn.hpp
 	<SDL.h>
 	<SDL_image.h>
 	<string>
 
-1709748422 source:d:\codeblock\survivor\basicfn.cpp
+1709784895 source:d:\codeblock\survivor\basicfn.cpp
 	"BasicFn.hpp"
 
-1709748977 source:d:\codeblock\survivor\bigobj.cpp
+1709777594 source:d:\codeblock\survivor\bigobj.cpp
 	"BigObj.hpp"
 
-1709748787 d:\codeblock\survivor\bigobj.hpp
+1709796353 d:\codeblock\survivor\bigobj.hpp
 	"BasicFn.hpp"
+
+1709796371 d:\codeblock\survivor\player.hpp
+	"BasicFn.hpp"
+	"BigObj.hpp"
+
+1709796076 source:d:\codeblock\survivor\player.cpp
+	"Player.hpp"
 

@@ -1,10 +1,10 @@
-#pragma once
 #include "BasicFn.hpp"
 
 namespace base
 {
     SDL_Window *window = nullptr;
     SDL_Renderer *renderer = nullptr;
+    SDL_Event g_event;
 
     // Các hàm và mã khác...
 }

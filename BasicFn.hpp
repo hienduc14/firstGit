@@ -10,6 +10,7 @@ namespace base
 {
     extern SDL_Window *window;
     extern SDL_Renderer *renderer;
+    extern SDL_Event g_event;
     void initSDL();
     void quitSDL();
     SDL_Texture *Load_Image( std::string &filePath );

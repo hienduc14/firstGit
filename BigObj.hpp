@@ -21,4 +21,4 @@ public :
 
     // ve hinh anh tu texture
     void drawObj();
-};;
+};
