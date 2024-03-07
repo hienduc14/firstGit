@@ -2,6 +2,7 @@
 #include "BasicFn.hpp"
 #include "BigObj.hpp"
 #include "Player.hpp"
+#include "Map.hpp"
 #include <iostream>
 int main( int argc, char* args[] )
 {
@@ -11,11 +12,10 @@ int main( int argc, char* args[] )
     // ve map
     std::string x = "map.jpg";
 
-    BigObj Map;
-    Map.SetRect( 0, 0, 1000, 1000 );
-    Map.SetTexture( x );
-//    Map.drawObj();
-
+    Map BackGr;
+//    BackGr.drawObj();
+//    SDL_RenderPresent(base::renderer);
+//    SDL_Delay(1000);
     Player player;
 
     bool quit = false;
@@ -31,9 +31,11 @@ int main( int argc, char* args[] )
             player.ResetInput();
             player.KeyInput(base::g_event);
         }
-        player.Move();
-        Map.drawObj();
+        player.Move(BackGr);
+
+        BackGr.drawObj();
         player.drawObj();
+
         SDL_RenderPresent(base::renderer);
         SDL_Delay( 10 );
     }
@@ -43,4 +45,5 @@ int main( int argc, char* args[] )
 
     // thoat chuong trinh
     base::quitSDL();
+    return 1;
 }
