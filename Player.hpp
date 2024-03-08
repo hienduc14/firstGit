@@ -2,6 +2,10 @@
 #include "BasicFn.hpp"
 #include "BigObj.hpp"
 #include "Map.hpp"
+#include "Enemy.hpp"
+#include <vector>
+#define PlayerWidth 150
+#define PlayerHeight 100
 
 class Player : public BigObj
 {
@@ -11,11 +15,17 @@ public :
 private :
     int a_x = 0, a_y = 0;
     int v_Player = 5;
-    const int PlayerWidth = 150;
-    const int PlayerHeight = 100;
+    int dir;
     const char* PlayerImg = "player.jpg";
+//public :
+//    std::vector<Ammo*> AmmoList;
 public :
     void ResetInput();
-    void KeyInput( SDL_Event Events );
-    void Move( Map &BackGr );
+    void KeyInput();
+    void Move( Map &BackGr, Enemy &enemy );
+    void SetDir();
+    int GetDir();
+//    void SetAmmoList(std::vector<Ammo*> ammoList  );
+//    std::vector<Ammo*> GetAmmoList();
+
 };
