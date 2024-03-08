@@ -9,8 +9,6 @@ public :
     Map();
     ~Map();
 private :
-    int x, y;
-
     const char* MapImg = "EndlessMap.png";
 public :
     void MapMove( int u, int v );

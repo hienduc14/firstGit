@@ -1,8 +1,6 @@
 #include "Func.hpp"
 
 int func::dist( int x, int y, int u, int v ){
-//    std::cout << x << " " << y << " " << u << " " << v << '\n';
-//    return 10;
     return sqrt( 1ll*(u-x)*(u-x) + 1ll*(v-y)*(v-y) );
 }
 

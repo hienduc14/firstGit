@@ -4,6 +4,7 @@
 #include "Player.hpp"
 #include "Map.hpp"
 #include "Enemy.hpp"
+#include "Power.hpp"
 int main( int argc, char* args[] )
 {
     // khoi tao window, renderer...
@@ -15,6 +16,12 @@ int main( int argc, char* args[] )
     Map BackGr;
     Player player;
     Enemy enemy;
+    Power gun;
+
+    gun.SetType(0);
+    int ok = 1;
+    gun.drawObj();
+
     enemy.SetUp();
     bool quit = false;
     while(!quit)
@@ -28,37 +35,30 @@ int main( int argc, char* args[] )
             }
 
         }
+        // nhap thao tac tu ban phim
         player.ResetInput();
         player.KeyInput();
-        player.Move(BackGr, enemy);
+
+        // xu ly dan (neu co)
+        if( ok == 1 ){
+            gun.Start( player.GetDir(), PlayerWidth/2+3*dx[player.GetDir()], PlayerHeight/2+3*dy[player.GetDir()] );
+            ok = 0;
+        }
+
+        //xu ly move cac Obj
+        player.Move(BackGr, enemy, gun);
+
+        //cac obj move
+        gun.Run();
         enemy.Chase();
+
         BackGr.drawObj();
         player.drawObj();
         enemy.drawObj();
-//        std::vector<Ammo*> ammoList = player.GetAmmoList();
-//        std::vector<Ammo*> &ammoList = player.AmmoList;
-//        for (auto it = player.AmmoList.begin(); it != player.AmmoList.end(); ) {
-//            Ammo *u = (*it);
-//            if ( u->GetIsMove() == false) {
-//                std::cout << "A";
-//                it = player.AmmoList.erase(it); // Xoá phần tử
-//            } else {
-//                ++it;
-//            }
-//        }
-//        for( Ammo* ammo : player.AmmoList ){
-//            if( ammo != NULL ){
-//                if( ammo->GetIsMove() == true ){
-//                    ammo->drawObj();
-//                    ammo->Move(player.GetDir(), 1, ammo->GetRect());
-//                }
-//
-//            }
-//
-//        }
+        gun.drawObj();
 
         SDL_RenderPresent(base::renderer);
-        SDL_Delay( 10 );
+        SDL_Delay( 50 );
     }
 
 

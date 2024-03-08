@@ -24,36 +24,23 @@ void Player::KeyInput()
     if( state[SDL_SCANCODE_S] || state[SDL_SCANCODE_DOWN] )     a_y += v_Player;
     if( state[SDL_SCANCODE_A] || state[SDL_SCANCODE_LEFT] )     a_x -= v_Player;
     if( state[SDL_SCANCODE_D] || state[SDL_SCANCODE_RIGHT] )    a_x += v_Player;
-//    if( state[SDL_SCANCODE_SPACE] ){
-//        Ammo* ammo;
-//        ammo->SetWH(50, 50);
-//        ammo->SetTexture("bullet.png");
-//        ammo->SetAmmoType(Ammo::Knife);
-//        ammo->SetRect(this->rect.x+PlayerWidth, this->rect.y);
-//
-//        ammo->SetIsMove(true);
-//        std::cout << ammo->GetIsMove() << " ";
-//        this->AmmoList.push_back(ammo);
-//        std::cout << ammo->GetIsMove() << " " << AmmoList.back()->GetIsMove() << '\n';
-//        for(auto it : AmmoList) std::cout << it->GetIsMove() << " "; std::cout << '\n';
-//    }
 }
 void Player::SetDir(){
-    if( a_x > 0 || a_y == 0 ) dir = 0;
-    if( a_x > 0 || a_y > 0 ) dir = 1;
-    if( a_x == 0 || a_y > 0 ) dir = 2;
-    if( a_x < 0 || a_y > 0 ) dir = 3;
-    if( a_x < 0 || a_y == 0 ) dir = 4;
-    if( a_x < 0 || a_y < 0 ) dir = 5;
-    if( a_x == 0 || a_y < 0 ) dir = 6;
-    if( a_x > 0 || a_y < 0 ) dir = 7;
+    if( a_x > 0 && a_y == 0 ) dir = 0;
+    if( a_x > 0 && a_y > 0 ) dir = 1;
+    if( a_x == 0 && a_y > 0 ) dir = 2;
+    if( a_x < 0 && a_y > 0 ) dir = 3;
+    if( a_x < 0 && a_y == 0 ) dir = 4;
+    if( a_x < 0 && a_y < 0 ) dir = 5;
+    if( a_x == 0 && a_y < 0 ) dir = 6;
+    if( a_x > 0 && a_y < 0 ) dir = 7;
 }
 
 int Player::GetDir(){
     return this->dir;
 }
 
-void Player::Move( Map &BackGr, Enemy &enemy )
+void Player::Move( Map &BackGr, Enemy &enemy, Power &power )
 {
 //    this->rect.x += this->a_x;
 //    if( rect.x < 0 || rect.x + rect.w > SCREEN_WIDTH )
@@ -64,12 +51,5 @@ void Player::Move( Map &BackGr, Enemy &enemy )
     SetDir();
     BackGr.MapMove( -a_x, -a_y );
     enemy.Change( -a_x, -a_y );
+    power.Change( -a_x, -a_y );
 }
-
-//
-//void Player::SetAmmoList(std::vector<Ammo*> ammoList )
-//{
-//    AmmoList = ammoList;
-//}
-
-//std::vector<Ammo*> Player::GetAmmoList(){ return AmmoList; }

@@ -36,6 +36,8 @@
 		<Unit filename="BasicFn.hpp" />
 		<Unit filename="BigObj.cpp" />
 		<Unit filename="BigObj.hpp" />
+		<Unit filename="Enemy.cpp" />
+		<Unit filename="Enemy.hpp" />
 		<Unit filename="Func.cpp" />
 		<Unit filename="Func.hpp" />
 		<Unit filename="Map.cpp" />
@@ -44,6 +46,8 @@
 		<Unit filename="MovingObj.hpp" />
 		<Unit filename="Player.cpp" />
 		<Unit filename="Player.hpp" />
+		<Unit filename="Power.cpp" />
+		<Unit filename="Power.hpp" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />

@@ -12,5 +12,5 @@ protected :
     int v_Obj = 0;
 public :
     void Change( int ax, int ay );
-    void Run();
+//    void Run();
 };
