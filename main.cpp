@@ -3,7 +3,7 @@
 #include "BigObj.hpp"
 #include "Player.hpp"
 #include "Map.hpp"
-#include <iostream>
+#include "Enemy.hpp"
 int main( int argc, char* args[] )
 {
     // khoi tao window, renderer...
@@ -14,7 +14,8 @@ int main( int argc, char* args[] )
 
     Map BackGr;
     Player player;
-
+    Enemy enemy;
+    enemy.SetUp();
     bool quit = false;
     while(!quit)
     {
@@ -28,12 +29,33 @@ int main( int argc, char* args[] )
 
         }
         player.ResetInput();
-        player.KeyInput(base::g_event);
-
-        player.Move(BackGr);
-
+        player.KeyInput();
+        player.Move(BackGr, enemy);
+        enemy.Chase();
         BackGr.drawObj();
         player.drawObj();
+        enemy.drawObj();
+//        std::vector<Ammo*> ammoList = player.GetAmmoList();
+//        std::vector<Ammo*> &ammoList = player.AmmoList;
+//        for (auto it = player.AmmoList.begin(); it != player.AmmoList.end(); ) {
+//            Ammo *u = (*it);
+//            if ( u->GetIsMove() == false) {
+//                std::cout << "A";
+//                it = player.AmmoList.erase(it); // Xoá phần tử
+//            } else {
+//                ++it;
+//            }
+//        }
+//        for( Ammo* ammo : player.AmmoList ){
+//            if( ammo != NULL ){
+//                if( ammo->GetIsMove() == true ){
+//                    ammo->drawObj();
+//                    ammo->Move(player.GetDir(), 1, ammo->GetRect());
+//                }
+//
+//            }
+//
+//        }
 
         SDL_RenderPresent(base::renderer);
         SDL_Delay( 10 );

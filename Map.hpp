@@ -1,7 +1,8 @@
 #pragma once
 #include "BasicFn.hpp"
 #include "BigObj.hpp"
-
+#define MapWidth SCREEN_WIDTH
+#define MapHeight SCREEN_HEIGHT
 class Map : public BigObj
 {
 public :
@@ -9,8 +10,7 @@ public :
     ~Map();
 private :
     int x, y;
-    const int MapWidth = SCREEN_WIDTH;
-    const int MapHeight = SCREEN_HEIGHT;
+
     const char* MapImg = "EndlessMap.png";
 public :
     void MapMove( int u, int v );

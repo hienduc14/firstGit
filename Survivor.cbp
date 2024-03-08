@@ -36,9 +36,12 @@
 		<Unit filename="BasicFn.hpp" />
 		<Unit filename="BigObj.cpp" />
 		<Unit filename="BigObj.hpp" />
-		<Unit filename="InObj.hpp" />
+		<Unit filename="Func.cpp" />
+		<Unit filename="Func.hpp" />
 		<Unit filename="Map.cpp" />
 		<Unit filename="Map.hpp" />
+		<Unit filename="MovingObj.cpp" />
+		<Unit filename="MovingObj.hpp" />
 		<Unit filename="Player.cpp" />
 		<Unit filename="Player.hpp" />
 		<Unit filename="main.cpp" />

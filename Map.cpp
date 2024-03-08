@@ -2,10 +2,8 @@
 
 Map::Map()
 {
-    this->rect.x = -MapWidth;
-    this->rect.y = -MapHeight;
-    this->rect.w = MapWidth*3;
-    this->rect.h = MapHeight*3;
+    this->rectst = {0, 0, MapWidth*3, MapHeight*3};
+    this->rect = {-MapWidth, -MapHeight, MapWidth*3, MapHeight*3};
     this->SetTexture(MapImg);
 }
 

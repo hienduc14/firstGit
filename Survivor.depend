@@ -3,40 +3,78 @@
 	<iostream>
 	<SDL.h>
 
-1709822153 source:d:\codeblock\survivor\main.cpp
+1709887148 source:d:\codeblock\survivor\main.cpp
 	<SDL.h>
 	"BasicFn.hpp"
 	"BigObj.hpp"
 	"Player.hpp"
 	"Map.hpp"
-	<iostream>
+	"Enemy.hpp"
 
-1709822363 d:\codeblock\survivor\basicfn.hpp
+1709875056 d:\codeblock\survivor\basicfn.hpp
 	<SDL.h>
 	<SDL_image.h>
 	<string>
+	<iostream>
 
 1709822453 source:d:\codeblock\survivor\basicfn.cpp
 	"BasicFn.hpp"
 
-1709822332 source:d:\codeblock\survivor\bigobj.cpp
+1709885579 source:d:\codeblock\survivor\bigobj.cpp
 	"BigObj.hpp"
 
-1709822332 d:\codeblock\survivor\bigobj.hpp
+1709884974 d:\codeblock\survivor\bigobj.hpp
 	"BasicFn.hpp"
 
-1709822500 d:\codeblock\survivor\player.hpp
+1709886279 d:\codeblock\survivor\player.hpp
 	"BasicFn.hpp"
 	"BigObj.hpp"
 	"Map.hpp"
+	"Enemy.hpp"
+	<vector>
 
-1709822277 source:d:\codeblock\survivor\player.cpp
+1709886289 source:d:\codeblock\survivor\player.cpp
 	"Player.hpp"
 
-1709822277 source:d:\codeblock\survivor\map.cpp
+1709885579 source:d:\codeblock\survivor\map.cpp
 	"Map.hpp"
 
-1709822500 d:\codeblock\survivor\map.hpp
+1709885579 d:\codeblock\survivor\map.hpp
 	"BasicFn.hpp"
 	"BigObj.hpp"
+
+1709873564 d:\codeblock\survivor\ammo.hpp
+	"BasicFn.hpp"
+	"BigObj.hpp"
+	"Touch.hpp"
+
+1709832720 source:d:\codeblock\survivor\ammo.cpp
+	"Ammo.hpp"
+
+1709832260 d:\codeblock\survivor\touch.hpp
+	"BasicFn.hpp"
+
+1709831343 source:d:\codeblock\survivor\touch.cpp
+	"Touch.hpp"
+
+1709886841 source:d:\codeblock\survivor\func.cpp
+	"Func.hpp"
+
+1709874791 d:\codeblock\survivor\func.hpp
+	"BasicFn.hpp"
+	<cmath>
+
+1709887148 source:d:\codeblock\survivor\movingobj.cpp
+	"MovingObj.hpp"
+
+1709887148 d:\codeblock\survivor\movingobj.hpp
+	"BasicFn.hpp"
+	"BigObj.hpp"
+
+1709887195 source:d:\codeblock\survivor\enemy.cpp
+	"Enemy.hpp"
+
+1709886257 d:\codeblock\survivor\enemy.hpp
+	"MovingObj.hpp"
+	"Func.hpp"
 
