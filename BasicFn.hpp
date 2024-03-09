@@ -1,8 +1,9 @@
 #pragma once
 #include <SDL.h>
 #include <SDL_image.h>
-#include <string>
 #include <iostream>
+#include <list>
+
 const int SCREEN_WIDTH = 1000;
 const int SCREEN_HEIGHT = 1000;
 const int CENTER_X = SCREEN_WIDTH/2;
