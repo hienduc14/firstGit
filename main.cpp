@@ -1,5 +1,6 @@
 #include <SDL.h>
 #include "BasicFn.hpp"
+#include "Func.hpp"
 #include "BigObj.hpp"
 #include "Player.hpp"
 #include "Map.hpp"
@@ -15,14 +16,10 @@ int main( int argc, char* args[] )
 
     Map BackGr;
     Player player;
-    Enemy enemy;
-    Power gun;
+    std::list<Enemy> enemies;
+    std::list<Power> powers;
+    int ok = 0;
 
-    gun.SetType(0);
-    int ok = 1;
-    gun.drawObj();
-
-    enemy.SetUp();
     bool quit = false;
     while(!quit)
     {
@@ -40,25 +37,37 @@ int main( int argc, char* args[] )
         player.KeyInput();
 
         // xu ly dan (neu co)
-        if( ok == 1 ){
+        if( ok == 5 ){
+            Power gun;
+            gun.SetType(0);
             gun.Start( player.GetDir(), PlayerWidth/2+3*dx[player.GetDir()], PlayerHeight/2+3*dy[player.GetDir()] );
+            powers.push_back( gun );
+        }
+        // random sinh quai
+        if( ok == 10 ){
+            Enemy enemy;
+            if( (func::random( 0, 1 )) ) enemy.SetUp( (func::random(0, SCREEN_WIDTH)), 0 );
+            else enemy.SetUp( 0, (func::random(0, SCREEN_HEIGHT) ));
+            enemies.push_back( enemy );
             ok = 0;
         }
+        ok += 1;
 
         //xu ly move cac Obj
-        player.Move(BackGr, enemy, gun);
+        player.Move(BackGr, enemies, powers );
 
         //cac obj move
-        gun.Run();
-        enemy.Chase();
+        for( auto &enemy : enemies) enemy.Chase();
+        for( auto &power : powers ) power.Run();
 
+        // render
         BackGr.drawObj();
         player.drawObj();
-        enemy.drawObj();
-        gun.drawObj();
+        for( auto &enemy : enemies)enemy.drawObj();
+        for( auto power : powers ) power.drawObj();
 
         SDL_RenderPresent(base::renderer);
-        SDL_Delay( 50 );
+        SDL_Delay( 10 );
     }
 
 

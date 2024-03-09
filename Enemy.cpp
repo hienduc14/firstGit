@@ -23,7 +23,7 @@ void Enemy::Chase(){
     Change( ax, ay );
 }
 
-void Enemy::SetUp(){
+void Enemy::SetUp(int x, int y){
     rectst = { 0, 0, 220, 150 };
-    rect = { 0, 0, 60, 50 };
+    rect = { x, y, 60, 50 };
 }

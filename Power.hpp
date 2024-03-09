@@ -11,9 +11,9 @@ public :
     ~Power();
 private :
     int TypePower;
-    const char* ammo[4] = {"bullet.png"};
-    const int ammo_w[4] = { 50, 0, 0, 0 };
-    const int ammo_h[4] = { 50, 0, 0, 0 };
+    const char* ammo[4] = {"orb.png"};
+    const int ammo_w[4] = { 64, 0, 0, 0 };
+    const int ammo_h[4] = { 60, 0, 0, 0 };
 public :
     void SetType(int x);
     int GetType();

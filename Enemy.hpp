@@ -8,5 +8,5 @@ public :
     Enemy();
     ~Enemy();
     void Chase();
-    void SetUp();
+    void SetUp(int x, int y);
 };

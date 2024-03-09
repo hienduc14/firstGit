@@ -40,7 +40,7 @@ int Player::GetDir(){
     return this->dir;
 }
 
-void Player::Move( Map &BackGr, Enemy &enemy, Power &power )
+void Player::Move( Map &BackGr, std::list<Enemy> &enemies, std::list<Power> &powers )
 {
 //    this->rect.x += this->a_x;
 //    if( rect.x < 0 || rect.x + rect.w > SCREEN_WIDTH )
@@ -50,6 +50,6 @@ void Player::Move( Map &BackGr, Enemy &enemy, Power &power )
 //        rect.y -= a_y;
     SetDir();
     BackGr.MapMove( -a_x, -a_y );
-    enemy.Change( -a_x, -a_y );
-    power.Change( -a_x, -a_y );
+    for( auto enemy : enemies ) enemy.Change( -a_x, -a_y );
+    for( auto &power : powers ) power.Change( -a_x, -a_y );
 }

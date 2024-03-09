@@ -15,7 +15,7 @@ public :
     ~Player();
 private :
     int a_x = 0, a_y = 0;
-    int v_Player = 5;
+    int v_Player = 7;
     int dir = 0;
     const char* PlayerImg = "player.jpg";
 //public :
@@ -23,7 +23,7 @@ private :
 public :
     void ResetInput();
     void KeyInput();
-    void Move( Map &BackGr, Enemy &enemy, Power &power );
+    void Move( Map &BackGr, std::list<Enemy> &enemies, std::list<Power> &powers );
     void SetDir();
     int GetDir();
 //    void SetAmmoList(std::vector<Ammo*> ammoList  );
