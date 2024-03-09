@@ -7,6 +7,7 @@
 #include <vector>
 #define PlayerWidth 60
 #define PlayerHeight 50
+const std::string PlayerImg = "player.jpg";
 
 class Player : public BigObj
 {
@@ -17,16 +18,13 @@ private :
     int a_x = 0, a_y = 0;
     int v_Player = 7;
     int dir = 0;
-    const char* PlayerImg = "player.jpg";
-//public :
-//    std::vector<Ammo*> AmmoList;
+    bool MyPower[5] = {0, 0, 0, 0, 0};
 public :
     void ResetInput();
     void KeyInput();
     void Move( Map &BackGr, std::list<Enemy> &enemies, std::list<Power> &powers );
     void SetDir();
     int GetDir();
-//    void SetAmmoList(std::vector<Ammo*> ammoList  );
-//    std::vector<Ammo*> GetAmmoList();
-
+    void SetPower( int x );
+    int GetPower( int x );
 };
