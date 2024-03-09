@@ -14,7 +14,7 @@ BigObj::~BigObj(){
 }
 void BigObj::SetRectSt(int x, int y){this->rectst.x = x; this->rectst.y = y;}
 void BigObj::SetRect(int x, int y){this->rect.x = x; this->rect.y = y;}
-void BigObj::SetTexture( const char* filePath ){texture = base::Load_Image( filePath );}
+void BigObj::SetTexture( const std::string filePath ){texture = base::Load_Image( filePath );}
 
 SDL_Rect BigObj::GetRectSt(){ return this->rectst; }
 SDL_Rect BigObj::GetRect(){ return this->rect; }

@@ -16,7 +16,7 @@ public :
     // tao setter va getter cua rect va texture
     void SetRectSt(int x, int y);
     void SetRect(int x, int y);
-    void SetTexture( const char* filePath );
+    void SetTexture( const std::string filePath );
 
     SDL_Rect GetRectSt();
     SDL_Rect GetRect();

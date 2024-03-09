@@ -6,6 +6,7 @@
 #include "Map.hpp"
 #include "Enemy.hpp"
 #include "Power.hpp"
+#include "Orb.hpp"
 int main( int argc, char* args[] )
 {
     // khoi tao window, renderer...
@@ -35,10 +36,7 @@ int main( int argc, char* args[] )
         // nhap thao tac tu ban phim
         player.ResetInput();
         player.KeyInput();
-
-//        // xoa dan
-//        for( auto &power : powers ) if(  )
-
+        if( !player.GetPower(0) )player.SetPower(0);
         // random sinh quai
         if( ok == 10 ){
             Enemy enemy;
@@ -48,11 +46,11 @@ int main( int argc, char* args[] )
             ok = 0;
         }
         // xu ly dan (neu co)
-        if( ok == 5 ){
-            Power gun;
-            gun.SetType(0);
-            gun.Start( player.GetDir(), PlayerWidth/2+3*dx[player.GetDir()], PlayerHeight/2+3*dy[player.GetDir()] );
-            powers.push_back( gun );
+        if( ok == 5 && player.GetPower(0) ){
+            Orb orb;
+            orb.Create();
+            orb.Start( player.GetDir(), PlayerWidth/2+3*dx[player.GetDir()], PlayerHeight/2+3*dy[player.GetDir()] );
+            powers.push_back( orb );
         }
         ok++;
         //xu ly move cac Obj
@@ -78,9 +76,9 @@ int main( int argc, char* args[] )
         }
         // render
         BackGr.drawObj();
+        for( auto power : powers ) power.drawObj();
         player.drawObj();
         for( auto &enemy : enemies)enemy.drawObj();
-        for( auto power : powers ) power.drawObj();
 
         SDL_RenderPresent(base::renderer);
 

@@ -39,9 +39,9 @@ void base::quitSDL()
     SDL_Quit();
 }
 
-SDL_Texture *base::Load_Image( const char* filePath )
+SDL_Texture *base::Load_Image( const std::string filePath )
 {
     SDL_Texture *screen = nullptr;
-    screen = IMG_LoadTexture(base::renderer, filePath);
+    screen = IMG_LoadTexture(base::renderer, filePath.c_str());
 	return screen;
 };

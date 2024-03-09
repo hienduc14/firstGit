@@ -44,6 +44,7 @@
 		<Unit filename="Map.hpp" />
 		<Unit filename="MovingObj.cpp" />
 		<Unit filename="MovingObj.hpp" />
+		<Unit filename="Orb.hpp" />
 		<Unit filename="Player.cpp" />
 		<Unit filename="Player.hpp" />
 		<Unit filename="Power.cpp" />

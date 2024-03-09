@@ -3,6 +3,7 @@
 #include <SDL_image.h>
 #include <iostream>
 #include <list>
+#include <string>
 
 const int SCREEN_WIDTH = 1000;
 const int SCREEN_HEIGHT = 1000;
@@ -22,5 +23,5 @@ namespace base
     extern SDL_Event g_event;
     void initSDL();
     void quitSDL();
-    SDL_Texture *Load_Image( const char* filePath );
+    SDL_Texture *Load_Image( const std::string filePath );
 }

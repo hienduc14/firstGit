@@ -3,7 +3,7 @@
 Enemy::Enemy()
 {
     v_Obj = 3;
-    this->SetTexture("slime_walk.png");
+    this->SetTexture(SlimeImg);
 }
 
 Enemy::~Enemy()
@@ -16,10 +16,10 @@ void Enemy::Chase(){
 //    int k = Dist/v_Obj;
 //    Change( (CENTER_X-rect.x)/k, ((CENTER_Y-rect.y))/k );
     int ax=0, ay=0;
-    if( rect.x < CENTER_X ) ax = v_Obj;
-    if( rect.x > CENTER_X ) ax = -v_Obj;
-    if( rect.y < CENTER_Y ) ay = v_Obj;
-    if( rect.y > CENTER_Y ) ay = -v_Obj;
+    if( rect.x < CENTER_X-rect.w/2 ) ax = v_Obj;
+    if( rect.x > CENTER_X-rect.w/2 ) ax = -v_Obj;
+    if( rect.y < CENTER_Y-rect.h/2 ) ay = v_Obj;
+    if( rect.y > CENTER_Y-rect.h/2 ) ay = -v_Obj;
     Change( ax, ay );
 }
 
