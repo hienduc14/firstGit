@@ -5,8 +5,8 @@
 #include "Enemy.hpp"
 #include "Power.hpp"
 #include <vector>
-#define PlayerWidth 150
-#define PlayerHeight 100
+#define PlayerWidth 60
+#define PlayerHeight 50
 
 class Player : public BigObj
 {

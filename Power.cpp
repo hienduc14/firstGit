@@ -3,7 +3,7 @@
 Power::Power()
 {
     rect.x = 0; rect.y = 0;
-    v_Obj = 8;
+    v_Obj = 10;
 }
 
 Power::~Power()
@@ -19,8 +19,9 @@ void Power::SetType( int x )
     this->rectst.y = 0;
     this->rectst.w = ammo_w[x];
     this->rectst.h = ammo_h[x];
-    this->rect.w = ammo_w[x];
-    this->rect.h = ammo_h[x];
+    this->rect.w = 30;
+    this->rect.h = 30;
+    exist = 1;
 }
 
 int Power::GetType(){ return TypePower; }

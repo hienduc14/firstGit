@@ -36,13 +36,9 @@ int main( int argc, char* args[] )
         player.ResetInput();
         player.KeyInput();
 
-        // xu ly dan (neu co)
-        if( ok == 5 ){
-            Power gun;
-            gun.SetType(0);
-            gun.Start( player.GetDir(), PlayerWidth/2+3*dx[player.GetDir()], PlayerHeight/2+3*dy[player.GetDir()] );
-            powers.push_back( gun );
-        }
+//        // xoa dan
+//        for( auto &power : powers ) if(  )
+
         // random sinh quai
         if( ok == 10 ){
             Enemy enemy;
@@ -51,8 +47,14 @@ int main( int argc, char* args[] )
             enemies.push_back( enemy );
             ok = 0;
         }
-        ok += 1;
-
+        // xu ly dan (neu co)
+        if( ok == 5 ){
+            Power gun;
+            gun.SetType(0);
+            gun.Start( player.GetDir(), PlayerWidth/2+3*dx[player.GetDir()], PlayerHeight/2+3*dy[player.GetDir()] );
+            powers.push_back( gun );
+        }
+        ok++;
         //xu ly move cac Obj
         player.Move(BackGr, enemies, powers );
 
@@ -60,6 +62,20 @@ int main( int argc, char* args[] )
         for( auto &enemy : enemies) enemy.Chase();
         for( auto &power : powers ) power.Run();
 
+        // kiem tra va cham
+        for( auto &enemy : enemies )
+        {
+            for( auto &power : powers )
+                {
+                if( func::checkRect( power.GetRect(), enemy.GetRect() ) )
+                {
+                    power.exist = 0;
+                    enemy.exist = 0;
+                    const char* x = "orb_explode.png";
+                    power.SetTexture(x);
+                }
+            }
+        }
         // render
         BackGr.drawObj();
         player.drawObj();
@@ -67,7 +83,21 @@ int main( int argc, char* args[] )
         for( auto power : powers ) power.drawObj();
 
         SDL_RenderPresent(base::renderer);
-        SDL_Delay( 10 );
+
+        //xoa quai va dan
+        for( auto &enemy : enemies)enemy.drawObj();
+        for( auto power : powers ) power.drawObj();
+        auto it = enemies.begin();
+        while (it != enemies.end()) {
+            if (it->exist == 0) it = enemies.erase(it);
+            else ++it;
+        }
+        auto its = powers.begin();
+        while (its!= powers.end()){
+            if(its->exist == 0) its = powers.erase(its);
+            else ++its;
+        }
+        SDL_Delay( 50 );
     }
 
 

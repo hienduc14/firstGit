@@ -3,7 +3,7 @@
 	<iostream>
 	<SDL.h>
 
-1709954846 source:d:\codeblock\survivor\main.cpp
+1709965392 source:d:\codeblock\survivor\main.cpp
 	<SDL.h>
 	"BasicFn.hpp"
 	"Func.hpp"
@@ -28,7 +28,7 @@
 1709884974 d:\codeblock\survivor\bigobj.hpp
 	"BasicFn.hpp"
 
-1709955021 d:\codeblock\survivor\player.hpp
+1709966855 d:\codeblock\survivor\player.hpp
 	"BasicFn.hpp"
 	"BigObj.hpp"
 	"Map.hpp"
@@ -36,7 +36,7 @@
 	"Power.hpp"
 	<vector>
 
-1709954229 source:d:\codeblock\survivor\player.cpp
+1709966142 source:d:\codeblock\survivor\player.cpp
 	"Player.hpp"
 
 1709885579 source:d:\codeblock\survivor\map.cpp
@@ -60,30 +60,30 @@
 1709831343 source:d:\codeblock\survivor\touch.cpp
 	"Touch.hpp"
 
-1709954947 source:d:\codeblock\survivor\func.cpp
+1709958095 source:d:\codeblock\survivor\func.cpp
 	"Func.hpp"
 
-1709954921 d:\codeblock\survivor\func.hpp
+1709958085 d:\codeblock\survivor\func.hpp
 	"BasicFn.hpp"
 	<cmath>
 
-1709917377 source:d:\codeblock\survivor\movingobj.cpp
+1709965978 source:d:\codeblock\survivor\movingobj.cpp
 	"MovingObj.hpp"
 
-1709893448 d:\codeblock\survivor\movingobj.hpp
+1709965276 d:\codeblock\survivor\movingobj.hpp
 	"BasicFn.hpp"
 	"BigObj.hpp"
 
-1709954544 source:d:\codeblock\survivor\enemy.cpp
+1709966154 source:d:\codeblock\survivor\enemy.cpp
 	"Enemy.hpp"
 
 1709954544 d:\codeblock\survivor\enemy.hpp
 	"MovingObj.hpp"
 	"Func.hpp"
 
-1709955021 source:d:\codeblock\survivor\power.cpp
+1709966778 source:d:\codeblock\survivor\power.cpp
 	"Power.hpp"
 
-1709951252 d:\codeblock\survivor\power.hpp
+1709965276 d:\codeblock\survivor\power.hpp
 	"MovingObj.hpp"
 

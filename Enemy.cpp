@@ -2,7 +2,7 @@
 
 Enemy::Enemy()
 {
-    v_Obj = 1;
+    v_Obj = 3;
     this->SetTexture("slime_walk.png");
 }
 
@@ -26,4 +26,5 @@ void Enemy::Chase(){
 void Enemy::SetUp(int x, int y){
     rectst = { 0, 0, 220, 150 };
     rect = { x, y, 60, 50 };
+    exist = 1;
 }

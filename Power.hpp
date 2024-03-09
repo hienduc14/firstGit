@@ -19,4 +19,5 @@ public :
     int GetType();
     void Start( int dir, int x, int y );
     void Run();
+
 };
