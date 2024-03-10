@@ -3,6 +3,9 @@
 Enemy::Enemy()
 {
     v_Obj = 3;
+    damage = 1;
+    HP = 4;
+    CoolDown = 2;
     this->SetTexture(SlimeImg);
 }
 
@@ -11,8 +14,10 @@ Enemy::~Enemy()
 
 }
 
+
+
 void Enemy::Chase(){
-//    int Dist = func::dist(CENTER_X, CENTER_Y, this->rect.x+this->rect.w/2, this->rect.y+this->rect.h/2 );
+//    int Dist = func::dist(CENTER_X, CENTER_Y, rect.x+rect.w/2, rect.y+rect.h/2 );
 //    int k = Dist/v_Obj;
 //    Change( (CENTER_X-rect.x)/k, ((CENTER_Y-rect.y))/k );
     int ax=0, ay=0;

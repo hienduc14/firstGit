@@ -19,6 +19,9 @@ private :
     int v_Player = 7;
     int dir = 0;
     bool MyPower[5] = {0, 0, 0, 0, 0};
+    int Cycle[5] = {1, 0, 0, 0, 0};
+public :
+    int HP = 30;
 public :
     void ResetInput();
     void KeyInput();
@@ -27,4 +30,6 @@ public :
     int GetDir();
     void SetPower( int x );
     int GetPower( int x );
+    void SetCycle( int x, int t );
+    int GetCycle( int t );
 };

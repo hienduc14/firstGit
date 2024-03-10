@@ -2,7 +2,7 @@
 
 Orb::Orb()
 {
-
+    damage = 2;
 }
 
 Orb::~Orb()

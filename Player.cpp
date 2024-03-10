@@ -50,3 +50,5 @@ void Player::Move( Map &BackGr, std::list<Enemy> &enemies, std::list<Power> &pow
 
 void Player::SetPower( int x ){MyPower[x] = 1;}
 int Player::GetPower( int x ){return MyPower[x];}
+void Player::SetCycle( int x, int t ){ Cycle[t] = x; }
+int Player::GetCycle( int t ){ return Cycle[t]; }

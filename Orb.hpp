@@ -4,7 +4,7 @@
 #define OrbImgH 60
 #define OrbW 30
 #define OrbH 30
-#define OrbV 5
+#define OrbV 20
 const std::string OrbImg = "orb.png";
 
 class Orb : public Power
