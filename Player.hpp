@@ -1,15 +1,15 @@
 #pragma once
 #include "BasicFn.hpp"
 #include "BigObj.hpp"
-#include "Map.hpp"
+#include "Screen.hpp"
 #include "Enemy.hpp"
 #include "Power.hpp"
 #include "Exp.hpp"
 #include <vector>
-#define PlayerWidth 60
-#define PlayerHeight 50
+#define PlayerWidth 196
+#define PlayerHeight 137
 #define PlayerR 100
-const std::string PlayerImg = "player.jpg";
+const std::string PlayerImg = "PlayerSlime.png";
 
 class Player : public BigObj
 {
@@ -28,7 +28,7 @@ public :
 public :
     void ResetInput();
     void KeyInput();
-    void Move( Map &BackGr, std::list<Enemy> &enemies, std::list<Power> &powers, std::list<Exp> &exps );
+    void Move( Screen &Map, std::list<Enemy> &enemies, std::list<Power> &powers, std::list<Exp> &exps );
     void SetDir();
     int GetDir();
     void SetPower( int x );

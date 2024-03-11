@@ -1,7 +1,7 @@
 #include "Player.hpp"
 Player::Player()
 {
-    this->rectst = {0, 0, 150, 100};
+    this->rectst = {0, 0, PlayerWidth, PlayerHeight};
     this->rect.x = CENTER_X - PlayerWidth/2;
     this->rect.y = CENTER_Y - PlayerHeight/2;
     this->rect.w = PlayerWidth;
@@ -40,10 +40,10 @@ int Player::GetDir(){
     return this->dir;
 }
 
-void Player::Move( Map &BackGr, std::list<Enemy> &enemies, std::list<Power> &powers, std::list<Exp> &exps )
+void Player::Move( Screen &Map, std::list<Enemy> &enemies, std::list<Power> &powers, std::list<Exp> &exps )
 {
     SetDir();
-    BackGr.MapMove( -a_x, -a_y );
+    Map.MapMove( -a_x, -a_y );
     for( auto &enemy : enemies ) enemy.Change( -a_x, -a_y );
     for( auto &exp : exps ) exp.Change( -a_x, -a_y );
     for( auto &power : powers ) power.Change( -a_x, -a_y );

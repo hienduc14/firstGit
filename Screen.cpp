@@ -1,18 +1,17 @@
-#include "Map.hpp"
+#include "Screen.hpp"
 
-Map::Map()
+Screen::Screen()
 {
-    this->rectst = {0, 0, MapWidth*3, MapHeight*3};
-    this->rect = {-MapWidth, -MapHeight, MapWidth*3, MapHeight*3};
-    this->SetTexture(MapImg);
+    this->rectst = {0, 0, MapWidth, MapHeight};
+    this->rect = {0, 0, MapWidth, MapHeight};
 }
 
-Map::~Map()
+Screen::~Screen()
 {
 
 }
 
-void Map::MapMove(int u, int v){
+void Screen::MapMove(int u, int v){
     this->rect.x += u; this->rect.y += v;
     if( this->rect.x >= 0 ) this->rect.x-=SCREEN_WIDTH;
     if( this->rect.y >= 0 ) this->rect.y-=SCREEN_HEIGHT;

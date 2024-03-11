@@ -4,7 +4,7 @@
 
 class BigObj
 {
-protected :
+public :
     SDL_Rect rect;
     SDL_Texture* texture;
     SDL_Rect rectst;

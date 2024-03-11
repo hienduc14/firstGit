@@ -6,7 +6,7 @@
 #include <string>
 
 const int SCREEN_WIDTH = 1000;
-const int SCREEN_HEIGHT = 1000;
+const int SCREEN_HEIGHT = 600;
 const int CENTER_X = SCREEN_WIDTH/2;
 const int CENTER_Y = SCREEN_HEIGHT/2;
 const int FPS = 20;
