@@ -13,7 +13,9 @@ protected :
 public :
     int damage = 0;
     bool exist = 0;
+    int c_x, c_y;
 public :
     void Change( int ax, int ay );
+    void Located();
 //    void Run();
 };

@@ -1,7 +1,7 @@
 #pragma once
 #include "MovingObj.hpp"
 #include "Func.hpp"
-const std::string SlimeImg = "slime_walk.png";
+const std::string SlimeImg = "slime.png";
 class Enemy : public MovingObj
 {
 public :
@@ -11,5 +11,5 @@ public :
     Enemy();
     ~Enemy();
     void Chase();
-    void SetUp(int x, int y);
+    void SetUp(int x, int y, const std::string Pic);
 };

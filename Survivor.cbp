@@ -38,6 +38,8 @@
 		<Unit filename="BigObj.hpp" />
 		<Unit filename="Enemy.cpp" />
 		<Unit filename="Enemy.hpp" />
+		<Unit filename="Exp.cpp" />
+		<Unit filename="Exp.hpp" />
 		<Unit filename="Func.cpp" />
 		<Unit filename="Func.hpp" />
 		<Unit filename="Map.cpp" />
