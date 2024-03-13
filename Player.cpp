@@ -2,10 +2,10 @@
 Player::Player()
 {
     this->rectst = {0, 0, PlayerWidth, PlayerHeight};
-    this->rect.x = CENTER_X - PlayerWidth/2;
-    this->rect.y = CENTER_Y - PlayerHeight/2;
-    this->rect.w = PlayerWidth;
-    this->rect.h = PlayerHeight;
+    this->rect.x = CENTER_X - 25;
+    this->rect.y = CENTER_Y - 18;
+    this->rect.w = 50;
+    this->rect.h = 36;
     this->SetTexture(PlayerImg);
     this->dir = 1;
 }
@@ -24,6 +24,7 @@ void Player::KeyInput()
     if( state[SDL_SCANCODE_S] || state[SDL_SCANCODE_DOWN] )     a_y += v_Player;
     if( state[SDL_SCANCODE_A] || state[SDL_SCANCODE_LEFT] )     a_x -= v_Player;
     if( state[SDL_SCANCODE_D] || state[SDL_SCANCODE_RIGHT] )    a_x += v_Player;
+    if( a_x && a_y ) a_x/=1.414, a_y/=1.414;
 }
 void Player::SetDir(){
     if( a_x > 0 && a_y == 0 ) dir = 0;

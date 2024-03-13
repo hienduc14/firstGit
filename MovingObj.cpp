@@ -2,7 +2,6 @@
 
 MovingObj :: MovingObj()
 {
-
 }
 
 MovingObj :: ~MovingObj()
@@ -10,9 +9,16 @@ MovingObj :: ~MovingObj()
 
 }
 
-void MovingObj::Change( int ax, int ay )
+void MovingObj::Change( double ax, double ay )
 {
-    this->rect.x += ax; this->rect.y += ay;
+//    std::cout << "---------------\n";
+//    std::cout << L_x << " " << L_y << " " << ax << " " << ay << '\n';\
+
+    L_x += ax*TimeManager::Instance()->getElapsedTime();
+    L_y += ay*TimeManager::Instance()->getElapsedTime();
+    rect.x = L_x; rect.y = L_y;
+//    std::cout << L_x << " " << L_y <<  '\n';
+//    std::cout << rect.x << " " << rect.y << '\n';
     Located();
 }
 

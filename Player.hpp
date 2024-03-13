@@ -17,8 +17,8 @@ public :
     Player();
     ~Player();
 private :
-    int a_x = 0, a_y = 0;
-    int v_Player = 7;
+    double a_x = 0, a_y = 0;
+    double v_Player = 300;
     int dir = 0;
     bool MyPower[5] = {0, 0, 0, 0, 0};
     int Cycle[5] = {1, 0, 0, 0, 0};

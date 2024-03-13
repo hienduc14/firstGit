@@ -6,17 +6,18 @@ void play::Game( int StartPower ){
     Map.rectst = {0, 0, MapWidth*3, MapHeight*3};
     Map.rect = {-MapWidth, -MapHeight, MapWidth*3, MapHeight*3};
     Map.SetTexture(MapImg);
-
+    Map.SetL();
     Player player;
     std::list<Enemy> enemies;
     std::list<Power> powers;
     std::list<Exp> exps;
     int frame = 0;
-
+    double TimeStep = 1000/FPS;
     player.SetPower(StartPower);
     bool quit = false;
     while(!quit)
     {
+        TimeManager::Instance()->process();
         int currentTime = SDL_GetTicks();
         while(SDL_PollEvent(&base::g_event))
         {
@@ -34,7 +35,7 @@ void play::Game( int StartPower ){
         if( !player.GetPower(0) )player.SetPower(0);
 
         // random sinh quai
-        if( frame%(FPS*2) == 0 && enemies.size() < 50 ){
+        if( frame%int(FPS*2) == 0 && enemies.size() < 50 ){
             Enemy enemy;
             if( (func::random( 0, 1 )) ) enemy.SetUp( (func::random(0, SCREEN_WIDTH)), 0, SlimeImg );
             else enemy.SetUp( 0, (func::random(0, SCREEN_HEIGHT) ), SlimeImg );
@@ -42,7 +43,7 @@ void play::Game( int StartPower ){
         }
 
         // xu ly dan (neu co)
-        if( frame%(FPS*player.GetCycle(0)) == 0 && player.GetPower(0) ){
+        if( frame%int(FPS*player.GetCycle(0)) == 0 && player.GetPower(0) ){
             Orb orb;
             orb.Create();
             orb.Start( player.GetDir(), PlayerWidth/2+3*dx[player.GetDir()], PlayerHeight/2+3*dy[player.GetDir()] );
@@ -83,21 +84,27 @@ void play::Game( int StartPower ){
                 {
                     power.exist = 0;
                     enemy.HP -= power.damage;
-                    const char* x = "orb_explode.png";
-                    power.SetTexture(x);
+                    power.SetTexture(std::string("orb_explode.png"));
                 }
             }
             if(enemy.exist == true && func::checkRect( player.GetRect(), enemy.GetRect() ) ){
                 if(enemy.CoolDown == 0) {
                     player.HP -= enemy.damage;
                     if( player.HP <= 0 ) break;
-                    enemy.CoolDown = 2;
+                    enemy.CoolDown = EnemyCD;
                 }
-                else enemy.CoolDown --;
+                else enemy.CoolDown -= TimeStep;
             }
         }
         if( player.HP <= 0 ) break;
 
+        for( auto &power : powers ) {
+            power.ExistTime -= TimeStep;
+            if( power.ExistTime <= 0 ){
+                power.exist = 0;
+                power.SetTexture(std::string("orb_explode.png"));
+            }
+        }
 
         // render
         Map.drawObj();
@@ -107,7 +114,7 @@ void play::Game( int StartPower ){
         for( auto &enemy : enemies) enemy.drawObj();
 
         SDL_RenderPresent(base::renderer);
-
+        SDL_RenderClear(base::renderer);
         //xoa quai va dan
         auto it = powers.begin();
         while (it != powers.end()) {
@@ -133,7 +140,7 @@ void play::Game( int StartPower ){
         }
         int frameTime = SDL_GetTicks() - currentTime;
 //        std::cout << frameTime << '\n';
-        if( frameTime < 1000/FPS ) SDL_Delay( 1000/FPS-frameTime );
+        if( frameTime < TimeStep ) SDL_Delay( TimeStep-frameTime );
         frame++;
 //        break;
     }
@@ -144,6 +151,6 @@ void play::Game( int StartPower ){
         Map.drawObj();
         SDL_RenderPresent(base::renderer);
     }
-    SDL_Delay(5000);
+//    SDL_Delay(5000);
     return ;
 }

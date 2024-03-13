@@ -56,6 +56,8 @@
 		<Unit filename="Power.hpp" />
 		<Unit filename="Screen.cpp" />
 		<Unit filename="Screen.hpp" />
+		<Unit filename="Time.cpp" />
+		<Unit filename="Time.hpp" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />

@@ -25,3 +25,8 @@ void BigObj::drawObj()
 {
     SDL_RenderCopy(base::renderer, texture, &rectst, &rect);
 }
+
+void BigObj::SetL()
+{
+    L_x = rect.x; L_y = rect.y;
+}

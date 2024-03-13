@@ -9,12 +9,12 @@ int main( int argc, char* args[] )
     // khoi tao window, renderer...
     base::initSDL();
     Screen MainMenu;
-    MainMenu.rectst = {0, 0, 1299, 834};
+    MainMenu.rectst = {0, 0, 1002, 564};
     MainMenu.rect = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
     MainMenu.SetTexture(MainMenuImg);
     Button Play;
     Play.rectst = {0, 0, 403, 146};
-    Play.rect = {SCREEN_WIDTH-Play.rectst.w/2, SCREEN_HEIGHT-200, 100, 30};
+    Play.rect = {CENTER_X-150, SCREEN_HEIGHT-200, 300, 95};
     Play.SetTexture(PlayImg);
 
     bool GameQuit = false;
@@ -27,7 +27,7 @@ int main( int argc, char* args[] )
                 break;
             }
         }
-//        MainMenu.drawObj();
+        MainMenu.drawObj();
         Play.drawObj();
         SDL_RenderPresent(base::renderer);
 
@@ -35,8 +35,6 @@ int main( int argc, char* args[] )
         std::cout << Play.status << '\n';
         if( Play.status == 1 ) play::Game( 0 );
     }
-
-    SDL_Delay( 10000 );
 
     // thoat chuong trinh
     base::quitSDL();

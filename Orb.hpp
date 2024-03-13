@@ -4,14 +4,14 @@
 #define OrbImgH 60
 #define OrbW 30
 #define OrbH 30
-#define OrbV 20
+const double OrbV = 500;
 const std::string OrbImg = "orb.png";
 
 class Orb : public Power
 {
 public :
     Orb();
-    ~Orb();
+    virtual ~Orb();
     void Create();
     void Start( int dir, int x, int y );
 

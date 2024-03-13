@@ -8,6 +8,7 @@ public :
     SDL_Rect rect;
     SDL_Texture* texture;
     SDL_Rect rectst;
+    double L_x = 0, L_y = 0;
 public :
     // tao constructor va destructor
     BigObj();
@@ -21,6 +22,8 @@ public :
     SDL_Rect GetRectSt();
     SDL_Rect GetRect();
     SDL_Texture* GetTexture();
+
+    void SetL();
 
     // ve hinh anh tu texture
     void drawObj();

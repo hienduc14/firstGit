@@ -1,8 +1,8 @@
 #pragma once
 #include "BasicFn.hpp"
 #include "BigObj.hpp"
-#define MapWidth SCREEN_WIDTH
-#define MapHeight SCREEN_HEIGHT
+#define MapWidth 1000
+#define MapHeight 1000
 const std::string MapImg = "EndlessMap.png";
 class Screen : public BigObj
 {
@@ -10,5 +10,5 @@ public :
     Screen();
     ~Screen();
 public :
-    void MapMove( int u, int v );
+    void MapMove( double u, double v );
 };

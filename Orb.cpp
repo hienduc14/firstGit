@@ -3,6 +3,7 @@
 Orb::Orb()
 {
     damage = 2;
+    ExistTime = 2000;
 }
 
 Orb::~Orb()
@@ -26,6 +27,7 @@ void Orb::Start( int dir, int x, int y )
     SetRect(CENTER_X-rect.w/2, CENTER_Y-rect.h/2);
     a_x = v_Obj*dx[dir];
     a_y = v_Obj*dy[dir];
+    L_x = rect.x; L_y = rect.y;
 };
 
 

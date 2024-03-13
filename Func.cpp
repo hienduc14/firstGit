@@ -1,6 +1,6 @@
 #include "Func.hpp"
 
-float func::dist( int x, int y, int u, int v )
+double func::dist( int x, int y, int u, int v )
 {
     return sqrt( 1ll*(u-x)*(u-x) + 1ll*(v-y)*(v-y) );
 }

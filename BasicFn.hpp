@@ -4,12 +4,12 @@
 #include <iostream>
 #include <list>
 #include <string>
-
+#include "Time.hpp"
 const int SCREEN_WIDTH = 1000;
 const int SCREEN_HEIGHT = 600;
 const int CENTER_X = SCREEN_WIDTH/2;
 const int CENTER_Y = SCREEN_HEIGHT/2;
-const int FPS = 20;
+const float FPS = 60;
 const int dx[8] = { 1, 1, 0, -1, -1, -1, 0, 1 };
 const int dy[8] = { 0, 1, 1, 1, 0, -1, -1, -1 };
 //const char* rival[6] = { "slime_walk.png" };

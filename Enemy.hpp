@@ -1,12 +1,14 @@
 #pragma once
 #include "MovingObj.hpp"
 #include "Func.hpp"
+
+const double EnemyCD = 2000;
 const std::string SlimeImg = "slime.png";
 class Enemy : public MovingObj
 {
 public :
     int HP;
-    int CoolDown;
+    double CoolDown = EnemyCD;
 public :
     Enemy();
     ~Enemy();
