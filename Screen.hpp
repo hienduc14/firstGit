@@ -3,7 +3,6 @@
 #include "BigObj.hpp"
 #define MapWidth 1000
 #define MapHeight 1000
-const std::string MapImg = "EndlessMap.png";
 class Screen : public BigObj
 {
 public :

@@ -7,10 +7,10 @@ BigObj::BigObj(){
 }
 
 BigObj::~BigObj(){
-    if( texture != nullptr ){
-        delete texture;
-        texture = nullptr;
-    }
+//    if( texture != nullptr ){
+//        delete texture;
+//        texture = nullptr;
+//    }
 }
 void BigObj::SetRectSt(int x, int y){this->rectst.x = x; this->rectst.y = y;}
 void BigObj::SetRect(int x, int y){this->rect.x = x; this->rect.y = y;}

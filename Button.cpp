@@ -9,15 +9,19 @@ Button::~Button()
 
 }
 
-void Button::CheckMouse(SDL_Event &e)
+void Button::CheckMouse(SDL_Event e)
 {
 //    if( e.type == SDL_MOUSEMOTION || e.type == SDL_MOUSEBUTTONUP || e.type == SDL_MOUSEBUTTONDOWN ){
         int x, y;
+        this->status = 0;
+
+//        std::cout << status << ' ';
         SDL_GetMouseState( &x, &y );
         if( rect.x <= x && rect.x+rect.w >= x && rect.y <= y && rect.y+rect.h >= y ){
-            SDL_PollEvent( &e );
+//            SDL_PollEvent( &e );
             switch (e.type){
 				case SDL_MOUSEBUTTONDOWN:
+//                std::cout << rect.x << " " << rect.y << "\n";
 				status = 1;
 				break;
 
@@ -26,6 +30,6 @@ void Button::CheckMouse(SDL_Event &e)
 				break;
             }
         }
-        else status = 0;
+//        std::cout << status << '\n';
 //    }
 }

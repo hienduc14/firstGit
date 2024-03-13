@@ -1,11 +1,14 @@
 #include "BasicFn.hpp"
 
+int GameSpeed = 1;
+bool Quit = false;
+
 namespace base
 {
     SDL_Window *window = nullptr;
     SDL_Renderer *renderer = nullptr;
     SDL_Event g_event;
-
+//    int GameSpeed = 1;
     // Các hàm và mã khác...
 }
 
@@ -43,5 +46,6 @@ SDL_Texture *base::Load_Image( const std::string filePath )
 {
     SDL_Texture *screen = nullptr;
     screen = IMG_LoadTexture(base::renderer, filePath.c_str());
+	if (screen == nullptr) std::cout<< "aaaa\n";
 	return screen;
 };

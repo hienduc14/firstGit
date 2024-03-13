@@ -4,6 +4,13 @@ Orb::Orb()
 {
     damage = 2;
     ExistTime = 2000;
+    this->texture = pre::OrbTexture;
+    this->rectst.w = OrbImgW;
+    this->rectst.h = OrbImgH;
+    this->rect.w = OrbW;
+    this->rect.h = OrbH;
+    v_Obj = OrbV;
+    exist = 1;
 }
 
 Orb::~Orb()
@@ -13,13 +20,7 @@ Orb::~Orb()
 
 void Orb::Create()
 {
-    SetTexture(OrbImg);
-    this->rectst.w = OrbImgW;
-    this->rectst.h = OrbImgH;
-    this->rect.w = OrbW;
-    this->rect.h = OrbH;
-    v_Obj = OrbV;
-    exist = 1;
+
 }
 
 void Orb::Start( int dir, int x, int y )
@@ -29,5 +30,8 @@ void Orb::Start( int dir, int x, int y )
     a_y = v_Obj*dy[dir];
     L_x = rect.x; L_y = rect.y;
 };
+void Orb::Run(){
+    Change( a_x, a_y );
+}
 
 

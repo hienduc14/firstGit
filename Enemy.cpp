@@ -2,7 +2,7 @@
 Enemy::Enemy()
 {
     v_Obj = 30;
-    damage = 1;
+    damage = 5;
     HP = 4;
     rectst = { 0, 0, 220, 150 };
     rect.w = 60; rect.h = 50;
@@ -23,10 +23,11 @@ void Enemy::Chase(){
     Located();
 }
 
-void Enemy::SetUp(int x, int y, const std::string Pic){
+void Enemy::SetUp(int x, int y, int type){
+    if( type == 0 ) texture = pre::ExpTexture;
+    if( type == 1 ) texture = pre::SlimeTexture;
     exist = 1;
     rect.x = x; rect.y = y;
-    this->SetTexture(Pic);
     Located();
     SetL();
 }

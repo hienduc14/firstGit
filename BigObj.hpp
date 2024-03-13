@@ -1,6 +1,6 @@
 #pragma once
 #include "BasicFn.hpp"
-
+#include "ImgTexture.hpp"
 
 class BigObj
 {
@@ -9,6 +9,7 @@ public :
     SDL_Texture* texture;
     SDL_Rect rectst;
     double L_x = 0, L_y = 0;
+    SDL_Rect frame_state[10];
 public :
     // tao constructor va destructor
     BigObj();

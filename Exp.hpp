@@ -1,7 +1,6 @@
 #pragma once
 #include "Enemy.hpp"
 
-const std::string ExpImg = "exp.png";
 class Exp : public Enemy
 {
 public :

@@ -3,7 +3,6 @@
 #include "Func.hpp"
 
 const double EnemyCD = 2000;
-const std::string SlimeImg = "slime.png";
 class Enemy : public MovingObj
 {
 public :
@@ -13,5 +12,5 @@ public :
     Enemy();
     ~Enemy();
     void Chase();
-    void SetUp(int x, int y, const std::string Pic);
+    void SetUp(int x, int y, int type);
 };

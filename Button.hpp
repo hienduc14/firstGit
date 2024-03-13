@@ -9,5 +9,5 @@ public :
 public :
     int status = 0;
 public :
-    void CheckMouse(SDL_Event &e);
+    void CheckMouse(SDL_Event e);
 };

@@ -46,6 +46,8 @@
 		<Unit filename="Func.hpp" />
 		<Unit filename="Game.cpp" />
 		<Unit filename="Game.hpp" />
+		<Unit filename="ImgTexture.cpp" />
+		<Unit filename="ImgTexture.hpp" />
 		<Unit filename="MovingObj.cpp" />
 		<Unit filename="MovingObj.hpp" />
 		<Unit filename="Orb.cpp" />
