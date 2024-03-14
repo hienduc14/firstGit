@@ -3,7 +3,7 @@
 	<iostream>
 	<SDL.h>
 
-1710352385 source:d:\codeblock\survivor\main.cpp
+1710384852 source:d:\codeblock\survivor\main.cpp
 	<SDL.h>
 	"BasicFn.hpp"
 	"Game.hpp"
@@ -24,21 +24,22 @@
 1710318995 source:d:\codeblock\survivor\bigobj.cpp
 	"BigObj.hpp"
 
-1710324255 d:\codeblock\survivor\bigobj.hpp
+1710412414 d:\codeblock\survivor\bigobj.hpp
 	"BasicFn.hpp"
 	"ImgTexture.hpp"
 
-1710327106 d:\codeblock\survivor\player.hpp
+1710426111 d:\codeblock\survivor\player.hpp
 	"BasicFn.hpp"
 	"BigObj.hpp"
 	"Screen.hpp"
 	"Enemy.hpp"
 	"Orb.hpp"
+	"FireBall.hpp"
 	"Exp.hpp"
 	"ImgTexture.hpp"
 	<vector>
 
-1710335740 source:d:\codeblock\survivor\player.cpp
+1710390347 source:d:\codeblock\survivor\player.cpp
 	"Player.hpp"
 
 1709885579 source:d:\codeblock\survivor\map.cpp
@@ -62,19 +63,21 @@
 1709831343 source:d:\codeblock\survivor\touch.cpp
 	"Touch.hpp"
 
-1710264154 source:d:\codeblock\survivor\func.cpp
+1710414472 source:d:\codeblock\survivor\func.cpp
 	"Func.hpp"
 
-1710264155 d:\codeblock\survivor\func.hpp
+1710414472 d:\codeblock\survivor\func.hpp
 	"BasicFn.hpp"
+	<valarray>
 	<cmath>
 
-1710335750 source:d:\codeblock\survivor\movingobj.cpp
+1710425291 source:d:\codeblock\survivor\movingobj.cpp
 	"MovingObj.hpp"
 
-1710265606 d:\codeblock\survivor\movingobj.hpp
+1710414575 d:\codeblock\survivor\movingobj.hpp
 	"BasicFn.hpp"
 	"BigObj.hpp"
+	"Func.hpp"
 
 1710327914 source:d:\codeblock\survivor\enemy.cpp
 	"Enemy.hpp"
@@ -89,11 +92,11 @@
 1710264969 d:\codeblock\survivor\power.hpp
 	"MovingObj.hpp"
 
-1710320637 source:d:\codeblock\survivor\orb.cpp
+1710386552 source:d:\codeblock\survivor\orb.cpp
 	"Orb.hpp"
 
-1710318906 d:\codeblock\survivor\orb.hpp
-	"Power.hpp"
+1710385958 d:\codeblock\survivor\orb.hpp
+	"MovingObj.hpp"
 
 1710322285 source:d:\codeblock\survivor\exp.cpp
 	"Exp.hpp"
@@ -101,7 +104,7 @@
 1710318793 d:\codeblock\survivor\exp.hpp
 	"Enemy.hpp"
 
-1710358004 d:\codeblock\survivor\game.hpp
+1710390233 d:\codeblock\survivor\game.hpp
 	<SDL.h>
 	"BasicFn.hpp"
 	"Func.hpp"
@@ -109,13 +112,13 @@
 	"Player.hpp"
 	"Screen.hpp"
 	"Enemy.hpp"
-	"Power.hpp"
 	"Orb.hpp"
+	"FireBall.hpp"
 	"Exp.hpp"
 	"ImgTexture.hpp"
 	"Button.hpp"
 
-1710358011 source:d:\codeblock\survivor\game.cpp
+1710424143 source:d:\codeblock\survivor\game.cpp
 	"Game.hpp"
 
 1710338801 source:d:\codeblock\survivor\button.cpp
@@ -141,17 +144,24 @@
 1710269566 source:d:\codeblock\survivor\time.cpp
 	"Time.hpp"
 
-1710357410 d:\codeblock\survivor\imgtexture.hpp
+1710387764 d:\codeblock\survivor\imgtexture.hpp
 	"BasicFn.hpp"
 
-1710357353 source:d:\codeblock\survivor\imgtexture.cpp
+1710390403 source:d:\codeblock\survivor\imgtexture.cpp
 	"ImgTexture.hpp"
 
-1710352109 source:d:\codeblock\survivor\menu.cpp
+1710385210 source:d:\codeblock\survivor\menu.cpp
 	"Menu.hpp"
 
-1710352139 d:\codeblock\survivor\menu.hpp
+1710384852 d:\codeblock\survivor\menu.hpp
 	"BasicFn.hpp"
 	"Screen.hpp"
 	"Button.hpp"
+
+1710424087 d:\codeblock\survivor\fireball.hpp
+	"MovingObj.hpp"
+	"Func.hpp"
+
+1710426100 source:d:\codeblock\survivor\fireball.cpp
+	"FireBall.hpp"
 

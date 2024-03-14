@@ -1,5 +1,5 @@
 #pragma once
-#include "Power.hpp"
+#include "MovingObj.hpp"
 #define OrbImgW 64
 #define OrbImgH 60
 #define OrbW 30

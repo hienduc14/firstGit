@@ -19,3 +19,8 @@ int func::random( int x, int y )
     return x + rand() % (y - x + 1);
 
 }
+
+double func::GetAngle(double x, double y)
+{
+    return atan2(y, x)*180/M_PI;
+}

@@ -1,22 +1,27 @@
 #include "Menu.hpp"
 
-namespace play
+Menu::Menu()
 {
 
 }
 
-int play::Menu()
+Menu::~Menu()
 {
-    Screen MainMenu;
+
+}
+
+int Menu::play()
+{
+//    Screen MainMenu;
     MainMenu.rectst = {0, 0, 1002, 564};
     MainMenu.rect = {0, 0, SCREEN_WIDTH, SCREEN_HEIGHT};
     MainMenu.SetTexture(MainMenuImg);
-    Button Play;
+//    Button Play;
     Play.rectst = {0, 0, 403, 146};
     Play.rect = {CENTER_X-150, SCREEN_HEIGHT-200, 300, 95};
     Play.SetTexture(PlayImg);
     while( !Quit ){
-//            Play.status = 0;
+        Play.status = 0;
         while(SDL_PollEvent(&base::g_event))
         {
             if (base::g_event.type == SDL_QUIT)

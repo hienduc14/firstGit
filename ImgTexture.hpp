@@ -3,6 +3,7 @@
 
 const std::string SlimeImg = "slime.png";
 const std::string OrbImg = "orb.png";
+const std::string FireBallImg = "fireball.png";
 const std::string ExpImg = "exp.png";
 const std::string PlayerImg = "PlayerSlime.png";
 const std::string MapImg = "EndlessMap.png";
@@ -13,6 +14,7 @@ namespace pre
     extern SDL_Texture* MapTexture;
     extern SDL_Texture* SlimeTexture;
     extern SDL_Texture* OrbTexture;
+    extern SDL_Texture* FireBallTexture;
     extern SDL_Texture* ExpTexture;
     extern SDL_Texture* PlayerTexture;
     extern SDL_Texture* HealthTexture;

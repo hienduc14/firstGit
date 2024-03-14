@@ -6,8 +6,8 @@
 #include "Player.hpp"
 #include "Screen.hpp"
 #include "Enemy.hpp"
-#include "Power.hpp"
 #include "Orb.hpp"
+#include "FireBall.hpp"
 #include "Exp.hpp"
 #include "ImgTexture.hpp"
 #include "Button.hpp"
@@ -15,12 +15,24 @@ const std::string PauseImg = "pause.png";
 const std::string HomeImg = "home.png";
 const std::string ResumeImg = "resume.png";
 const std::string PauseMenuImg = "PauseMenu.png";
-namespace play
+class Game
 {
-//    int frame = 0;
-    void Game( int StartPower );
-//    void KeyInput(Player &player);
-//    void SpawnEnemy( std::list<Enemy> &enemies );
-//    void HandlePower( Player &player, std::list<Orb> &orbs );
+public :
+    Game();
+    ~Game();
+private :
+    Player player;
+    std::list<Enemy> enemies;
+    std::list<Orb> orbs;
+    std::list<FireBall> fireBalls;
+    std::list<Exp> exps;
+    int frame = 0;
+    Screen Map;
+    Button pause;
+    Button resume;
+    Button home;
+    Screen PauseMenu;
+public :
+    void play( int StartPower );
 
-}
+};

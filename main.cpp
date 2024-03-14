@@ -7,9 +7,11 @@ int main( int argc, char* args[] )
 {
     // khoi tao window, renderer...
     base::initSDL();
+    Menu menu;
+    Game game;
     while( !Quit ){
-        int state = play::Menu();
-        if( state == 1 ) play::Game( 0 );
+        int state = menu.play();
+        if( state == 1 ) game.play( 0 );
     }
     // thoat chuong trinh
     base::quitSDL();

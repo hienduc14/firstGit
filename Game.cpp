@@ -1,47 +1,60 @@
 #include "Game.hpp"
 
-void play::Game( int StartPower ){
+Game::Game()
+{
+
+}
+
+Game::~Game()
+{
+
+}
+
+void Game::play( int StartPower ){
     pre::MapTexture = base::Load_Image(MapImg);
     pre::SlimeTexture = base::Load_Image(SlimeImg);
     pre::OrbTexture = base::Load_Image(OrbImg);
+    pre::FireBallTexture = base::Load_Image(FireBallImg);
     pre::ExpTexture = base::Load_Image(ExpImg);
     pre::PlayerTexture = base::Load_Image(PlayerImg);
     pre::HealthTexture = base::Load_Image(HealthImg);
     pre::HealthBarTexture = base::Load_Image(HealthBarImg);
+//    if( pre::FireBallTexture == nullptr ) std::cout << "NOOOOOOOOOOOOOOOO\n";
     // ve map
-    Screen Map;
+//    Screen Map;
     Map.rectst = {0, 0, MapWidth*3, MapHeight*3};
     Map.rect = {-MapWidth, -MapHeight, MapWidth*3, MapHeight*3};
     Map.texture = pre::MapTexture;
     Map.SetL();
 
-    Button pause;
+//    Button pause;
     pause.texture = base::Load_Image(PauseImg);
     pause.rectst = {0, 0, 131, 116};
     pause.rect = {SCREEN_WIDTH-80,0, 80, 80};
 
-    Button resume;
+//    Button resume;
     resume.texture = base::Load_Image(ResumeImg);
     resume.rectst = {0, 0, 401, 102};
     resume.rect = {CENTER_X+300-200-20, CENTER_Y+250-50-20, 200, 50};
 
-    Button home;
+//    Button home;
     home.texture = base::Load_Image(HomeImg);
     home.rectst = {0, 0, 131, 116};
     home.rect = {CENTER_X+300-200-60-20,CENTER_Y+250-50-20, 50, 50};
 
-    Screen PauseMenu;
+//    Screen PauseMenu;
     PauseMenu.texture = base::Load_Image(PauseMenuImg);
     PauseMenu.rectst = {0, 0, 624, 480};
     PauseMenu.rect = {CENTER_X-300, CENTER_Y-250, 600, 500};
 
-
-    Player player;
-    std::list<Enemy> enemies;
-    std::list<Orb> orbs;
-    std::list<Exp> exps;
-    int frame = 0;
-    player.SetPower(StartPower);
+    player.SetUp();
+//    Player player;
+//    std::list<Enemy> enemies;
+//    std::list<Orb> orbs;
+//    std::list<Exp> exps;
+//    int frame = 0;
+    player.SetPower(StartPower, frame);
+    player.SetPower(1, frame);
 
     int GameState = 0;
     bool GameQuit = false;
@@ -70,6 +83,7 @@ void play::Game( int StartPower ){
         {
             Map.drawObj();
             for( auto &orb : orbs ) orb.drawObj();
+            for( auto &fireBall : fireBalls ) fireBall.drawObj();
             for( auto &exp : exps ) exp.drawObj();
             player.renderPlayer();
             for( auto &enemy : enemies) enemy.drawObj();
@@ -86,7 +100,6 @@ void play::Game( int StartPower ){
             // nhap thao tac tu ban phim
             player.ResetInput();
             player.KeyInput();
-            if( !player.GetPower(0) )player.SetPower(0);
 
             // random sinh quai
             if( frame%int(FPS*2) == 0 && enemies.size() < 50 ){
@@ -97,21 +110,38 @@ void play::Game( int StartPower ){
             }
 
             // xu ly dan (neu co)
-            if( frame%int(FPS*player.GetCycle(0)) == 0 && player.GetPower(0) ){
+            if( player.GetPower(0) && frame - player.GetStartCD(0) >= player.GetCD(0)  ){
                 Orb orb;
                 orb.Create();
                 orb.Start( player.GetDir(), PlayerWidth/2+3*dx[player.GetDir()], PlayerHeight/2+3*dy[player.GetDir()] );
                 orbs.push_back( orb );
+                player.SetStartCD(0, frame);
+            }
+            if( player.GetPower(1) && frame - player.GetStartCD(1) >= player.GetCD(1)  ){
+                int f_x = 1e9, f_y = 1e9; double luu = 1e9;
+                for(auto &enemy : enemies) if(luu > func::dist(CENTER_X, CENTER_Y, enemy.c_x, enemy.c_y) )
+                    {
+                        luu = func::dist(CENTER_X, CENTER_Y, enemy.c_x, enemy.c_y);
+                        f_x = enemy.c_x; f_y = enemy.c_y;
+                    }
+                if( f_x != 1e9 ){
+                    FireBall fireBall;
+                    fireBall.Create();
+                    fireBall.Start( f_x, f_y );
+                    fireBalls.push_back( fireBall );
+                    player.SetStartCD(1, frame);
+                }
             }
 
             //xu ly move cac Obj
-            player.Move(Map, enemies, orbs, exps );
+            player.Move(Map, enemies, orbs, fireBalls, exps );
 
             //cac obj move
             for( auto &enemy : enemies) {
                 enemy.Chase();
             }
             for( auto &orb : orbs ) orb.Run();
+            for( auto &fireBall : fireBalls ) fireBall.Run();
 
 
             for( auto &exp : exps ) {
@@ -141,6 +171,15 @@ void play::Game( int StartPower ){
                         orb.SetTexture(std::string("orb_explode.png"));
                     }
                 }
+                for( auto &fireBall : fireBalls )
+                    {
+                    if( func::checkRect( fireBall.GetRect(), enemy.GetRect() ) )
+                    {
+                        fireBall.exist = 0;
+                        enemy.HP -= fireBall.damage;
+                        fireBall.SetTexture(std::string("FireBall_explode.png"));
+                    }
+                }
                 if(enemy.exist == true && func::checkRect( player.GetRect(), enemy.GetRect() ) ){
 
                     if(enemy.CoolDown == EnemyCD ) {
@@ -161,10 +200,19 @@ void play::Game( int StartPower ){
                     orb.SetTexture(std::string("orb_explode.png"));
                 }
             }
+            for( auto &fireBall : fireBalls ) {
+                fireBall.ExistTime -= TimeStep;
+                if( fireBall.ExistTime <= 0 ){
+                    fireBall.exist = 0;
+                    fireBall.SetTexture(std::string("orb_explode.png"));
+                }
+            }
 
             // render
             Map.drawObj();
             for( auto &orb : orbs ) orb.drawObj();
+            for( auto &fireBall : fireBalls ) fireBall.RenderMoving();
+//            for( auto &fireBall : fireBalls ) fireBall.drawObj();
             for( auto &exp : exps ) exp.drawObj();
             player.renderPlayer();
             for( auto &enemy : enemies) enemy.drawObj();
@@ -181,6 +229,11 @@ void play::Game( int StartPower ){
             while (it != orbs.end()) {
                 if (it->exist <= 0) it = orbs.erase(it);
                 else ++it;
+            }
+            auto itk = fireBalls.begin();
+            while (itk != fireBalls.end()) {
+                if (itk->exist <= 0) itk = fireBalls.erase(itk);
+                else ++itk;
             }
             auto its = enemies.begin();
             while (its!= enemies.end()){

@@ -1,5 +1,6 @@
 #pragma once
 #include "BasicFn.hpp"
+#include <valarray>
 #include <cmath>
 namespace func
 {
@@ -9,4 +10,6 @@ namespace func
     bool checkRect( SDL_Rect rect1, SDL_Rect rect2 );
     // lay ngau nhien trong x->y
     int random( int x, int y );
+
+    double GetAngle( double x, double y );
 }

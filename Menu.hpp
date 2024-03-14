@@ -5,11 +5,16 @@
 
 const std::string MainMenuImg = "Menu.png";
 const std::string PlayImg = "play.png";
-extern Screen MainMenu;
-extern Button Play;
 
-namespace play
+class Menu
 {
-    int Menu();
-}
+public :
+    Menu();
+    ~Menu();
+private :
+    Screen MainMenu;
+    Button Play;
+public :
+    int play();
+};
 
