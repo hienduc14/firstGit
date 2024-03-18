@@ -21,5 +21,5 @@ public :
 public :
     void Change( double ax, double ay );
     void Located();
-    void RenderMoving();
+    void RenderMoving( int IsMove );
 };

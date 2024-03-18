@@ -8,9 +8,12 @@
 #include "Enemy.hpp"
 #include "Orb.hpp"
 #include "FireBall.hpp"
+#include "Zone.hpp"
 #include "Exp.hpp"
+#include "Card.hpp"
 #include "ImgTexture.hpp"
 #include "Button.hpp"
+#include <utility>
 const std::string PauseImg = "pause.png";
 const std::string HomeImg = "home.png";
 const std::string ResumeImg = "resume.png";
@@ -26,13 +29,21 @@ private :
     std::list<Orb> orbs;
     std::list<FireBall> fireBalls;
     std::list<Exp> exps;
-    int frame = 0;
+    Zone zone;
     Screen Map;
     Button pause;
     Button resume;
     Button home;
     Screen PauseMenu;
+    Card card[3];
+    std::pair<int, int> timeSpawn = {-2000, 1000};
 public :
     void play( int StartPower );
-
+    void Prepare();
+    void LevelUp();
+    void SpawnEnemy();
+    void Firing();
+    void PauseGame();
+    void RenderGamePlay( int IsMoving );
+    void RemoveThing();
 };

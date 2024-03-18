@@ -20,6 +20,7 @@ void Player::SetUp()
 //    this->SetTexture(PlayerImg);
     this->dir = 1;
     SetHealthBar();
+    SetExpBar();
 }
 
 void Player::ResetInput(){ a_x = 0; a_y = 0; }
@@ -58,37 +59,74 @@ void Player::Move( Screen &Map, std::list<Enemy> &enemies, std::list<Orb> &orbs,
     for( auto &fireBall : fireBalls ) fireBall.Change( -a_x, -a_y );
 }
 
-void Player::SetPower( int x, int frame )
+void Player::SetPower( int x )
 {
     MyPower[x] = 1;
-    StartCD[x] = frame;
+    StartCD[x] = SDL_GetTicks();
 }
 int Player::GetPower( int x ){return MyPower[x];}
 void Player::SetCD( int t, int x ){ CD[t] = x; }
 int Player::GetCD( int t ){ return CD[t]; }
-void Player::SetStartCD( int t, int x ){ StartCD[t] = x; }
+void Player::SetStartCD( int t ){ StartCD[t] = SDL_GetTicks(); }
 int Player::GetStartCD( int t ){ return StartCD[t]; }
 
 void Player::SetHealthBar()
 {
     Health.texture = pre::HealthTexture;
-    HealthBar.texture = pre::HealthBarTexture;
     Health.rectst = {0, 0, HealthBarWidth, HealthBarHeight};
-    HealthBar.rectst = {0, 0, HealthBarWidth, HealthBarHeight};
     Health.rect = {CENTER_X-40,CENTER_Y+this->rect.h/2+10, HealthBarWidth, HealthBarHeight};
+    HealthBar.texture = pre::HealthBarTexture;
+    HealthBar.rectst = {0, 0, HealthBarWidth, HealthBarHeight};
     HealthBar.rect = {CENTER_X-40,CENTER_Y+this->rect.h/2+10, HealthBarWidth, HealthBarHeight};
+}
+
+void Player::SetExpBar()
+{
+    ExpPoint.texture = pre::ExpPointTexture;
+    ExpPoint.rectst = {0, 0, ExpBarWidth, ExpBarHeight};
+    ExpPoint.rect = {0, SCREEN_HEIGHT-20, 0, 20};
+    ExpBar.texture = pre::ExpBarTexture;
+    ExpBar.rectst = {0, 0, ExpBarWidth, ExpBarHeight};
+    ExpBar.rect = {0, SCREEN_HEIGHT-20, SCREEN_WIDTH, 20};
 }
 
 void Player::Bleeding( int dmg )
 {
     HP -= dmg;
     double per = double(HP)/HPMax;
-    Health.rectst.w = double(HealthBarWidth)*per;
-    Health.rect.w = double(HealthBarWidth)*per;
+//    Health.rectst.w = double(HealthBarWidth)*per;
+    Health.rect.w = double(HealthBar.rect.w)*per;
+}
+
+int Player::ExpAbsorb( Exp &exp )
+{
+    if( func::dist( exp.c_x, exp.c_y, CENTER_X, CENTER_Y) <= 10 ){
+        EXP += exp.stat;
+        exp.exist = 0;
+
+        int addLevel = 0;
+        while( EXP >= ExpRequire[Level] )
+        {
+            EXP -= ExpRequire[Level];
+            addLevel++;
+            Level++;
+        }
+
+        double per = double(EXP)/ExpRequire[Level];
+        ExpPoint.rect.w = double(ExpBar.rect.w)*per;
+        return addLevel;
+    }
+    if( func::dist( exp.c_x, exp.c_y, CENTER_X, CENTER_Y) <= PlayerR ) {
+        exp.Chase();
+        return 0;
+    }
+    return 0;
 }
 
 void Player::renderPlayer(){
     this->drawObj();
     Health.drawObj();
     HealthBar.drawObj();
+    ExpPoint.drawObj();
+    ExpBar.drawObj();
 }

@@ -12,8 +12,8 @@ FireBall::FireBall()
     v_Obj = FireBallV;
     exist = 1;
     timeCurrent = 0;
-    frameTime = 0.1; frameNum = 6;
-    for( int i = 0; i <= 5; i++ )
+    frameTime = 0.05; frameNum = 8;
+    for( int i = 0; i <= frameNum-1; i++ )
     {
         clip[i].w = FireBallW;
         clip[i].h = FireBallH;

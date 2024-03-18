@@ -6,5 +6,5 @@ class Exp : public Enemy
 public :
     Exp();
     ~Exp();
-    int stat = 0;
+    int stat = 1;
 };

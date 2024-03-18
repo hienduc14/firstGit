@@ -23,20 +23,33 @@ void MovingObj::Located()
     c_y = rect.y + rect.h/2;
 }
 
-void MovingObj::RenderMoving()
+void MovingObj::RenderMoving( int IsMove )
 {
-    timeCurrent += TimeManager::Instance()->getElapsedTime();
-    while( timeCurrent >= frameTime*frameNum ) timeCurrent -= frameTime*frameNum;
-//    if( timeCurrent < 5) timeCurrent ++; else timeCurrent = 0;
-//    int clipIndex = timeCurrent;
-//    rectst = clip[clipIndex];
-    int clipIndex = timeCurrent/frameTime;
-    rectst = clip[clipIndex];
-    std::cout << clipIndex << '\n';
-    double angle = func::GetAngle( a_x, a_y );
+    if( IsMove == false )
+    {
+        double angle = func::GetAngle( a_x, a_y );
 
-    SDL_RendererFlip flip = SDL_FLIP_NONE;
-    if( rect.x > CENTER_X ) flip = SDL_FLIP_VERTICAL;
+        SDL_RendererFlip flip = SDL_FLIP_NONE;
+        if( rect.x > CENTER_X ) flip = SDL_FLIP_VERTICAL;
 
-    SDL_RenderCopyEx(base::renderer, texture, &clip[clipIndex], &rect, angle, nullptr, flip);
+        SDL_RenderCopyEx(base::renderer, texture, &rectst, &rect, angle, nullptr, flip);
+    }
+    else
+    {
+        //lay frame cua animation theo thoi gian
+        timeCurrent += TimeManager::Instance()->getElapsedTime();
+        while( timeCurrent >= frameTime*frameNum ) timeCurrent -= frameTime*frameNum;
+        int clipIndex = timeCurrent/frameTime;
+        //lay goc di chuyen
+        double angle = func::GetAngle( a_x, a_y );
+
+        //lay huong di chuyen
+        SDL_RendererFlip flip = SDL_FLIP_NONE;
+        if( rect.x > CENTER_X ) flip = SDL_FLIP_VERTICAL;
+
+        SDL_RenderCopyEx(base::renderer, texture, &clip[clipIndex], &rect, angle, nullptr, flip);
+
+        // gan lai frame hien tai
+        rectst = clip[clipIndex];
+    }
 }
