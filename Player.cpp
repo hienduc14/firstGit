@@ -62,7 +62,6 @@ void Player::Move( Screen &Map, std::list<Enemy> &enemies, std::list<Orb> &orbs,
 void Player::SetPower( int x )
 {
     MyPower[x] = 1;
-    StartCD[x] = SDL_GetTicks();
 }
 int Player::GetPower( int x ){return MyPower[x];}
 void Player::SetCD( int t, int x ){ CD[t] = x; }
@@ -129,4 +128,17 @@ void Player::renderPlayer(){
     HealthBar.drawObj();
     ExpPoint.drawObj();
     ExpBar.drawObj();
+}
+
+int Player::checkCD(int t)
+{
+    if( StartCD[t] == -1 ){
+        StartCD[t] = SDL_GetTicks();
+        return 1;
+    }else{
+        if( int(SDL_GetTicks()) - StartCD[t] >= CD[t] ){
+            return 1;
+        }
+        return 0;
+    }
 }

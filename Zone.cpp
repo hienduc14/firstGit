@@ -2,7 +2,7 @@
 
 Zone::Zone()
 {
-    damage = 3;
+    damage = 1;
 
     this->rectst.w = ZoneImgW;
     this->rectst.h = ZoneImgH;
@@ -18,10 +18,19 @@ Zone::~Zone()
 
 void Zone::Start()
 {
-    this->texture = pre::ZoneTexture;
-    SetRect(CENTER_X-rect.w/2, CENTER_Y-rect.h/2);
-    Located();
-    SetL();
+    switch (CanDmg)
+    {
+
+    case -1 :
+        this->texture = pre::ZoneTexture;
+        SetRect(CENTER_X-rect.w/2, CENTER_Y-rect.h/2);
+        Located();
+        SetL();
+        CanDmg = 1;
+        break;
+    case 0 :
+        CanDmg = 1;
+    }
 }
 
 void Zone::DOT( Enemy &enemy )

@@ -2,7 +2,7 @@
 #include "MovingObj.hpp"
 #include "Func.hpp"
 
-const double EnemyCD = 2000;
+const double EnemyCD = 500;
 class Enemy : public MovingObj
 {
 public :

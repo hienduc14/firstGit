@@ -10,7 +10,10 @@
 //const SDL_Texture* OrbCard = base::Load_Image("");
 //const SDL_Texture* FireBallCard = base::Load_Image("");
 //const SDL_Texture* ZoneCard = base::Load_Image("");
-
+namespace pre
+{
+    extern int OptionUsed[5];
+}
 class Card : public Button
 {
 public :
@@ -23,3 +26,4 @@ public :
     void Random();
     void Update( Player &player );
 };
+

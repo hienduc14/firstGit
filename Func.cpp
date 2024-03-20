@@ -15,7 +15,6 @@ bool func::checkRect( SDL_Rect rect1, SDL_Rect rect2 )
 
 int func::random( int x, int y )
 {
-    srand(SDL_GetTicks());
     return x + rand() % (y - x + 1);
 
 }

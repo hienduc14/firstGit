@@ -12,6 +12,8 @@ class Zone : public MovingObj
 private :
     int radius = 150;
 public :
+    int CanDmg = -1;
+public :
     Zone();
     virtual ~Zone();
     void Start();

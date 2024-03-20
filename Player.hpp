@@ -24,10 +24,10 @@ private :
     double a_x = 0, a_y = 0;
     double v_Player = 300;
     int dir = 0;
-    bool MyPower[5] = {0, 0, 0, 0, 0};
-    double CD[5] = {1*1000, 3*1000, 0, 0, 0};
-    double StartCD[5] = {0, 0, 0, 0, 0};
-    int ExpRequire[10] = { 2, 10, 15, 20, 25, 30, 35, 40, 45, 50 };
+    int MyPower[5] = {0, 0, 0, 0, 0};
+    double CD[5] = {1*1000, 3*1000, 3*1000, 0, 0};
+    double StartCD[5] = {-1, -1, -1, -1, -1};
+    int ExpRequire[10] = { 1, 10, 15, 20, 25, 30, 35, 40, 45, 50 };
     BigObj Health;
     BigObj HealthBar;
     BigObj ExpPoint;
@@ -55,4 +55,5 @@ public :
     void Bleeding( int dmg );
     int ExpAbsorb( Exp &exp );
     void renderPlayer();
+    int checkCD( int t );
 };

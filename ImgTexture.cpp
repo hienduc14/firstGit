@@ -16,4 +16,37 @@ namespace pre
     SDL_Texture* HPCardTexture= nullptr;
     SDL_Texture* WaterBallCardTexture= nullptr;
     SDL_Texture* FireBallCardTexture= nullptr;
+    SDL_Texture* Option[5][5];
+//    for( int i = 0; i <= 4; i++ )
+//    for( int j = 0; j <= 4; j++ ) Option[i][j] = nullptr;
+}
+
+LoadAll::LoadAll(){}
+LoadAll::~LoadAll(){}
+void LoadAll::loading()
+{
+    pre::MapTexture = base::Load_Image(MapImg);
+    pre::SlimeTexture = base::Load_Image(SlimeImg);
+    pre::OrbTexture = base::Load_Image(OrbImg);
+    pre::FireBallTexture = base::Load_Image(FireBallImg);
+    pre::ZoneTexture = base::Load_Image(ZoneImg);
+    pre::ExpTexture = base::Load_Image(ExpImg);
+    pre::PlayerTexture = base::Load_Image(PlayerImg);
+    pre::HealthTexture = base::Load_Image(HealthImg);
+    pre::HealthBarTexture = base::Load_Image(HealthBarImg);
+    pre::ExpPointTexture = base::Load_Image(ExpPointImg);
+    pre::ExpBarTexture = base::Load_Image(ExpBarImg);
+    pre::Option[1][0] = base::Load_Image(std::string("HPCard.png"));
+    pre::Option[2][0] = base::Load_Image(std::string("WaterBallCard.png"));
+    pre::Option[2][1] = base::Load_Image(std::string("WaterBallCardLV2.png"));
+    pre::Option[2][2] = base::Load_Image(std::string("WaterBallCardLV3.png"));
+    pre::Option[2][3] = base::Load_Image(std::string("WaterBallCardLV4.png"));
+    pre::Option[3][0] = base::Load_Image(std::string("FireBallCard.png"));
+    pre::Option[3][1] = base::Load_Image(std::string("FireBallCardLV2.png"));
+    pre::Option[3][2] = base::Load_Image(std::string("FireBallCardLV3.png"));
+    pre::Option[3][3] = base::Load_Image(std::string("FireBallCardLV4.png"));
+    pre::Option[4][0] = base::Load_Image(std::string("ZoneCard.png"));
+    pre::Option[4][1] = base::Load_Image(std::string("ZoneCardLV2.png"));
+    pre::Option[4][2] = base::Load_Image(std::string("ZoneCardLV3.png"));
+    pre::Option[4][3] = base::Load_Image(std::string("ZoneCardLV4.png"));
 }

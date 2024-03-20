@@ -43,6 +43,8 @@ public :
     void LevelUp();
     void SpawnEnemy();
     void Firing();
+    void PowerColision();
+    void PowerExisted();
     void PauseGame();
     void RenderGamePlay( int IsMoving );
     void RemoveThing();

@@ -1,5 +1,10 @@
 #include "Card.hpp"
 
+namespace pre
+{
+    int OptionUsed[5] = {0, 0, 0, 0, 0};
+}
+
 Card::Card()
 {
     rectst = {0, 0, CardImgW, CardImgH};
@@ -20,25 +25,16 @@ void Card::Appear( int tt )
 
 void Card::Random()
 {
-    content = func::random( 1, 3 );
-    switch (content)
-    {
-    case 1:
-        this->texture = pre::HPCardTexture;
-        break;
-    case 2:
-        this->texture = pre::WaterBallCardTexture;
-        break;
-    case 3:
-        this->texture = pre::FireBallCardTexture;
-        break;
-//    case 4:
-//        this->texture = pre::HPCardTexture;
-    }
+    do{
+        content = func::random( 1, 4 );
+    }while( 2 <= content && content <= 4 && pre::OptionUsed[content]+1 > 4);
+    this->texture = pre::Option[content][pre::OptionUsed[content]];
+    return;
 }
 
 void Card::Update( Player &player )
 {
+    if( 2 <= content && content <= 4 ) pre::OptionUsed[content]++;
     switch (content)
     {
     case 1:
@@ -52,6 +48,11 @@ void Card::Update( Player &player )
     case 3:
         //FireBall
         player.SetPower( 1 );
+        break;
+
+    case 4:
+        //zone
+        player.SetPower( 2 );
         break;
     }
     content = 0;

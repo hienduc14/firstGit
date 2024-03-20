@@ -31,4 +31,13 @@ namespace pre
     extern SDL_Texture* HPCardTexture;
     extern SDL_Texture* WaterBallCardTexture;
     extern SDL_Texture* FireBallCardTexture;
+    extern SDL_Texture* Option[5][5];
 }
+
+class LoadAll
+{
+public:
+    LoadAll();
+    ~LoadAll();
+    void loading();
+};

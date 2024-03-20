@@ -9,6 +9,7 @@ int main( int argc, char* args[] )
     base::initSDL();
     Menu menu;
     Game game;
+    srand(SDL_GetTicks());
     while( !Quit ){
         int state = menu.play();
         if( state == 1 ) game.play( 0 );

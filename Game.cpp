@@ -14,7 +14,10 @@ void Game::play( int StartPower ){
     Prepare();
 //    player.SetPower(StartPower);
 //    player.SetPower(1);
-    player.SetPower(2);
+//    player.SetPower(2);
+    Exp exp;
+    exp.SetUp( CENTER_X + PlayerWidth/2 + 30 ,CENTER_Y , 0);
+    exps.push_back( exp );
 
     int GameState = 0;
     int Upgrades = 0;
@@ -80,9 +83,7 @@ void Game::play( int StartPower ){
             player.Move(Map, enemies, orbs, fireBalls, exps );
 
             //cac obj move
-            for( auto &enemy : enemies) {
-                enemy.Chase();
-            }
+            for( auto &enemy : enemies) enemy.Chase();
             for( auto &orb : orbs ) orb.Run();
             for( auto &fireBall : fireBalls ) fireBall.Run();
 
@@ -94,69 +95,19 @@ void Game::play( int StartPower ){
                 }
 
             // kiem tra va cham
+            PowerColision();
 
-            for( auto &enemy : enemies )
-            {
-                for( auto &orb : orbs )
-                    {
-                    if( func::checkRect( orb.GetRect(), enemy.GetRect() ) )
-                    {
-                        orb.exist = 0;
-                        enemy.HP -= orb.damage;
-                        orb.SetTexture(std::string("orb_explode.png"));
-                    }
-                }
-                for( auto &fireBall : fireBalls )
-                    {
-                    if( func::checkRect( fireBall.GetRect(), enemy.GetRect() ) )
-                    {
-                        fireBall.exist = 0;
-                        enemy.HP -= fireBall.damage;
-                        fireBall.SetTexture(std::string("FireBall_explode.png"));
-                    }
-                }
-                if( player.GetPower( 2 ) ){
-                    zone.DOT( enemy );
-                }
-
-                if(enemy.exist == true && func::checkRect( player.GetRect(), enemy.GetRect() ) ){
-
-                    if(enemy.CoolDown == EnemyCD ) {
-    //                    std::cout << enemy.CoolDown << '\n';
-    //                    player.HP -= enemy.damage;
-                        player.Bleeding(enemy.damage);
-                        if( player.HP <= 0 ) break;
-                    }
-                    enemy.CoolDown -= TimeStep;
-                    if(enemy.CoolDown <= 0 ) enemy.CoolDown = EnemyCD;
-                }
-            }
-
-            for( auto &orb : orbs ) {
-                orb.ExistTime -= TimeStep;
-                if( orb.ExistTime <= 0 ){
-                    orb.exist = 0;
-                    orb.SetTexture(std::string("orb_explode.png"));
-                }
-            }
-            for( auto &fireBall : fireBalls ) {
-                fireBall.ExistTime -= TimeStep;
-                if( fireBall.ExistTime <= 0 ){
-                    fireBall.exist = 0;
-                    fireBall.SetTexture(std::string("orb_explode.png"));
-                }
-            }
+            // kiem tra dan exist
+            PowerExisted();
 
             // render
             RenderGamePlay( 1 );
             pause.drawObj();
-
             SDL_RenderPresent(base::renderer);
 
             SDL_RenderClear(base::renderer);
 
             if( player.HP <= 0 ) break;
-    //        std::cout << player.HP << '\n';
 
             //xoa quai va dan
             RemoveThing();
@@ -170,6 +121,7 @@ void Game::play( int StartPower ){
     if( player.HP <= 0 ){
         Screen GameOver;
         GameOver.SetTexture(std::string("GameOver.png"));
+        if(GameOver.texture == nullptr) std::cout << "NOooooooooooooo\n";
         GameOver.drawObj();
         SDL_RenderPresent(base::renderer);
         SDL_Delay(5000);
@@ -179,21 +131,8 @@ void Game::play( int StartPower ){
 
 void Game::Prepare()
 {
-    pre::MapTexture = base::Load_Image(MapImg);
-    pre::SlimeTexture = base::Load_Image(SlimeImg);
-    pre::OrbTexture = base::Load_Image(OrbImg);
-    pre::FireBallTexture = base::Load_Image(FireBallImg);
-    pre::ZoneTexture = base::Load_Image(ZoneImg);
-    pre::ExpTexture = base::Load_Image(ExpImg);
-    pre::PlayerTexture = base::Load_Image(PlayerImg);
-    pre::HealthTexture = base::Load_Image(HealthImg);
-    pre::HealthBarTexture = base::Load_Image(HealthBarImg);
-    pre::ExpPointTexture = base::Load_Image(ExpPointImg);
-    pre::ExpBarTexture = base::Load_Image(ExpBarImg);
-    pre::HPCardTexture = base::Load_Image(HPCardImg);
-    pre::WaterBallCardTexture = base::Load_Image(WaterBallCardImg);
-    pre::FireBallCardTexture = base::Load_Image(FireBallCardImg);
-    if( pre::WaterBallCardTexture== nullptr ) std::cout << "NOOOOOOOOOOOOOOOO" << '\n';
+    LoadAll preload;
+    preload.loading();
 //    ve map
 //    Screen Map;
     Map.rectst = {0, 0, MapWidth*3, MapHeight*3};
@@ -244,8 +183,11 @@ void Game::SpawnEnemy()
 {
     if( int(SDL_GetTicks()) - timeSpawn.first > timeSpawn.second && enemies.size() < 50 ){
         Enemy enemy;
-        if( (func::random( 0, 1 )) ) enemy.SetUp( (func::random(0, SCREEN_WIDTH)), 0, 1);
-        else enemy.SetUp( 0, (func::random(0, SCREEN_HEIGHT) ), 1);
+        int edge = func::random(1, 4);
+        if( edge == 1 ) enemy.SetUp( (func::random(0, SCREEN_WIDTH)), -50, 1);
+        if( edge == 2 ) enemy.SetUp( -50, (func::random(0, SCREEN_HEIGHT) ), 1);
+        if( edge == 3 ) enemy.SetUp( (func::random(0, SCREEN_HEIGHT) ), SCREEN_HEIGHT+50, 1);
+        if( edge == 4 ) enemy.SetUp( SCREEN_WIDTH+50, (func::random(0, SCREEN_HEIGHT) ), 1);
         enemies.push_back( enemy );
         timeSpawn.first = SDL_GetTicks();
     }
@@ -254,14 +196,14 @@ void Game::SpawnEnemy()
 
 void Game::Firing()
 {
-    if( player.GetPower(0) && int(SDL_GetTicks())- player.GetStartCD(0) >= player.GetCD(0)  ){
+    if( player.GetPower(0) && player.checkCD(0)  ){
         Orb orb;
         orb.Create();
         orb.Start( player.GetDir(), PlayerWidth/2+3*dx[player.GetDir()], PlayerHeight/2+3*dy[player.GetDir()] );
         orbs.push_back( orb );
         player.SetStartCD(0);
     }
-    if( player.GetPower(1) && int(SDL_GetTicks()) - player.GetStartCD(1) >= player.GetCD(1)  ){
+    if( player.GetPower(1) && player.checkCD(1) ){
         int f_x = 1e9, f_y = 1e9; double luu = 1e9;
         for(auto &enemy : enemies) if(luu > func::dist(CENTER_X, CENTER_Y, enemy.c_x, enemy.c_y) )
             {
@@ -276,10 +218,68 @@ void Game::Firing()
             player.SetStartCD(1);
         }
     }
-    if( player.GetPower( 2 ) )
+    if( player.GetPower(2) && player.checkCD(2) )
     {
         zone.Start();
     }
+}
+
+void Game::PowerColision()
+{
+    for( auto &enemy : enemies )
+    {
+        for( auto &orb : orbs )
+            {
+            if( func::checkRect( orb.GetRect(), enemy.GetRect() ) )
+            {
+                orb.exist = 0;
+                enemy.HP -= orb.damage;
+                orb.SetTexture(std::string("orb_explode.png"));
+            }
+        }
+        for( auto &fireBall : fireBalls )
+            {
+            if( func::checkRect( fireBall.GetRect(), enemy.GetRect() ) )
+            {
+                fireBall.exist = 0;
+                enemy.HP -= fireBall.damage;
+                fireBall.SetTexture(std::string("FireBall_explode.png"));
+            }
+        }
+        if( player.GetPower( 2 ) && zone.CanDmg == 1 ) zone.DOT( enemy );
+
+        if(enemy.exist == true && func::checkRect( player.GetRect(), enemy.GetRect() ) ){
+
+            if(enemy.CoolDown == EnemyCD ) {
+//                    std::cout << enemy.CoolDown << '\n';
+//                    player.HP -= enemy.damage;
+                player.Bleeding(enemy.damage);
+                if( player.HP <= 0 ) break;
+            }
+            enemy.CoolDown -= TimeStep;
+            if(enemy.CoolDown <= 0 ) enemy.CoolDown = EnemyCD;
+        }
+    }
+}
+
+void Game::PowerExisted()
+{
+    for( auto &orb : orbs ) {
+        orb.ExistTime -= TimeStep;
+        if( orb.ExistTime <= 0 ){
+            orb.exist = 0;
+            orb.SetTexture(std::string("orb_explode.png"));
+        }
+    }
+
+    for( auto &fireBall : fireBalls ) {
+        fireBall.ExistTime -= TimeStep;
+        if( fireBall.ExistTime <= 0 ){
+            fireBall.exist = 0;
+            fireBall.SetTexture(std::string("orb_explode.png"));
+        }
+    }
+
 }
 
 void Game::PauseGame()

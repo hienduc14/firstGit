@@ -3,7 +3,7 @@
 	<iostream>
 	<SDL.h>
 
-1710384852 source:d:\codeblock\survivor\main.cpp
+1710907324 source:d:\codeblock\survivor\main.cpp
 	<SDL.h>
 	"BasicFn.hpp"
 	"Game.hpp"
@@ -28,7 +28,7 @@
 	"BasicFn.hpp"
 	"ImgTexture.hpp"
 
-1710759949 d:\codeblock\survivor\player.hpp
+1710906487 d:\codeblock\survivor\player.hpp
 	"BasicFn.hpp"
 	"BigObj.hpp"
 	"Screen.hpp"
@@ -39,7 +39,7 @@
 	"ImgTexture.hpp"
 	<vector>
 
-1710758302 source:d:\codeblock\survivor\player.cpp
+1710855931 source:d:\codeblock\survivor\player.cpp
 	"Player.hpp"
 
 1709885579 source:d:\codeblock\survivor\map.cpp
@@ -63,7 +63,7 @@
 1709831343 source:d:\codeblock\survivor\touch.cpp
 	"Touch.hpp"
 
-1710414472 source:d:\codeblock\survivor\func.cpp
+1710907324 source:d:\codeblock\survivor\func.cpp
 	"Func.hpp"
 
 1710414472 d:\codeblock\survivor\func.hpp
@@ -82,7 +82,7 @@
 1710327914 source:d:\codeblock\survivor\enemy.cpp
 	"Enemy.hpp"
 
-1710759597 d:\codeblock\survivor\enemy.hpp
+1710908056 d:\codeblock\survivor\enemy.hpp
 	"MovingObj.hpp"
 	"Func.hpp"
 
@@ -104,7 +104,7 @@
 1710581255 d:\codeblock\survivor\exp.hpp
 	"Enemy.hpp"
 
-1710759900 d:\codeblock\survivor\game.hpp
+1710859283 d:\codeblock\survivor\game.hpp
 	<SDL.h>
 	"BasicFn.hpp"
 	"Func.hpp"
@@ -121,7 +121,7 @@
 	"Button.hpp"
 	<utility>
 
-1710761661 source:d:\codeblock\survivor\game.cpp
+1710916313 source:d:\codeblock\survivor\game.cpp
 	"Game.hpp"
 
 1710726681 source:d:\codeblock\survivor\button.cpp
@@ -147,10 +147,10 @@
 1710269566 source:d:\codeblock\survivor\time.cpp
 	"Time.hpp"
 
-1710758303 d:\codeblock\survivor\imgtexture.hpp
+1710907016 d:\codeblock\survivor\imgtexture.hpp
 	"BasicFn.hpp"
 
-1710758302 source:d:\codeblock\survivor\imgtexture.cpp
+1710916041 source:d:\codeblock\survivor\imgtexture.cpp
 	"ImgTexture.hpp"
 
 1710385210 source:d:\codeblock\survivor\menu.cpp
@@ -168,20 +168,20 @@
 1710610574 source:d:\codeblock\survivor\fireball.cpp
 	"FireBall.hpp"
 
-1710696324 d:\codeblock\survivor\zone.hpp
+1710855367 d:\codeblock\survivor\zone.hpp
 	"MovingObj.hpp"
 	"Func.hpp"
 	"Enemy.hpp"
 
-1710687607 source:d:\codeblock\survivor\zone.cpp
+1710855605 source:d:\codeblock\survivor\zone.cpp
 	"Zone.hpp"
 
-1710761676 d:\codeblock\survivor\card.hpp
+1710910271 d:\codeblock\survivor\card.hpp
 	"Player.hpp"
 	"Button.hpp"
 	"Func.hpp"
 	"ImgTexture.hpp"
 
-1710760330 source:d:\codeblock\survivor\card.cpp
+1710916352 source:d:\codeblock\survivor\card.cpp
 	"Card.hpp"
 
