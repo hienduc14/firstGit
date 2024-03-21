@@ -8,6 +8,8 @@ const double OrbV = 500;
 class Orb : public MovingObj
 {
 public :
+    double delayTime;
+public :
     int ExistTime;
 public :
     Orb();

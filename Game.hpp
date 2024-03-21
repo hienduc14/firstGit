@@ -11,6 +11,7 @@
 #include "Zone.hpp"
 #include "Exp.hpp"
 #include "Card.hpp"
+#include "PowerUp.hpp"
 #include "ImgTexture.hpp"
 #include "Button.hpp"
 #include <utility>

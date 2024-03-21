@@ -15,7 +15,6 @@ Screen::~Screen()
 void Screen::MapMove(double u, double v){
     L_x += u*TimeManager::Instance()->getElapsedTime();
     L_y += v*TimeManager::Instance()->getElapsedTime();
-//    cout << u << " " << v << "\n";
     rect.x = L_x; rect.y = L_y;
     if( this->rect.x >= 0 ) this->rect.x-=MapWidth;
     if( this->rect.y >= 0 ) this->rect.y-=MapHeight;

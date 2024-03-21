@@ -1,5 +1,7 @@
 #pragma once
 #include "Player.hpp"
+#include "Enemy.hpp"
+#include "Exp.hpp"
 #include "Button.hpp"
 #include "Func.hpp"
 #include "ImgTexture.hpp"
@@ -12,7 +14,7 @@
 //const SDL_Texture* ZoneCard = base::Load_Image("");
 namespace pre
 {
-    extern int OptionUsed[5];
+    extern int OptionUsed[7];
 }
 class Card : public Button
 {

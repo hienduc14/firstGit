@@ -6,7 +6,7 @@ const double EnemyCD = 500;
 class Enemy : public MovingObj
 {
 public :
-    int HP;
+    double HP;
     double CoolDown = EnemyCD;
 public :
     Enemy();

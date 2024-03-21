@@ -2,8 +2,7 @@
 
 Zone::Zone()
 {
-    damage = 1;
-
+    damage = ZoneDmg;
     this->rectst.w = ZoneImgW;
     this->rectst.h = ZoneImgH;
     this->rect.w = ZoneW;
@@ -33,8 +32,12 @@ void Zone::Start()
     }
 }
 
-void Zone::DOT( Enemy &enemy )
+bool Zone::DOT( Enemy &enemy )
 {
-    if( func::dist( CENTER_X, CENTER_Y, enemy.c_x, enemy.c_y ) <= radius )
+    if( func::dist( CENTER_X, CENTER_Y, enemy.c_x, enemy.c_y ) <= radius+20 )
+    {
         enemy.HP -= damage;
+        return 1;
+    }
+    return 0;
 }

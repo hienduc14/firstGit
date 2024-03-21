@@ -8,11 +8,14 @@ int main( int argc, char* args[] )
     // khoi tao window, renderer...
     base::initSDL();
     Menu menu;
-    Game game;
     srand(SDL_GetTicks());
     while( !Quit ){
         int state = menu.play();
-        if( state == 1 ) game.play( 0 );
+
+        if( state == 1 ){
+            Game game;
+            game.play( 0 );
+        }
     }
     // thoat chuong trinh
     base::quitSDL();

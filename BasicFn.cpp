@@ -46,6 +46,5 @@ SDL_Texture *base::Load_Image( const std::string filePath )
 {
     SDL_Texture *screen = nullptr;
     screen = IMG_LoadTexture(base::renderer, filePath.c_str());
-	if (screen == nullptr) std::cout<< "aaaa\n";
 	return screen;
 };

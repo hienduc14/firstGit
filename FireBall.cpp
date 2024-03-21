@@ -32,9 +32,9 @@ void FireBall::Create()
 
 }
 
-void FireBall::Start( int x, int y )
+void FireBall::Start( int u, int v, int x, int y )
 {
-    SetRect(CENTER_X-rect.w/2, CENTER_Y-rect.h/2);
+    SetRect(u-rect.w/2, v-rect.h/2);
     Located();
     SetL();
 //    L_x = rect.x; L_y = rect.y;
@@ -52,5 +52,4 @@ void FireBall::Aim( int x, int y ){
 void FireBall::Run(){
     Change( a_x, a_y );
 }
-
 

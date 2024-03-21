@@ -2,7 +2,7 @@
 
 Game::Game()
 {
-
+    memset(pre::OptionUsed, 0, sizeof(pre::OptionUsed));
 }
 
 Game::~Game()
@@ -84,8 +84,12 @@ void Game::play( int StartPower ){
 
             //cac obj move
             for( auto &enemy : enemies) enemy.Chase();
-            for( auto &orb : orbs ) orb.Run();
-            for( auto &fireBall : fireBalls ) fireBall.Run();
+            for( auto &orb : orbs )
+                if( orb.delayTime <= 0 ) orb.Run();
+                else orb.delayTime -= TimeStep;
+            for( auto &fireBall : fireBalls )
+                if( fireBall.delayTime <= 0 ) fireBall.Run();
+                else fireBall.delayTime -= TimeStep;
 
             //Hap thu kinh nghiem
             for( auto &exp : exps )
@@ -121,7 +125,6 @@ void Game::play( int StartPower ){
     if( player.HP <= 0 ){
         Screen GameOver;
         GameOver.SetTexture(std::string("GameOver.png"));
-        if(GameOver.texture == nullptr) std::cout << "NOooooooooooooo\n";
         GameOver.drawObj();
         SDL_RenderPresent(base::renderer);
         SDL_Delay(5000);
@@ -166,7 +169,7 @@ void Game::Prepare()
 void Game::LevelUp()
 {
     RenderGamePlay( 0 );
-    bool xd[4] = {0, 0, 0, 0} ;
+    bool xd[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0} ;
     for(int i = 0; i <= 2; i++) if(card[i].content == -1){
         card[i].Appear(i-1);
         while(xd[card[i].content])
@@ -182,14 +185,17 @@ void Game::LevelUp()
 void Game::SpawnEnemy()
 {
     if( int(SDL_GetTicks()) - timeSpawn.first > timeSpawn.second && enemies.size() < 50 ){
-        Enemy enemy;
-        int edge = func::random(1, 4);
-        if( edge == 1 ) enemy.SetUp( (func::random(0, SCREEN_WIDTH)), -50, 1);
-        if( edge == 2 ) enemy.SetUp( -50, (func::random(0, SCREEN_HEIGHT) ), 1);
-        if( edge == 3 ) enemy.SetUp( (func::random(0, SCREEN_HEIGHT) ), SCREEN_HEIGHT+50, 1);
-        if( edge == 4 ) enemy.SetUp( SCREEN_WIDTH+50, (func::random(0, SCREEN_HEIGHT) ), 1);
-        enemies.push_back( enemy );
-        timeSpawn.first = SDL_GetTicks();
+        int number = func::random( 3, 10 );
+        for( int i = 1; i <= number; i++ ){
+            Enemy enemy;
+            int edge = func::random(1, 4);
+            if( edge == 1 ) enemy.SetUp( (func::random(0, SCREEN_WIDTH)), -50, 1);
+            if( edge == 2 ) enemy.SetUp( -50, (func::random(0, SCREEN_HEIGHT) ), 1);
+            if( edge == 3 ) enemy.SetUp( (func::random(0, SCREEN_HEIGHT) ), SCREEN_HEIGHT+50, 1);
+            if( edge == 4 ) enemy.SetUp( SCREEN_WIDTH+50, (func::random(0, SCREEN_HEIGHT) ), 1);
+            enemies.push_back( enemy );
+            timeSpawn.first = SDL_GetTicks();
+        }
     }
 
 }
@@ -197,10 +203,7 @@ void Game::SpawnEnemy()
 void Game::Firing()
 {
     if( player.GetPower(0) && player.checkCD(0)  ){
-        Orb orb;
-        orb.Create();
-        orb.Start( player.GetDir(), PlayerWidth/2+3*dx[player.GetDir()], PlayerHeight/2+3*dy[player.GetDir()] );
-        orbs.push_back( orb );
+        OrbAdd( orbs, player.MyPower[0], player.dir );
         player.SetStartCD(0);
     }
     if( player.GetPower(1) && player.checkCD(1) ){
@@ -210,17 +213,11 @@ void Game::Firing()
                 luu = func::dist(CENTER_X, CENTER_Y, enemy.c_x, enemy.c_y);
                 f_x = enemy.c_x; f_y = enemy.c_y;
             }
-        if( f_x != 1e9 ){
-            FireBall fireBall;
-            fireBall.Create();
-            fireBall.Start( f_x, f_y );
-            fireBalls.push_back( fireBall );
-            player.SetStartCD(1);
-        }
+        if( luu != 1e9 ) FireBallAdd( fireBalls, player, f_x, f_y );
     }
-    if( player.GetPower(2) && player.checkCD(2) )
+    if( player.GetPower(2) )
     {
-        zone.Start();
+        ZoneAdd(zone, player);
     }
 }
 
@@ -246,13 +243,12 @@ void Game::PowerColision()
                 fireBall.SetTexture(std::string("FireBall_explode.png"));
             }
         }
-        if( player.GetPower( 2 ) && zone.CanDmg == 1 ) zone.DOT( enemy );
+        if( player.GetPower( 2 ) && zone.CanDmg == 1 ){
+            zone.DOT( enemy );
+        }
 
         if(enemy.exist == true && func::checkRect( player.GetRect(), enemy.GetRect() ) ){
-
             if(enemy.CoolDown == EnemyCD ) {
-//                    std::cout << enemy.CoolDown << '\n';
-//                    player.HP -= enemy.damage;
                 player.Bleeding(enemy.damage);
                 if( player.HP <= 0 ) break;
             }
@@ -294,8 +290,8 @@ void Game::PauseGame()
 void Game::RenderGamePlay( int IsMoving )
 {
     Map.drawObj();
-    for( auto &orb : orbs ) orb.drawObj();
-    for( auto &fireBall : fireBalls ) fireBall.RenderMoving( IsMoving );
+    for( auto &orb : orbs ) if(orb.delayTime <= 0) orb.drawObj();
+    for( auto &fireBall : fireBalls ) if( fireBall.delayTime <= 0 ) fireBall.RenderMoving( IsMoving );
     zone.drawObj();
     for( auto &exp : exps ) exp.drawObj();
     player.renderPlayer();

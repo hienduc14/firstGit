@@ -4,18 +4,20 @@
 #include "Enemy.hpp"
 #define ZoneImgW 519
 #define ZoneImgH 519
-#define ZoneW 300
-#define ZoneH 300
-
+#define ZoneR 90
+#define ZoneW ZoneR*2
+#define ZoneH ZoneR*2
+const double ZoneCD = 500;
+const double ZoneDmg = 0.1;
 class Zone : public MovingObj
 {
-private :
-    int radius = 150;
-public :
+public:
+    int radius = ZoneR;
     int CanDmg = -1;
-public :
+    int CurrentLevel = 0;
+public:
     Zone();
     virtual ~Zone();
     void Start();
-    void DOT( Enemy &enemy );
+    bool DOT( Enemy &enemy );
 };

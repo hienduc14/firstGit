@@ -17,7 +17,6 @@ void Player::SetUp()
     this->rect.w = 50;
     this->rect.h = 36;
     this->texture = pre::PlayerTexture;
-//    this->SetTexture(PlayerImg);
     this->dir = 1;
     SetHealthBar();
     SetExpBar();
@@ -56,7 +55,8 @@ void Player::Move( Screen &Map, std::list<Enemy> &enemies, std::list<Orb> &orbs,
     for( auto &enemy : enemies ) enemy.Change( -a_x, -a_y );
     for( auto &exp : exps ) exp.Change( -a_x, -a_y );
     for( auto &orb : orbs ) orb.Change( -a_x, -a_y );
-    for( auto &fireBall : fireBalls ) fireBall.Change( -a_x, -a_y );
+    for( auto &fireBall : fireBalls )
+        if(fireBall.delayTime <= 0) fireBall.Change( -a_x, -a_y );
 }
 
 void Player::SetPower( int x )
@@ -66,8 +66,6 @@ void Player::SetPower( int x )
 int Player::GetPower( int x ){return MyPower[x];}
 void Player::SetCD( int t, int x ){ CD[t] = x; }
 int Player::GetCD( int t ){ return CD[t]; }
-void Player::SetStartCD( int t ){ StartCD[t] = SDL_GetTicks(); }
-int Player::GetStartCD( int t ){ return StartCD[t]; }
 
 void Player::SetHealthBar()
 {
@@ -91,7 +89,7 @@ void Player::SetExpBar()
 
 void Player::Bleeding( int dmg )
 {
-    HP -= dmg;
+    HP -= Defense*dmg;
     double per = double(HP)/HPMax;
 //    Health.rectst.w = double(HealthBarWidth)*per;
     Health.rect.w = double(HealthBar.rect.w)*per;
@@ -100,7 +98,7 @@ void Player::Bleeding( int dmg )
 int Player::ExpAbsorb( Exp &exp )
 {
     if( func::dist( exp.c_x, exp.c_y, CENTER_X, CENTER_Y) <= 10 ){
-        EXP += exp.stat;
+        EXP += ExpGain*exp.stat;
         exp.exist = 0;
 
         int addLevel = 0;
@@ -130,10 +128,12 @@ void Player::renderPlayer(){
     ExpBar.drawObj();
 }
 
+void Player::SetStartCD( int t ){ StartCD[t] = SDL_GetTicks(); }
+int Player::GetStartCD( int t ){ return StartCD[t]; }
+
 int Player::checkCD(int t)
 {
     if( StartCD[t] == -1 ){
-        StartCD[t] = SDL_GetTicks();
         return 1;
     }else{
         if( int(SDL_GetTicks()) - StartCD[t] >= CD[t] ){
