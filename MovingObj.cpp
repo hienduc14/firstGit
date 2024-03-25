@@ -23,14 +23,14 @@ void MovingObj::Located()
     c_y = rect.y + rect.h/2;
 }
 
-void MovingObj::RenderMoving( int IsMove )
+void MovingObj::RenderMoving( bool IsMove, bool IsFlip, bool IsRotate )
 {
     if( IsMove == false )
     {
         double angle = func::GetAngle( a_x, a_y );
 
         SDL_RendererFlip flip = SDL_FLIP_NONE;
-        if( rect.x > CENTER_X ) flip = SDL_FLIP_VERTICAL;
+        if( rect.x > CENTER_X ) flip = SDL_FLIP_HORIZONTAL;
 
         SDL_RenderCopyEx(base::renderer, texture, &rectst, &rect, angle, nullptr, flip);
     }
@@ -41,11 +41,11 @@ void MovingObj::RenderMoving( int IsMove )
         while( timeCurrent >= frameTime*frameNum ) timeCurrent -= frameTime*frameNum;
         int clipIndex = timeCurrent/frameTime;
         //lay goc di chuyen
-        double angle = func::GetAngle( a_x, a_y );
+        double angle = func::GetAngle( a_x, a_y ) * IsRotate;
 
         //lay huong di chuyen
         SDL_RendererFlip flip = SDL_FLIP_NONE;
-        if( rect.x > CENTER_X ) flip = SDL_FLIP_VERTICAL;
+        if( IsFlip == true && rect.x > CENTER_X ) flip = SDL_FLIP_HORIZONTAL;
 
         SDL_RenderCopyEx(base::renderer, texture, &clip[clipIndex], &rect, angle, nullptr, flip);
 

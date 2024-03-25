@@ -40,6 +40,8 @@
 		<Unit filename="Button.hpp" />
 		<Unit filename="Card.cpp" />
 		<Unit filename="Card.hpp" />
+		<Unit filename="Dmg.cpp" />
+		<Unit filename="Dmg.hpp" />
 		<Unit filename="Enemy.cpp" />
 		<Unit filename="Enemy.hpp" />
 		<Unit filename="Exp.cpp" />
@@ -60,8 +62,12 @@
 		<Unit filename="Orb.hpp" />
 		<Unit filename="Player.cpp" />
 		<Unit filename="Player.hpp" />
+		<Unit filename="PowerUp.cpp" />
+		<Unit filename="PowerUp.hpp" />
 		<Unit filename="Screen.cpp" />
 		<Unit filename="Screen.hpp" />
+		<Unit filename="TextObj.cpp" />
+		<Unit filename="TextObj.hpp" />
 		<Unit filename="Time.cpp" />
 		<Unit filename="Time.hpp" />
 		<Unit filename="Zone.cpp" />

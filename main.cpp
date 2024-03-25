@@ -3,6 +3,8 @@
 #include "Game.hpp"
 #include "Menu.hpp"
 #include "Button.hpp"
+#include "TextObj.hpp"
+#include "Dmg.hpp"
 int main( int argc, char* args[] )
 {
     // khoi tao window, renderer...

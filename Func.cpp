@@ -23,3 +23,11 @@ double func::GetAngle(double x, double y)
 {
     return atan2(y, x)*180/M_PI;
 }
+
+bool Area::checkArea( Area rect )
+{
+    return ((rect.x+rect.w >= x) &&
+            (x+w >= rect.x) &&
+            (rect.y+rect.w >= y) &&
+            (y+w >= rect.y) );
+}

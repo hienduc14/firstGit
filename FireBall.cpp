@@ -7,17 +7,17 @@ FireBall::FireBall()
     this->texture = pre::FireBallTexture;
     this->rectst.w = FireBallW;
     this->rectst.h = FireBallH;
-    this->rect.w = 80;
-    this->rect.h = 30;
+    this->rect.w = FireBallW;
+    this->rect.h = FireBallH;
     v_Obj = FireBallV;
     exist = 1;
     timeCurrent = 0;
     frameTime = 0.05; frameNum = 8;
     for( int i = 0; i <= frameNum-1; i++ )
     {
-        clip[i].w = FireBallW;
-        clip[i].h = FireBallH;
-        clip[i].x = FireBallW*i;
+        clip[i].w = FireBallImgW;
+        clip[i].h = FireBallImgH;
+        clip[i].x = FireBallImgW*i;
         clip[i].y = 0;
     }
 }

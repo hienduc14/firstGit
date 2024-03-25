@@ -14,6 +14,7 @@
 #include "PowerUp.hpp"
 #include "ImgTexture.hpp"
 #include "Button.hpp"
+#include "Dmg.hpp"
 #include <utility>
 const std::string PauseImg = "pause.png";
 const std::string HomeImg = "home.png";
@@ -30,6 +31,7 @@ private :
     std::list<Orb> orbs;
     std::list<FireBall> fireBalls;
     std::list<Exp> exps;
+    std::list<Dmg> dmgs;
     Zone zone;
     Screen Map;
     Button pause;

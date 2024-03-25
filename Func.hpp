@@ -13,3 +13,9 @@ namespace func
 
     double GetAngle( double x, double y );
 }
+
+struct Area
+{
+    double x, y; int w, h;
+    bool checkArea( Area rect );
+};

@@ -1,7 +1,7 @@
 #pragma once
 #include "BasicFn.hpp"
 
-const std::string SlimeImg = "slime.png";
+const std::string SlimeImg = "RedSlime.png";
 const std::string OrbImg = "orb.png";
 const std::string FireBallImg = "FireBalls.png";
 const std::string ZoneImg = "zone.png   ";
@@ -32,6 +32,8 @@ namespace pre
     extern SDL_Texture* WaterBallCardTexture;
     extern SDL_Texture* FireBallCardTexture;
     extern SDL_Texture* Option[8][8];
+
+    extern TTF_Font* DmgFont;
 }
 
 class LoadAll

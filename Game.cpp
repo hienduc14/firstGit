@@ -3,15 +3,22 @@
 Game::Game()
 {
     memset(pre::OptionUsed, 0, sizeof(pre::OptionUsed));
+    memset(Dot, 0, sizeof(Dot));
 }
 
 Game::~Game()
 {
-
+    enemies.clear();
+    orbs.clear();
+    fireBalls.clear();
+    exps.clear();
 }
 
 void Game::play( int StartPower ){
+    std::cout << "........................" << '\n';
+    std::cout << enemies.size() << '\n';
     Prepare();
+//    SDL_Delay(5000);
 //    player.SetPower(StartPower);
 //    player.SetPower(1);
 //    player.SetPower(2);
@@ -83,7 +90,8 @@ void Game::play( int StartPower ){
             player.Move(Map, enemies, orbs, fireBalls, exps );
 
             //cac obj move
-            for( auto &enemy : enemies) enemy.Chase();
+            for( auto &enemy : enemies) enemy.MoveOccupy( enemies );
+
             for( auto &orb : orbs )
                 if( orb.delayTime <= 0 ) orb.Run();
                 else orb.delayTime -= TimeStep;
@@ -185,15 +193,23 @@ void Game::LevelUp()
 void Game::SpawnEnemy()
 {
     if( int(SDL_GetTicks()) - timeSpawn.first > timeSpawn.second && enemies.size() < 50 ){
-        int number = func::random( 3, 10 );
+        int number = func::random( 1, 5 );
         for( int i = 1; i <= number; i++ ){
-            Enemy enemy;
-            int edge = func::random(1, 4);
-            if( edge == 1 ) enemy.SetUp( (func::random(0, SCREEN_WIDTH)), -50, 1);
-            if( edge == 2 ) enemy.SetUp( -50, (func::random(0, SCREEN_HEIGHT) ), 1);
-            if( edge == 3 ) enemy.SetUp( (func::random(0, SCREEN_HEIGHT) ), SCREEN_HEIGHT+50, 1);
-            if( edge == 4 ) enemy.SetUp( SCREEN_WIDTH+50, (func::random(0, SCREEN_HEIGHT) ), 1);
-            enemies.push_back( enemy );
+            for( int j = 1; j <= 10; j++ ){
+                Enemy enemy;
+                int dif =  50;
+                int edge = func::random(1, 4);
+                if( edge == 1 ) enemy.SetUp( (func::random(0, SCREEN_WIDTH)), -dif, 1);
+                if( edge == 2 ) enemy.SetUp( -dif, (func::random(0, SCREEN_HEIGHT) ), 1);
+                if( edge == 3 ) enemy.SetUp( (func::random(0, SCREEN_WIDTH) ), SCREEN_HEIGHT+dif, 1);
+                if( edge == 4 ) enemy.SetUp( SCREEN_WIDTH+dif, (func::random(0, SCREEN_HEIGHT) ), 1);
+                enemy.SetOccupy();
+                if(enemy.CheckOccupy( enemies ) == 0)
+                {
+                    enemies.push_back( enemy );
+                    break;
+                }
+            }
             timeSpawn.first = SDL_GetTicks();
         }
     }
@@ -231,6 +247,8 @@ void Game::PowerColision()
             {
                 orb.exist = 0;
                 enemy.HP -= orb.damage;
+                Dmg dmg( orb.damage, enemy.rect.x, enemy.rect.y );
+                dmgs.push_back( dmg );
                 orb.SetTexture(std::string("orb_explode.png"));
             }
         }
@@ -240,11 +258,15 @@ void Game::PowerColision()
             {
                 fireBall.exist = 0;
                 enemy.HP -= fireBall.damage;
+                Dmg dmg( fireBall.damage, enemy.rect.x, enemy.rect.y );
+                dmgs.push_back( dmg );
                 fireBall.SetTexture(std::string("FireBall_explode.png"));
             }
         }
         if( player.GetPower( 2 ) && zone.CanDmg == 1 ){
             zone.DOT( enemy );
+//            Dmg dmg( zone.damage, enemy.rect.x, enemy.rect.y );
+//            dmgs.push_back( dmg );
         }
 
         if(enemy.exist == true && func::checkRect( player.GetRect(), enemy.GetRect() ) ){
@@ -291,43 +313,57 @@ void Game::RenderGamePlay( int IsMoving )
 {
     Map.drawObj();
     for( auto &orb : orbs ) if(orb.delayTime <= 0) orb.drawObj();
-    for( auto &fireBall : fireBalls ) if( fireBall.delayTime <= 0 ) fireBall.RenderMoving( IsMoving );
+    for( auto &fireBall : fireBalls ) if( fireBall.delayTime <= 0 ) fireBall.RenderMoving( IsMoving, 0, 1 );
     zone.drawObj();
     for( auto &exp : exps ) exp.drawObj();
     player.renderPlayer();
-    for( auto &enemy : enemies) enemy.drawObj();
+//    for( auto &enemy : enemies) enemy.drawObj();
+    for( auto &enemy : enemies) enemy.RenderMoving( IsMoving, 1, 0 );
+    for( auto &dmg : dmgs ) dmg.PopUp();
 
 }
 
 void Game::RemoveThing()
 {
-    auto it = orbs.begin();
-    while (it != orbs.end()) {
-        if (it->exist <= 0) it = orbs.erase(it);
-        else ++it;
+    auto orb = orbs.begin();
+    while (orb != orbs.end()) {
+        if (orb->exist <= 0) orb = orbs.erase(orb);
+        else ++orb;
     }
-    auto itk = fireBalls.begin();
-    while (itk != fireBalls.end()) {
-        if (itk->exist <= 0) itk = fireBalls.erase(itk);
-        else ++itk;
+//    delete orb;
+    auto fireball = fireBalls.begin();
+    while (fireball != fireBalls.end()) {
+        if (fireball->exist <= 0) fireball = fireBalls.erase(fireball);
+        else ++fireball;
     }
-    auto its = enemies.begin();
-    while (its!= enemies.end()){
-        if(its->HP <= 0) {
+//    delete fireball;
+    auto enemy = enemies.begin();
+    while (enemy!= enemies.end()){
+        if(enemy->HP <= 0) {
             Exp exp;
-            exp.SetUp(its->GetRect().x, its->GetRect().y, 0);
+            exp.SetUp(enemy->GetRect().x, enemy->GetRect().y, 0);
             exps.push_back( exp );
-            its = enemies.erase(its);
+            enemy = enemies.erase(enemy);
         }
-        else ++its;
+        else ++enemy;
     }
-    auto itx = exps.begin();
-    while (itx!= exps.end()){
-        if(itx->exist == 0) {
-            itx = exps.erase(itx);
+//    delete enemy;
+    auto exp = exps.begin();
+    while (exp!= exps.end()){
+        if(exp->exist == 0) {
+            exp = exps.erase(exp);
         }
-        else ++itx;
+        else ++exp;
     }
+//    delete exp;
+    auto dmg = dmgs.begin();
+    while (dmg!= dmgs.end()){
+        if(dmg->exist == 0) {
+            dmg = dmgs.erase(dmg);
+        }
+        else ++dmg;
+    }
+//    delete dmg;
 }
 
 

@@ -174,5 +174,5 @@ void ZoneAdd(Zone &zone, Player &player)
             break;
         }
     }
-    zone.CurrentLevel == player.MyPower[2];
+    zone.CurrentLevel = player.MyPower[2];
 }

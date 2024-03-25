@@ -17,6 +17,8 @@ namespace pre
     SDL_Texture* WaterBallCardTexture= nullptr;
     SDL_Texture* FireBallCardTexture= nullptr;
     SDL_Texture* Option[8][8];
+
+    TTF_Font* DmgFont = nullptr;
 }
 
 LoadAll::LoadAll(){}
@@ -49,4 +51,6 @@ void LoadAll::loading()
     pre::Option[6][1] = base::Load_Image(std::string("ZoneCardLV2.png"));
     pre::Option[6][2] = base::Load_Image(std::string("ZoneCardLV3.png"));
     pre::Option[6][3] = base::Load_Image(std::string("ZoneCardLV4.png"));
+
+    pre::DmgFont = TTF_OpenFont("Oleaguid.ttf", 40);
 }

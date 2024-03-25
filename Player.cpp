@@ -52,7 +52,7 @@ void Player::Move( Screen &Map, std::list<Enemy> &enemies, std::list<Orb> &orbs,
 {
     SetDir();
     Map.MapMove( -a_x, -a_y );
-    for( auto &enemy : enemies ) enemy.Change( -a_x, -a_y );
+    for( auto &enemy : enemies ) {enemy.Change( -a_x, -a_y ); enemy.SetOccupy();}
     for( auto &exp : exps ) exp.Change( -a_x, -a_y );
     for( auto &orb : orbs ) orb.Change( -a_x, -a_y );
     for( auto &fireBall : fireBalls )

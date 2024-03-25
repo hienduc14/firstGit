@@ -7,7 +7,6 @@ class MovingObj : public BigObj
 public :
     MovingObj();
     ~MovingObj();
-
 protected :
     double a_x = 0, a_y = 0;
     double timeCurrent;
@@ -22,5 +21,5 @@ public :
 public :
     void Change( double ax, double ay );
     void Located();
-    void RenderMoving( int IsMove );
+    void RenderMoving( bool IsMove, bool IsFlip, bool IsRotate );
 };

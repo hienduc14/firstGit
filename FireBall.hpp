@@ -3,8 +3,8 @@
 #include "Func.hpp"
 #define FireBallImgW 160
 #define FireBallImgH 155
-#define FireBallW 160
-#define FireBallH 155
+#define FireBallW 50
+#define FireBallH 40
 const double FireBallV = 100;
 const double FireBallCD = 3000;
 
