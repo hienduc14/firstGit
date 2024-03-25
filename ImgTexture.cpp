@@ -20,6 +20,7 @@ namespace pre
 
     TTF_Font* DmgFont = nullptr;
     TTF_Font* CountFont = nullptr;
+    SDL_Texture* SkullIcon = nullptr;
 }
 
 LoadAll::LoadAll(){}
@@ -55,4 +56,5 @@ void LoadAll::loading()
 
     pre::DmgFont = TTF_OpenFont("CountFont.ttf", 40);
     pre::CountFont = TTF_OpenFont("CountFont.ttf", 70);
+    pre::SkullIcon = base::Load_Image(std::string("Skull.png"));
 }

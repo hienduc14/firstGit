@@ -54,6 +54,8 @@
 		<Unit filename="Game.hpp" />
 		<Unit filename="ImgTexture.cpp" />
 		<Unit filename="ImgTexture.hpp" />
+		<Unit filename="KillCount.cpp" />
+		<Unit filename="KillCount.hpp" />
 		<Unit filename="Menu.cpp" />
 		<Unit filename="Menu.hpp" />
 		<Unit filename="MovingObj.cpp" />
@@ -70,6 +72,8 @@
 		<Unit filename="TextObj.hpp" />
 		<Unit filename="Time.cpp" />
 		<Unit filename="Time.hpp" />
+		<Unit filename="TimeCount.cpp" />
+		<Unit filename="TimeCount.hpp" />
 		<Unit filename="Zone.cpp" />
 		<Unit filename="Zone.hpp" />
 		<Unit filename="main.cpp" />

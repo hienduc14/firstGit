@@ -322,6 +322,7 @@ void Game::RenderGamePlay( int IsMoving )
     for( auto &enemy : enemies) enemy.RenderMoving( IsMoving, 1, 0 );
     for( auto &dmg : dmgs ) dmg.PopUp(IsMoving);
     timecount.Display();
+    killcount.Display();
 }
 
 void Game::RemoveThing()
@@ -345,6 +346,7 @@ void Game::RemoveThing()
             exp.SetUp(enemy->GetRect().x, enemy->GetRect().y, 0);
             exps.push_back( exp );
             enemy = enemies.erase(enemy);
+            killcount.Add();
         }
         else ++enemy;
     }

@@ -35,6 +35,7 @@ namespace pre
 
     extern TTF_Font* DmgFont;
     extern TTF_Font* CountFont;
+    extern SDL_Texture* SkullIcon;
 }
 
 class LoadAll

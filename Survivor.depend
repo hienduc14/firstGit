@@ -109,7 +109,7 @@
 1710581255 d:\codeblock\survivor\exp.hpp
 	"Enemy.hpp"
 
-1711383914 d:\codeblock\survivor\game.hpp
+1711389412 d:\codeblock\survivor\game.hpp
 	<SDL.h>
 	"BasicFn.hpp"
 	"Func.hpp"
@@ -127,9 +127,10 @@
 	"Button.hpp"
 	"Dmg.hpp"
 	"TimeCount.hpp"
+	"KillCount.hpp"
 	<utility>
 
-1711384211 source:d:\codeblock\survivor\game.cpp
+1711389435 source:d:\codeblock\survivor\game.cpp
 	"Game.hpp"
 
 1711012727 source:d:\codeblock\survivor\button.cpp
@@ -155,10 +156,10 @@
 1710269566 source:d:\codeblock\survivor\time.cpp
 	"Time.hpp"
 
-1711383644 d:\codeblock\survivor\imgtexture.hpp
+1711389355 d:\codeblock\survivor\imgtexture.hpp
 	"BasicFn.hpp"
 
-1711383992 source:d:\codeblock\survivor\imgtexture.cpp
+1711389355 source:d:\codeblock\survivor\imgtexture.cpp
 	"ImgTexture.hpp"
 
 1710385210 source:d:\codeblock\survivor\menu.cpp
@@ -217,10 +218,16 @@
 1711384211 d:\codeblock\survivor\dmg.hpp
 	"TextObj.hpp"
 
-1711383928 d:\codeblock\survivor\timecount.hpp
+1711386496 d:\codeblock\survivor\timecount.hpp
 	"TextObj.hpp"
 	"Time.hpp"
 
 1711383914 source:d:\codeblock\survivor\timecount.cpp
 	"TimeCount.hpp"
+
+1711389355 source:d:\codeblock\survivor\killcount.cpp
+	"KillCount.hpp"
+
+1711389355 d:\codeblock\survivor\killcount.hpp
+	"TextObj.hpp"
 

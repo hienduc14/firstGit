@@ -1,7 +1,6 @@
 #pragma once
 #include "TextObj.hpp"
 #include "Time.hpp"
-//#include "ImgTexture.hpp"
 class TimeCount : public TextObj
 {
 private :

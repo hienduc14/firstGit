@@ -16,6 +16,7 @@
 #include "Button.hpp"
 #include "Dmg.hpp"
 #include "TimeCount.hpp"
+#include "KillCount.hpp"
 #include <utility>
 const std::string PauseImg = "pause.png";
 const std::string HomeImg = "home.png";
@@ -43,6 +44,7 @@ private :
     std::pair<int, int> timeSpawn = {-2000, 1000};
 
     TimeCount timecount;
+    KillCount killcount;
 public :
     void play( int StartPower );
     void Prepare();
