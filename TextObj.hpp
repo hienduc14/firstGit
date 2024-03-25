@@ -8,5 +8,5 @@ public :
     TextObj();
     ~TextObj();
 public :
-    void SetTTF( SDL_Texture* &TTFTexture );
+    void SetTTF(std::string tex, int x, int y, TTF_Font* font, SDL_Color color);
 };

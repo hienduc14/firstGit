@@ -12,7 +12,6 @@ Dmg::Dmg(double num, int x, int y)
 
 Dmg::~Dmg()
 {
-
 }
 
 std::string Dmg::NumToStr(double num)
@@ -23,12 +22,8 @@ std::string Dmg::NumToStr(double num)
 
 void Dmg::SetUp(std::string tex, int x, int y)
 {
-    texture = base::Load_Text(tex, pre::DmgFont, White);
+    SetTTF(tex, x, y, pre::DmgFont, White);
     Border = base::Load_Text(tex, pre::DmgFont, Black);
-    SDL_QueryTexture(texture, NULL, NULL, &rectst.w, &rectst.h);
-    rectst.x = rectst.y = 0;
-    rect.x = x; rect.y = y;
-    rect.w = rectst.w; rect.h = rectst.h;
     SetClip();
 }
 
@@ -50,13 +45,16 @@ void Dmg::SetClip()
         clip[u].y = rect.y + (rect.h-clip[u].h)/2;
     }
 }
-void Dmg::PopUp()
+
+void Dmg::PopUp( bool IsMove )
 {
-    CurrentTime += TimeManager::Instance()->getElapsedTime();
-    if( CurrentTime >= FrameTime*FrameNum )
-    {
-        exist = 0;
-        return;
+    if( IsMove == true ){
+        CurrentTime += TimeManager::Instance()->getElapsedTime();
+        if( CurrentTime >= FrameTime*FrameNum )
+        {
+            exist = 0;
+            return;
+        }
     }
     int index = CurrentTime/FrameTime;
     Write(clip[index], true);

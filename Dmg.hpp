@@ -19,6 +19,6 @@ public :
     std::string NumToStr(double Num);
     void SetUp(std::string tex, int x, int y );
     void SetClip();
-    void PopUp();
+    void PopUp(bool IsMove);
     void Write(SDL_Rect, bool IsBorder);
 };

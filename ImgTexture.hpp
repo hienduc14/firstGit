@@ -34,6 +34,7 @@ namespace pre
     extern SDL_Texture* Option[8][8];
 
     extern TTF_Font* DmgFont;
+    extern TTF_Font* CountFont;
 }
 
 class LoadAll

@@ -19,6 +19,7 @@ namespace pre
     SDL_Texture* Option[8][8];
 
     TTF_Font* DmgFont = nullptr;
+    TTF_Font* CountFont = nullptr;
 }
 
 LoadAll::LoadAll(){}
@@ -52,5 +53,6 @@ void LoadAll::loading()
     pre::Option[6][2] = base::Load_Image(std::string("ZoneCardLV3.png"));
     pre::Option[6][3] = base::Load_Image(std::string("ZoneCardLV4.png"));
 
-    pre::DmgFont = TTF_OpenFont("Oleaguid.ttf", 40);
+    pre::DmgFont = TTF_OpenFont("CountFont.ttf", 40);
+    pre::CountFont = TTF_OpenFont("CountFont.ttf", 70);
 }

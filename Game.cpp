@@ -78,6 +78,7 @@ void Game::play( int StartPower ){
         }
         if(GameState == 0)
         {
+            timecount.UpdateTime();
             // nhap thao tac tu ban phim
             player.ResetInput();
             player.KeyInput();
@@ -319,8 +320,8 @@ void Game::RenderGamePlay( int IsMoving )
     player.renderPlayer();
 //    for( auto &enemy : enemies) enemy.drawObj();
     for( auto &enemy : enemies) enemy.RenderMoving( IsMoving, 1, 0 );
-    for( auto &dmg : dmgs ) dmg.PopUp();
-
+    for( auto &dmg : dmgs ) dmg.PopUp(IsMoving);
+    timecount.Display();
 }
 
 void Game::RemoveThing()
