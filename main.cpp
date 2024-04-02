@@ -5,6 +5,7 @@
 #include "Button.hpp"
 #include "TextObj.hpp"
 #include "Dmg.hpp"
+#include "Wave.hpp"
 int main( int argc, char* args[] )
 {
     // khoi tao window, renderer...
@@ -13,7 +14,6 @@ int main( int argc, char* args[] )
     srand(SDL_GetTicks());
     while( !Quit ){
         int state = menu.play();
-
         if( state == 1 ){
             Game game;
             game.play( 0 );

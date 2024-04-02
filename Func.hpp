@@ -18,4 +18,5 @@ struct Area
 {
     double x, y; int w, h;
     bool checkArea( Area rect );
+    bool checkRect( SDL_Rect rect);
 };

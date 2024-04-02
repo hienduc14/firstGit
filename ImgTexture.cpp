@@ -4,6 +4,9 @@ namespace pre
 {
     SDL_Texture* MapTexture = nullptr;
     SDL_Texture* SlimeTexture= nullptr;
+    SDL_Texture* RabbitTexture= nullptr;
+    SDL_Texture* BoarTexture= nullptr;
+
     SDL_Texture* OrbTexture= nullptr;
     SDL_Texture* FireBallTexture= nullptr;
     SDL_Texture* ZoneTexture= nullptr;
@@ -29,6 +32,10 @@ void LoadAll::loading()
 {
     pre::MapTexture = base::Load_Image(MapImg);
     pre::SlimeTexture = base::Load_Image(SlimeImg);
+    pre::RabbitTexture = base::Load_Image(RabbitImg);
+    pre::BoarTexture = base::Load_Image(BoarImg);
+
+
     pre::OrbTexture = base::Load_Image(OrbImg);
     pre::FireBallTexture = base::Load_Image(FireBallImg);
     pre::ZoneTexture = base::Load_Image(ZoneImg);

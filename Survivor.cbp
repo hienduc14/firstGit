@@ -74,6 +74,8 @@
 		<Unit filename="Time.hpp" />
 		<Unit filename="TimeCount.cpp" />
 		<Unit filename="TimeCount.hpp" />
+		<Unit filename="Wave.cpp" />
+		<Unit filename="Wave.hpp" />
 		<Unit filename="Zone.cpp" />
 		<Unit filename="Zone.hpp" />
 		<Unit filename="main.cpp" />

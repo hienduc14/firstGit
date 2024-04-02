@@ -31,3 +31,11 @@ bool Area::checkArea( Area rect )
             (rect.y+rect.w >= y) &&
             (y+w >= rect.y) );
 }
+
+bool Area::checkRect( SDL_Rect rect )
+{
+    return ((rect.x+rect.w >= x) &&
+            (x+w >= rect.x) &&
+            (rect.y+rect.w >= y) &&
+            (y+w >= rect.y) );
+}

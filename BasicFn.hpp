@@ -23,12 +23,14 @@ extern bool Quit;
 extern bool Dot[2001][2001];
 void SetDot(int x, int y, int tt);
 bool GetDot(int x, int y);
-
 namespace base
 {
     extern SDL_Window *window;
     extern SDL_Renderer *renderer;
     extern SDL_Event g_event;
+    //player rect de ktra occupy voi enemy
+    extern SDL_Rect CenterRect;
+
     void initSDL();
     void quitSDL();
     SDL_Texture *Load_Image( const std::string filePath );

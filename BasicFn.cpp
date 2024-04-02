@@ -21,6 +21,8 @@ namespace base
     SDL_Window *window = nullptr;
     SDL_Renderer *renderer = nullptr;
     SDL_Event g_event;
+
+    SDL_Rect CenterRect;
 //    int GameSpeed = 1;
     // Các hàm và mã khác...
 }

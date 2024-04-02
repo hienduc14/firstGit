@@ -34,10 +34,16 @@ void Zone::Start()
 
 bool Zone::DOT( Enemy &enemy )
 {
+    bool ok = 0;
     if( func::dist( CENTER_X, CENTER_Y, enemy.c_x, enemy.c_y ) <= radius+20 )
     {
-        enemy.HP -= damage;
-        return 1;
+        if(enemy.IsDot == 0){
+            enemy.HP -= damage;
+            ok = 1;
+        }
+        enemy.IsDot += TimeStep;
+        if(enemy.IsDot > delay) enemy.IsDot = 0;
+
     }
-    return 0;
+    return ok;
 }

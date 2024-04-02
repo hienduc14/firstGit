@@ -20,6 +20,8 @@ void Player::SetUp()
     this->dir = 1;
     SetHealthBar();
     SetExpBar();
+    // dung de enemy bi can boi player
+    base::CenterRect = {rect.x, rect.y, rect.w, rect.h};
 }
 
 void Player::ResetInput(){ a_x = 0; a_y = 0; }
@@ -52,7 +54,7 @@ void Player::Move( Screen &Map, std::list<Enemy> &enemies, std::list<Orb> &orbs,
 {
     SetDir();
     Map.MapMove( -a_x, -a_y );
-    for( auto &enemy : enemies ) {enemy.Change( -a_x, -a_y ); enemy.SetOccupy();}
+    for( auto &enemy : enemies ) {enemy.ChangeOccupy( -a_x, -a_y, enemies ); enemy.SetOccupy();}
     for( auto &exp : exps ) exp.Change( -a_x, -a_y );
     for( auto &orb : orbs ) orb.Change( -a_x, -a_y );
     for( auto &fireBall : fireBalls )

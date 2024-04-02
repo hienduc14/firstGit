@@ -15,15 +15,15 @@ Game::~Game()
 }
 
 void Game::play( int StartPower ){
-    std::cout << "........................" << '\n';
-    std::cout << enemies.size() << '\n';
+//    std::cout << "........................" << '\n';
+//    std::cout << enemies.size() << '\n';
     Prepare();
 //    SDL_Delay(5000);
-//    player.SetPower(StartPower);
-//    player.SetPower(1);
-//    player.SetPower(2);
+//    player.MyPower[0] = 4;
+//    player.MyPower[1] = 4;
+//    player.MyPower[2] = 1;
     Exp exp;
-    exp.SetUp( CENTER_X + PlayerWidth/2 + 30 ,CENTER_Y , 0);
+    exp.SetUp( CENTER_X,CENTER_Y , -1);
     exps.push_back( exp );
 
     int GameState = 0;
@@ -78,7 +78,9 @@ void Game::play( int StartPower ){
         }
         if(GameState == 0)
         {
+            //update timeclock
             timecount.UpdateTime();
+            wave.SetWave(int(timecount.minute), int(timecount.second) );
             // nhap thao tac tu ban phim
             player.ResetInput();
             player.KeyInput();
@@ -173,6 +175,8 @@ void Game::Prepare()
     PauseMenu.rect = {CENTER_X-300, CENTER_Y-250, 600, 500};
 
     player.SetUp();
+    wave.SetUp("Wave.txt");
+    TimeManager::Instance()->reset();
 }
 
 void Game::LevelUp()
@@ -198,12 +202,14 @@ void Game::SpawnEnemy()
         for( int i = 1; i <= number; i++ ){
             for( int j = 1; j <= 10; j++ ){
                 Enemy enemy;
+                int type = wave.GetEnemy();
+                std::cout << wave.WaveNum << " " << type << '\n';
                 int dif =  50;
                 int edge = func::random(1, 4);
-                if( edge == 1 ) enemy.SetUp( (func::random(0, SCREEN_WIDTH)), -dif, 1);
-                if( edge == 2 ) enemy.SetUp( -dif, (func::random(0, SCREEN_HEIGHT) ), 1);
-                if( edge == 3 ) enemy.SetUp( (func::random(0, SCREEN_WIDTH) ), SCREEN_HEIGHT+dif, 1);
-                if( edge == 4 ) enemy.SetUp( SCREEN_WIDTH+dif, (func::random(0, SCREEN_HEIGHT) ), 1);
+                if( edge == 1 ) enemy.SetUp( (func::random(0, SCREEN_WIDTH)), -dif, type);
+                if( edge == 2 ) enemy.SetUp( -dif, (func::random(0, SCREEN_HEIGHT) ), type);
+                if( edge == 3 ) enemy.SetUp( (func::random(0, SCREEN_WIDTH) ), SCREEN_HEIGHT+dif, type);
+                if( edge == 4 ) enemy.SetUp( SCREEN_WIDTH+dif, (func::random(0, SCREEN_HEIGHT) ), type);
                 enemy.SetOccupy();
                 if(enemy.CheckOccupy( enemies ) == 0)
                 {
@@ -265,12 +271,14 @@ void Game::PowerColision()
             }
         }
         if( player.GetPower( 2 ) && zone.CanDmg == 1 ){
-            zone.DOT( enemy );
-//            Dmg dmg( zone.damage, enemy.rect.x, enemy.rect.y );
-//            dmgs.push_back( dmg );
+            if( zone.DOT( enemy ) )
+            {
+                Dmg dmg( zone.damage, enemy.rect.x, enemy.rect.y );
+                dmgs.push_back( dmg );
+            }
         }
 
-        if(enemy.exist == true && func::checkRect( player.GetRect(), enemy.GetRect() ) ){
+        if(enemy.exist == true && enemy.RectOccupy.checkRect( player.GetRect() ) ){
             if(enemy.CoolDown == EnemyCD ) {
                 player.Bleeding(enemy.damage);
                 if( player.HP <= 0 ) break;
@@ -343,7 +351,7 @@ void Game::RemoveThing()
     while (enemy!= enemies.end()){
         if(enemy->HP <= 0) {
             Exp exp;
-            exp.SetUp(enemy->GetRect().x, enemy->GetRect().y, 0);
+            exp.SetUp(enemy->GetRect().x, enemy->GetRect().y, -1);
             exps.push_back( exp );
             enemy = enemies.erase(enemy);
             killcount.Add();

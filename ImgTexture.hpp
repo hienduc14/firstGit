@@ -2,6 +2,9 @@
 #include "BasicFn.hpp"
 
 const std::string SlimeImg = "RedSlime.png";
+const std::string RabbitImg = "Rabbit.png";
+const std::string BoarImg = "Boar.png";
+
 const std::string OrbImg = "orb.png";
 const std::string FireBallImg = "FireBalls.png";
 const std::string ZoneImg = "zone.png   ";
@@ -19,6 +22,10 @@ namespace pre
 {
     extern SDL_Texture* MapTexture;
     extern SDL_Texture* SlimeTexture;
+    extern SDL_Texture* RabbitTexture;
+    extern SDL_Texture* BoarTexture;
+
+
     extern SDL_Texture* OrbTexture;
     extern SDL_Texture* FireBallTexture;
     extern SDL_Texture* ZoneTexture;
