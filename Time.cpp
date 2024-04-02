@@ -19,3 +19,11 @@ void TimeManager::process() {
     last = current;
     elapsedTime = elapse / double(SDL_GetPerformanceFrequency());
 }
+
+void TimeManager::reset()
+{
+    current = SDL_GetPerformanceCounter();
+    last = SDL_GetPerformanceCounter();
+    elapse = SDL_GetPerformanceCounter();
+    elapsedTime = 0;
+}

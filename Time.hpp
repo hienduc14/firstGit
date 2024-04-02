@@ -24,4 +24,6 @@ public:
 
     void process();
 
+    void reset();
+
 };

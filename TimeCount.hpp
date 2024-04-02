@@ -3,7 +3,7 @@
 #include "Time.hpp"
 class TimeCount : public TextObj
 {
-private :
+public :
     double minute = 0, second = 0;
     std::string clock;
 public :
