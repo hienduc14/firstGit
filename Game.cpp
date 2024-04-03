@@ -197,13 +197,14 @@ void Game::LevelUp()
 
 void Game::SpawnEnemy()
 {
-    if( int(SDL_GetTicks()) - timeSpawn.first > timeSpawn.second && enemies.size() < 50 ){
+    if( wave.WaveNum > CurrentWave.second )
+        CurrentWave.first += wave.GetAmount(), CurrentWave.second = wave.WaveNum;
+    if( int(SDL_GetTicks()) - timeSpawn.first > timeSpawn.second && enemies.size() < wave.GetAmount() ){
         int number = func::random( 1, 5 );
         for( int i = 1; i <= number; i++ ){
             for( int j = 1; j <= 10; j++ ){
                 Enemy enemy;
                 int type = wave.GetEnemy();
-                std::cout << wave.WaveNum << " " << type << '\n';
                 int dif =  50;
                 int edge = func::random(1, 4);
                 if( edge == 1 ) enemy.SetUp( (func::random(0, SCREEN_WIDTH)), -dif, type);

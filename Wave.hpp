@@ -6,6 +6,7 @@ class Wave
 {
 public :
     int per[15][10];
+    int amount[10];
     int WaveNum = 0;
 public :
     Wave();
@@ -13,4 +14,5 @@ public :
     ~Wave();
     void SetWave(int minute, int second);
     int GetEnemy();
+    int GetAmount();
 };

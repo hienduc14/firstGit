@@ -23,7 +23,7 @@ public :
     ~Player();
 private :
     double a_x = 0, a_y = 0;
-    double v_Player = 300;
+    double v_Player = 100;
     int ExpRequire[10] = { 1, 10, 15, 20, 25, 30, 35, 40, 45, 50 };
     BigObj Health;
     BigObj HealthBar;

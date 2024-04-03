@@ -48,6 +48,7 @@ private :
     KillCount killcount;
 
     Wave wave;
+    std::pair<int, int> CurrentWave = {0, -1};
 public :
     void play( int StartPower );
     void Prepare();

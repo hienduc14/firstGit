@@ -110,7 +110,8 @@ void Enemy::SetUp(int x, int y, int type){
         }
         case 0:{
             texture = pre::SlimeTexture;
-            SetClip(0.1, 10, 0);
+            clip[0] = {4, 8, 28-4, 28-8};
+            SetClip(0.1, 10, 1);
             break;
         }
         case 1:{
@@ -167,6 +168,6 @@ void Enemy::SetClip( double x, int y, bool IsClipSet )
             clip[i].x = clip[i-1].x+W;
             clip[i].y = clip[i-1].y;
         }
-
     }
+    rect.w = clip[0].w; rect.h = clip[0].h;
 }

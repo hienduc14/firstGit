@@ -12,16 +12,16 @@ Player::~Player()
 void Player::SetUp()
 {
     this->rectst = {0, 0, PlayerWidth, PlayerHeight};
-    this->rect.x = CENTER_X - 25;
-    this->rect.y = CENTER_Y - 18;
-    this->rect.w = 50;
-    this->rect.h = 36;
+    this->rect.x = CENTER_X - 15;
+    this->rect.y = CENTER_Y - 9;
+    this->rect.w = 30;
+    this->rect.h = 18;
     this->texture = pre::PlayerTexture;
     this->dir = 1;
     SetHealthBar();
     SetExpBar();
     // dung de enemy bi can boi player
-    base::CenterRect = {rect.x, rect.y, rect.w, rect.h};
+    base::CenterRect = {rect.x+5, rect.y+5, rect.w-10, rect.h-10};
 }
 
 void Player::ResetInput(){ a_x = 0; a_y = 0; }
