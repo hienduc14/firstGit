@@ -8,6 +8,8 @@ public :
     int per[15][10];
     int amount[10];
     int WaveNum = 0;
+    int MaxWave = 10;
+    int WaveDis = 10;
 public :
     Wave();
     void SetUp(std::string filePath);

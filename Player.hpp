@@ -3,6 +3,7 @@
 #include "BigObj.hpp"
 #include "Screen.hpp"
 #include "Enemy.hpp"
+#include "Boss.hpp"
 #include "Orb.hpp"
 #include "FireBall.hpp"
 #include "Zone.hpp"
@@ -44,7 +45,7 @@ public :
     void SetUp();
     void ResetInput();
     void KeyInput();
-    void Move( Screen &Map, std::list<Enemy> &enemies, std::list<Orb> &orbs, std::list<FireBall> &fireBalls, std::list<Exp> &exps );
+    void Move( Screen &Map, std::list<Enemy> &enemies, std::list<Orb> &orbs, std::list<FireBall> &fireBalls, std::list<Exp> &exps, Boss &boss );
 
     void SetDir();
     int GetDir();

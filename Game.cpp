@@ -22,13 +22,14 @@ void Game::play( int StartPower ){
 //    player.MyPower[0] = 4;
 //    player.MyPower[1] = 4;
 //    player.MyPower[2] = 1;
+    bool ok = 1;
     Exp exp;
     exp.SetUp( CENTER_X,CENTER_Y , -1);
     exps.push_back( exp );
 
     int GameState = 0;
     int Upgrades = 0;
-    bool GameQuit = false;
+    bool GameQuit = false, GameWin = false;
     while(!GameQuit)
     {
         TimeManager::Instance()->process();
@@ -90,7 +91,7 @@ void Game::play( int StartPower ){
             // xu ly dan (neu co)
             Firing();
             //xu ly move cac Obj
-            player.Move(Map, enemies, orbs, fireBalls, exps );
+            player.Move(Map, enemies, orbs, fireBalls, exps, boss );
 
             //cac obj move
             for( auto &enemy : enemies) enemy.MoveOccupy( enemies );
@@ -102,12 +103,18 @@ void Game::play( int StartPower ){
                 if( fireBall.delayTime <= 0 ) fireBall.Run();
                 else fireBall.delayTime -= TimeStep;
 
+            //boss move
+            if( boss.exist == 1 ) boss.Doing();
+
+
             //Hap thu kinh nghiem
             for( auto &exp : exps )
                 if(exp.exist == true) {
                     Upgrades += player.ExpAbsorb( exp );
                     if( Upgrades ) GameState = 2;
                 }
+
+
 
             // kiem tra va cham
             PowerColision();
@@ -136,6 +143,8 @@ void Game::play( int StartPower ){
     if( player.HP <= 0 ){
         Screen GameOver;
         GameOver.SetTexture(std::string("GameOver.png"));
+        GameOver.rect.w = SCREEN_WIDTH;
+        GameOver.rect.h = SCREEN_HEIGHT;
         GameOver.drawObj();
         SDL_RenderPresent(base::renderer);
         SDL_Delay(5000);
@@ -197,31 +206,48 @@ void Game::LevelUp()
 
 void Game::SpawnEnemy()
 {
-    if( wave.WaveNum > CurrentWave.second )
-        CurrentWave.first += wave.GetAmount(), CurrentWave.second = wave.WaveNum;
-    if( int(SDL_GetTicks()) - timeSpawn.first > timeSpawn.second && enemies.size() < wave.GetAmount() ){
-        int number = func::random( 1, 5 );
-        for( int i = 1; i <= number; i++ ){
-            for( int j = 1; j <= 10; j++ ){
-                Enemy enemy;
-                int type = wave.GetEnemy();
-                int dif =  50;
-                int edge = func::random(1, 4);
-                if( edge == 1 ) enemy.SetUp( (func::random(0, SCREEN_WIDTH)), -dif, type);
-                if( edge == 2 ) enemy.SetUp( -dif, (func::random(0, SCREEN_HEIGHT) ), type);
-                if( edge == 3 ) enemy.SetUp( (func::random(0, SCREEN_WIDTH) ), SCREEN_HEIGHT+dif, type);
-                if( edge == 4 ) enemy.SetUp( SCREEN_WIDTH+dif, (func::random(0, SCREEN_HEIGHT) ), type);
-                enemy.SetOccupy();
-                if(enemy.CheckOccupy( enemies ) == 0)
-                {
-                    enemies.push_back( enemy );
-                    break;
+//    if(wave.WaveNum < wave.MaxWave ){
+    if(wave.WaveNum < 0){
+
+        if( wave.WaveNum > CurrentWave.second )
+            CurrentWave.first += wave.GetAmount(), CurrentWave.second = wave.WaveNum;
+        if( int(SDL_GetTicks()) - timeSpawn.first > timeSpawn.second && enemies.size() < wave.GetAmount() ){
+            int number = func::random( 1, 5 );
+            for( int i = 1; i <= number; i++ ){
+                for( int j = 1; j <= 10; j++ ){
+                    Enemy enemy;
+                    int type = wave.GetEnemy();
+                    int dif =  50;
+                    int edge = func::random(1, 4);
+                    if( edge == 1 ) enemy.SetUp( (func::random(0, SCREEN_WIDTH)), -dif, type);
+                    if( edge == 2 ) enemy.SetUp( -dif, (func::random(0, SCREEN_HEIGHT) ), type);
+                    if( edge == 3 ) enemy.SetUp( (func::random(0, SCREEN_WIDTH) ), SCREEN_HEIGHT+dif, type);
+                    if( edge == 4 ) enemy.SetUp( SCREEN_WIDTH+dif, (func::random(0, SCREEN_HEIGHT) ), type);
+                    enemy.SetOccupy();
+                    if(enemy.CheckOccupy( enemies ) == 0)
+                    {
+                        enemies.push_back( enemy );
+                        break;
+                    }
                 }
+                timeSpawn.first = SDL_GetTicks();
             }
-            timeSpawn.first = SDL_GetTicks();
+        }
+
+    }
+    else{
+        if( boss.exist == 0 ){
+            int dif = 500;
+            int edge = func::random(1, 4);
+            if( edge == 1 ) boss.SetUp( (func::random(0, SCREEN_WIDTH)), -dif);
+            if( edge == 2 ) boss.SetUp( -dif, (func::random(0, SCREEN_HEIGHT) ));
+            if( edge == 3 ) boss.SetUp( (func::random(0, SCREEN_WIDTH) ), SCREEN_HEIGHT+dif);
+            if( edge == 4 ) boss.SetUp( SCREEN_WIDTH+dif, (func::random(0, SCREEN_HEIGHT) ));
+            boss.SetState();
+            boss.SetPhaseClip();
+            boss.exist = 1;
         }
     }
-
 }
 
 void Game::Firing()
@@ -237,6 +263,14 @@ void Game::Firing()
                 luu = func::dist(CENTER_X, CENTER_Y, enemy.c_x, enemy.c_y);
                 f_x = enemy.c_x; f_y = enemy.c_y;
             }
+        if(boss.exist == 1)
+        {
+            if( luu > func::dist(CENTER_X, CENTER_Y, boss.c_x, boss.c_y) )
+            {
+                luu = func::dist(CENTER_X, CENTER_Y, boss.c_x, boss.c_y);
+                f_x = boss.c_x; f_y = boss.c_y;
+            }
+        }
         if( luu != 1e9 ) FireBallAdd( fireBalls, player, f_x, f_y );
     }
     if( player.GetPower(2) )
@@ -288,6 +322,60 @@ void Game::PowerColision()
             if(enemy.CoolDown <= 0 ) enemy.CoolDown = EnemyCD;
         }
     }
+
+    // kiem tra voi boss
+    if( boss.phaseState == 1 || boss.phaseState == 4 ){
+        SDL_Rect bossRect = boss.GetBossBody();
+        for( auto &orb : orbs )
+            {
+            if( func::checkRect( orb.GetRect(), bossRect ) )
+            {
+                orb.exist = 0;
+                boss.HP -= orb.damage;
+                Dmg dmg( orb.damage, bossRect.x, bossRect.y );
+                dmgs.push_back( dmg );
+                orb.SetTexture(std::string("orb_explode.png"));
+            }
+        }
+        for( auto &fireBall : fireBalls )
+            {
+            if( func::checkRect( fireBall.GetRect(), bossRect ) )
+            {
+                fireBall.exist = 0;
+                boss.HP -= fireBall.damage;
+                Dmg dmg( fireBall.damage, bossRect.x, bossRect.y );
+                dmgs.push_back( dmg );
+                fireBall.SetTexture(std::string("FireBall_explode.png"));
+            }
+        }
+        if( player.GetPower( 2 ) && zone.CanDmg == 1 ){
+            if( zone.DOT( boss ) )
+            {
+                Dmg dmg( zone.damage, bossRect.x, bossRect.y );
+                dmgs.push_back( dmg );
+            }
+        }
+
+        if(boss.exist == true && func::checkRect(bossRect, player.GetRect() )  ){
+            if(boss.phaseState == 4){
+                if(boss.CoolDown == BossCD ) {
+                    player.Bleeding(boss.damage);
+                }
+                boss.CoolDown -= TimeStep;
+                if(boss.CoolDown <= 0 ) boss.CoolDown = BossCD;
+
+                boss.SkillHit = false;
+            }
+            else if( boss.phaseState == 3 )
+            {
+                if( boss.SkillHit == false )
+                {
+                    player.Bleeding(boss.dmgSkill);
+                    boss.SkillHit = true;
+                }
+            }
+        }
+    }
 }
 
 void Game::PowerExisted()
@@ -329,6 +417,8 @@ void Game::RenderGamePlay( int IsMoving )
     player.renderPlayer();
 //    for( auto &enemy : enemies) enemy.drawObj();
     for( auto &enemy : enemies) enemy.RenderMoving( IsMoving, 1, 0 );
+    if( boss.exist == 1 )boss.RenderMoving( IsMoving, 1, 0 );
+
     for( auto &dmg : dmgs ) dmg.PopUp(IsMoving);
     timecount.Display();
     killcount.Display();

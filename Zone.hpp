@@ -2,6 +2,7 @@
 #include "MovingObj.hpp"
 #include "Func.hpp"
 #include "Enemy.hpp"
+#include "Boss.hpp"
 #define ZoneImgW 519
 #define ZoneImgH 519
 #define ZoneR 90
@@ -21,4 +22,5 @@ public:
     virtual ~Zone();
     void Start();
     bool DOT( Enemy &enemy );
+    bool DOT( Boss &boss );
 };

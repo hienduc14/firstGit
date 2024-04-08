@@ -36,6 +36,8 @@
 		<Unit filename="BasicFn.hpp" />
 		<Unit filename="BigObj.cpp" />
 		<Unit filename="BigObj.hpp" />
+		<Unit filename="Boss.cpp" />
+		<Unit filename="Boss.hpp" />
 		<Unit filename="Button.cpp" />
 		<Unit filename="Button.hpp" />
 		<Unit filename="Card.cpp" />

@@ -18,6 +18,7 @@
 #include "TimeCount.hpp"
 #include "KillCount.hpp"
 #include "Wave.hpp"
+#include "Boss.hpp"
 #include <utility>
 const std::string PauseImg = "pause.png";
 const std::string HomeImg = "home.png";
@@ -31,6 +32,8 @@ public :
 private :
     Player player;
     std::list<Enemy> enemies;
+    Boss boss;
+
     std::list<Orb> orbs;
     std::list<FireBall> fireBalls;
     std::list<Exp> exps;

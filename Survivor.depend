@@ -33,11 +33,12 @@
 	"BasicFn.hpp"
 	"ImgTexture.hpp"
 
-1712109395 d:\codeblock\survivor\player.hpp
+1712508420 d:\codeblock\survivor\player.hpp
 	"BasicFn.hpp"
 	"BigObj.hpp"
 	"Screen.hpp"
 	"Enemy.hpp"
+	"Boss.hpp"
 	"Orb.hpp"
 	"FireBall.hpp"
 	"Zone.hpp"
@@ -45,7 +46,7 @@
 	"ImgTexture.hpp"
 	<vector>
 
-1712126721 source:d:\codeblock\survivor\player.cpp
+1712508420 source:d:\codeblock\survivor\player.cpp
 	"Player.hpp"
 
 1709885579 source:d:\codeblock\survivor\map.cpp
@@ -85,7 +86,7 @@
 	"BigObj.hpp"
 	"Func.hpp"
 
-1712109248 source:d:\codeblock\survivor\enemy.cpp
+1712126916 source:d:\codeblock\survivor\enemy.cpp
 	"Enemy.hpp"
 
 1712081481 d:\codeblock\survivor\enemy.hpp
@@ -110,7 +111,7 @@
 1710581255 d:\codeblock\survivor\exp.hpp
 	"Enemy.hpp"
 
-1712126387 d:\codeblock\survivor\game.hpp
+1712508018 d:\codeblock\survivor\game.hpp
 	<SDL.h>
 	"BasicFn.hpp"
 	"Func.hpp"
@@ -130,9 +131,10 @@
 	"TimeCount.hpp"
 	"KillCount.hpp"
 	"Wave.hpp"
+	"Boss.hpp"
 	<utility>
 
-1712126387 source:d:\codeblock\survivor\game.cpp
+1712566933 source:d:\codeblock\survivor\game.cpp
 	"Game.hpp"
 
 1711012727 source:d:\codeblock\survivor\button.cpp
@@ -142,7 +144,7 @@
 	"BasicFn.hpp"
 	"BigObj.hpp"
 
-1711012868 source:d:\codeblock\survivor\screen.cpp
+1712421792 source:d:\codeblock\survivor\screen.cpp
 	"Screen.hpp"
 
 1710337770 d:\codeblock\survivor\button.hpp
@@ -179,12 +181,13 @@
 1711253787 source:d:\codeblock\survivor\fireball.cpp
 	"FireBall.hpp"
 
-1711531078 d:\codeblock\survivor\zone.hpp
+1712563856 d:\codeblock\survivor\zone.hpp
 	"MovingObj.hpp"
 	"Func.hpp"
 	"Enemy.hpp"
+	"Boss.hpp"
 
-1711531078 source:d:\codeblock\survivor\zone.cpp
+1712564433 source:d:\codeblock\survivor\zone.cpp
 	"Zone.hpp"
 
 1711013574 d:\codeblock\survivor\card.hpp
@@ -233,10 +236,16 @@
 1711389355 d:\codeblock\survivor\killcount.hpp
 	"TextObj.hpp"
 
-1712110846 d:\codeblock\survivor\wave.hpp
+1712561599 d:\codeblock\survivor\wave.hpp
 	"Func.hpp"
 	<fstream>
 
-1712126387 source:d:\codeblock\survivor\wave.cpp
+1712561618 source:d:\codeblock\survivor\wave.cpp
 	"Wave.hpp"
+
+1712566920 source:d:\codeblock\survivor\boss.cpp
+	"Boss.hpp"
+
+1712564442 d:\codeblock\survivor\boss.hpp
+	"Enemy.hpp"
 

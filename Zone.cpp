@@ -47,3 +47,19 @@ bool Zone::DOT( Enemy &enemy )
     }
     return ok;
 }
+
+bool Zone::DOT( Boss &boss )
+{
+    bool ok = 0;
+    if( func::dist( CENTER_X, CENTER_Y, boss.c_x, boss.c_y ) <= radius+100 )
+    {
+        if(boss.IsDot == 0){
+            boss.HP -= damage;
+            ok = 1;
+        }
+        boss.IsDot += TimeStep;
+        if(boss.IsDot > delay) boss.IsDot = 0;
+
+    }
+    return ok;
+}
