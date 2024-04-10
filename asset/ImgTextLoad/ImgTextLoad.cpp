@@ -1,0 +1,84 @@
+#include "./ImgTextLoad.hpp"
+
+namespace pre
+{
+    SDL_Texture* MapTexture = nullptr;
+    SDL_Texture* SlimeTexture= nullptr;
+    SDL_Texture* RabbitTexture= nullptr;
+    SDL_Texture* BoarTexture= nullptr;
+
+    SDL_Texture* OrbTexture= nullptr;
+    SDL_Texture* FireBallTexture= nullptr;
+    SDL_Texture* ZoneTexture= nullptr;
+    SDL_Texture* ExpTexture= nullptr;
+    SDL_Texture* PlayerTexture= nullptr;
+    SDL_Texture* HealthTexture= nullptr;
+    SDL_Texture* HealthBarTexture= nullptr;
+    SDL_Texture* ExpPointTexture= nullptr;
+    SDL_Texture* ExpBarTexture= nullptr;
+    SDL_Texture* HPCardTexture= nullptr;
+    SDL_Texture* WaterBallCardTexture= nullptr;
+    SDL_Texture* FireBallCardTexture= nullptr;
+    SDL_Texture* Option[8][8];
+
+    TTF_Font* DmgFont = nullptr;
+    TTF_Font* CountFont = nullptr;
+    SDL_Texture* SkullIcon = nullptr;
+}
+
+LoadAll::LoadAll(){}
+LoadAll::~LoadAll(){}
+void LoadAll::loading( int MapTerrain )
+{
+    switch (MapTerrain)
+    {
+        case 0 :
+        {
+            pre::MapTexture     = base::Load_Image(std::string("./asset/Map/Meadow.png"));
+            break;
+        }
+        case 1 :
+        {
+            pre::MapTexture     = base::Load_Image(std::string("./asset/Map/GraveYard.png"));
+            break;
+        }
+        case 2 :
+        {
+            pre::MapTexture     = base::Load_Image(std::string("./asset/Map/Volcano.png"));
+            break;
+        }
+    }
+    pre::SlimeTexture   = base::Load_Image(std::string("./asset/Enemy/RedSlime.png"));
+    pre::RabbitTexture  = base::Load_Image(std::string("./asset/Enemy/Rabbit.png"));
+    pre::BoarTexture    = base::Load_Image(std::string("./asset/Enemy/Boar.png"));
+    pre::ExpTexture     = base::Load_Image(std::string("./asset/Enemy/exp.png"));
+
+    pre::OrbTexture         = base::Load_Image(std::string("./asset/Power/orb.png"));
+    pre::FireBallTexture    = base::Load_Image(std::string("./asset/Power/FireBalls.png"));
+    pre::ZoneTexture        = base::Load_Image(std::string("./asset/Power/zone.png"));
+
+    pre::PlayerTexture      = base::Load_Image(std::string("./asset/Player/PlayerSlime.png"));
+    pre::HealthTexture      = base::Load_Image(std::string("./asset/Player/hp.png"));
+    pre::HealthBarTexture   = base::Load_Image(std::string("./asset/Player/hp_bar.png"));
+    pre::ExpPointTexture    = base::Load_Image(std::string("./asset/Player/exp_point.png"));
+    pre::ExpBarTexture      = base::Load_Image(std::string("./asset/Player/exp_bar.png"));
+    pre::Option[1][0] = base::Load_Image(std::string("./asset/Card/HPCard.png"));
+    pre::Option[2][0] = base::Load_Image(std::string("./asset/Card/ExpCard.png"));
+    pre::Option[3][0] = base::Load_Image(std::string("./asset/Card/DefenseCard.png"));
+    pre::Option[4][0] = base::Load_Image(std::string("./asset/Card/WaterBallCard.png"));
+    pre::Option[4][1] = base::Load_Image(std::string("./asset/Card/WaterBallCardLV2.png"));
+    pre::Option[4][2] = base::Load_Image(std::string("./asset/Card/WaterBallCardLV3.png"));
+    pre::Option[4][3] = base::Load_Image(std::string("./asset/Card/WaterBallCardLV4.png"));
+    pre::Option[5][0] = base::Load_Image(std::string("./asset/Card/FireBallCard.png"));
+    pre::Option[5][1] = base::Load_Image(std::string("./asset/Card/FireBallCardLV2.png"));
+    pre::Option[5][2] = base::Load_Image(std::string("./asset/Card/FireBallCardLV3.png"));
+    pre::Option[5][3] = base::Load_Image(std::string("./asset/Card/FireBallCardLV4.png"));
+    pre::Option[6][0] = base::Load_Image(std::string("./asset/Card/ZoneCard.png"));
+    pre::Option[6][1] = base::Load_Image(std::string("./asset/Card/ZoneCardLV2.png"));
+    pre::Option[6][2] = base::Load_Image(std::string("./asset/Card/ZoneCardLV3.png"));
+    pre::Option[6][3] = base::Load_Image(std::string("./asset/Card/ZoneCardLV4.png"));
+
+    pre::DmgFont    = TTF_OpenFont("./asset/CountFont.ttf", 40);
+    pre::CountFont  = TTF_OpenFont("./asset/CountFont.ttf", 70);
+    pre::SkullIcon  = base::Load_Image(std::string("./asset/Screen/Skull.png"));
+}
