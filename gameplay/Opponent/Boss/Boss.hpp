@@ -8,23 +8,26 @@ public :
     Boss();
     ~Boss();
 public :
+    int BossType;
+
     int phaseState;
-    // 0 di chuyen // 1 nhay // 2 dam chan
-    SDL_Rect phaseRect[5][10];
-    int NumF = 0;
-    std::pair<int, double> phaseFrame[5] = { {4, 0.1}, {2, 0.1}, {1, 0.1}, {7, 0.1}, {6, 0.15} };
-    double phaseTime[5] = { 0.5, 0.2, 3, 0.7, 5 };
-    // 0 prepare; 1 jumping; 2 floating; 3 landing; 4 moving
+    SDL_Rect phaseRect[10][10];
+    int NumPhase, NumF = 0;
+    std::pair<int, double> phaseFrame[10];
+    double phaseTime[10];
 
     double ExistTime = 0;
     double v_Fly;
+    double a_x_Fly, a_y_Fly;
     int dmgSkill; bool SkillHit = false;
     int aim_x, aim_y;
 
     int IsDot = 0;
     double CoolDown = BossCD;
+
+    int SummonWave = 0;
 public:
-    void SetUp( int x, int y );
+    void SetUp( int x, int y, int type );
     void SetState();
     void SetPhaseClip();
     void Doing();

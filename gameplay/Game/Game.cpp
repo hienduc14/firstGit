@@ -203,8 +203,7 @@ void Game::LevelUp()
 void Game::SpawnEnemy()
 {
 //    if(wave.WaveNum < wave.MaxWave ){
-    if(wave.WaveNum < 0){
-
+    if(wave.WaveNum < 10){
         if( wave.WaveNum > CurrentWave.second )
             CurrentWave.first += wave.GetAmount(), CurrentWave.second = wave.WaveNum;
         if( int(SDL_GetTicks()) - timeSpawn.first > timeSpawn.second && enemies.size() < wave.GetAmount() ){
@@ -234,14 +233,34 @@ void Game::SpawnEnemy()
     else{
         if( boss.exist == 0 ){
             int dif = 500;
-            int edge = func::random(1, 4);
-            if( edge == 1 ) boss.SetUp( (func::random(0, SCREEN_WIDTH)), -dif);
-            if( edge == 2 ) boss.SetUp( -dif, (func::random(0, SCREEN_HEIGHT) ));
-            if( edge == 3 ) boss.SetUp( (func::random(0, SCREEN_WIDTH) ), SCREEN_HEIGHT+dif);
-            if( edge == 4 ) boss.SetUp( SCREEN_WIDTH+dif, (func::random(0, SCREEN_HEIGHT) ));
+            int edge = func::random(1, 4), x, y;
+            if( edge == 1 ) x = func::random(0, SCREEN_WIDTH),  y = -dif;
+            if( edge == 2 ) x = -dif,                           y = func::random(0, SCREEN_HEIGHT);
+            if( edge == 3 ) x = func::random(0, SCREEN_WIDTH),  y = SCREEN_HEIGHT+dif;
+            if( edge == 4 ) x = SCREEN_WIDTH+dif,               y = (func::random(0, SCREEN_HEIGHT) );
+            boss.SetUp(x, y, MapTerrain);
             boss.SetState();
             boss.SetPhaseClip();
-            boss.exist = 1;
+        }
+        if( boss.exist == 1 && boss.BossType == 1 && boss.phaseState == 4 && boss.SummonWave > 0 )
+        {
+            int NUM = 20; int R = 600;
+            double angle = 0;
+            for( int i = 0; i < NUM; i ++ )
+            {
+                angle += 360/NUM;
+                std::pair<int, int> luu = func::GetPosCircle(angle, R);
+                Enemy enemy;
+                int type = 0;
+                enemy.SetUp( CENTER_X+luu.first, CENTER_Y+luu.second, type);
+                enemy.SetOccupy();
+                enemy.IsThrough = true;
+                enemy.aim_x = CENTER_X;
+                enemy.aim_y = CENTER_Y;
+                enemy.v_Obj = 80;
+                enemies.push_back( enemy );
+            }
+            boss.SummonWave --;
         }
     }
 }

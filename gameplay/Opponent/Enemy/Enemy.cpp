@@ -43,32 +43,40 @@ int Enemy::CheckOccupy( std::list<Enemy>& enemies )
 
 void Enemy::MoveOccupy( std::list<Enemy>& enemies )
 {
-    double Dist = func::dist(CENTER_X, CENTER_Y, c_x, c_y );
-    if( Dist == 0 ) return;
-    double ax = v_Obj*(CENTER_X-c_x)/Dist;
-    double ay = v_Obj*(CENTER_Y-c_y)/Dist;
-    double preL_x = L_x, preL_y = L_y;
-    L_x += ax*TimeManager::Instance()->getElapsedTime()*GameSpeed;
-    rect.x = L_x;
-    SetOccupy();
-    Located();
-
-    if( CheckOccupy( enemies ) > 1 )
-    {
-        L_x = preL_x;
+    if( IsThrough == false ){
+        double Dist = func::dist(CENTER_X, CENTER_Y, c_x, c_y );
+        if( Dist == 0 ) return;
+        double ax = v_Obj*(CENTER_X-c_x)/Dist;
+        double ay = v_Obj*(CENTER_Y-c_y)/Dist;
+        double preL_x = L_x, preL_y = L_y;
+        L_x += ax*TimeManager::Instance()->getElapsedTime()*GameSpeed;
         rect.x = L_x;
         SetOccupy();
         Located();
-    }
-    L_y += ay*TimeManager::Instance()->getElapsedTime()*GameSpeed;
-    rect.y = L_y;
-    SetOccupy();
-    Located();
-    if( CheckOccupy( enemies ) > 1 )
-    {
-        L_y = preL_y;
+
+        if( CheckOccupy( enemies ) > 1 )
+        {
+            L_x = preL_x;
+            rect.x = L_x;
+            SetOccupy();
+            Located();
+        }
+        L_y += ay*TimeManager::Instance()->getElapsedTime()*GameSpeed;
         rect.y = L_y;
         SetOccupy();
+        Located();
+        if( CheckOccupy( enemies ) > 1 )
+        {
+            L_y = preL_y;
+            rect.y = L_y;
+            SetOccupy();
+            Located();
+        }
+    }
+    else{
+        double Dist = func::dist(aim_x, aim_y, c_x, c_y );
+        if( Dist == 0 ) return;
+        Change(( v_Obj*(aim_x-c_x)/Dist ), ( v_Obj*(aim_y-c_y)/Dist ) );
         Located();
     }
 }
@@ -110,32 +118,47 @@ void Enemy::SetUp(int x, int y, int type){
         }
         case 0:{
             texture = pre::SlimeTexture;
-            clip[0] = {4, 8, 28-4, 28-8};
-            SetClip(0.1, 10, 1);
+//            clip[0] = {4, 8, 28-4, 28-8};
+            clip[0].x = 0; clip[0].y = 0;
+            SDL_QueryTexture(pre::SlimeTexture, NULL, NULL, &clip[0].w, &clip[0].h);
+            clip[0].w /= pre::SlimeFrame;
+            SetClip(0.1, pre::SlimeFrame, 1);
             break;
         }
         case 1:{
             texture = pre::RabbitTexture;
-            clip[0] = {47, 57, 80-47, 80-57};
-            SetClip(0.2, 6, 1);
+//            clip[0] = {47, 57, 80-47, 80-57};
+            clip[0].x = 0; clip[0].y = 0;
+            SDL_QueryTexture(pre::RabbitTexture, NULL, NULL, &clip[0].w, &clip[0].h);
+            clip[0].w /= pre::RabbitFrame;
+            SetClip(0.2, pre::RabbitFrame, 1);
             break;
         }
         case 2:{
             texture = pre::BoarTexture;
-            clip[0] = {29, 42, 67-29, 65-42};
-            SetClip(0.2, 6, 1);
+//            clip[0] = {29, 42, 67-29, 65-42};
+            clip[0].x = 0; clip[0].y = 0;
+            SDL_QueryTexture(pre::BoarTexture, NULL, NULL, &clip[0].w, &clip[0].h);
+            clip[0].w /= pre::BoarFrame;
+            SetClip(0.2, pre::BoarFrame, 1);
             break;
         }
         case 3:{
             texture = pre::BoarTexture;
-            clip[0] = {29, 42, 67-29, 65-42};
-            SetClip(0.2, 6, 1);
+//            clip[0] = {29, 42, 67-29, 65-42};
+            clip[0].x = 0; clip[0].y = 0;
+            SDL_QueryTexture(pre::BoarTexture, NULL, NULL, &clip[0].w, &clip[0].h);
+            clip[0].w /= pre::BoarFrame;
+            SetClip(0.2, pre::BoarFrame, 1);
             break;
         }
         case 4:{
             texture = pre::BoarTexture;
-            clip[0] = {29, 42, 67-29, 65-42};
-            SetClip(0.2, 6, 1);
+//            clip[0] = {29, 42, 67-29, 65-42};
+            clip[0].x = 0; clip[0].y = 0;
+            SDL_QueryTexture(pre::BoarTexture, NULL, NULL, &clip[0].w, &clip[0].h);
+            clip[0].w /= pre::BoarFrame;
+            SetClip(0.2, pre::BoarFrame, 1);
             break;
         }
     }

@@ -4,10 +4,11 @@
 namespace pre
 {
     extern SDL_Texture* MapTexture;
+
     extern SDL_Texture* SlimeTexture;
     extern SDL_Texture* RabbitTexture;
     extern SDL_Texture* BoarTexture;
-
+    extern int SlimeFrame, RabbitFrame, BoarFrame;
 
     extern SDL_Texture* OrbTexture;
     extern SDL_Texture* FireBallTexture;

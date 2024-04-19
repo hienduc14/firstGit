@@ -19,6 +19,8 @@ public :
     void MoveOccupy(std::list<Enemy>& enemies);
     void ChangeOccupy(double ax, double ay, std::list<Enemy>& enemies);
 
+    int aim_x, aim_y;
+    bool IsThrough = false;
 public :
     Enemy();
     ~Enemy();

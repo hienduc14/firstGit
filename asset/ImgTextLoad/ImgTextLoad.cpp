@@ -3,9 +3,12 @@
 namespace pre
 {
     SDL_Texture* MapTexture = nullptr;
+
     SDL_Texture* SlimeTexture= nullptr;
     SDL_Texture* RabbitTexture= nullptr;
     SDL_Texture* BoarTexture= nullptr;
+
+    int SlimeFrame = 0, RabbitFrame = 0, BoarFrame = 0;
 
     SDL_Texture* OrbTexture= nullptr;
     SDL_Texture* FireBallTexture= nullptr;
@@ -35,22 +38,41 @@ void LoadAll::loading( int MapTerrain )
         case 0 :
         {
             pre::MapTexture     = base::Load_Image(std::string("./asset/Map/Meadow.png"));
+            pre::SlimeTexture   = base::Load_Image(std::string("./asset/Enemy/RedSlime.png"));
+            pre::RabbitTexture  = base::Load_Image(std::string("./asset/Enemy/Rabbit.png"));
+            pre::BoarTexture    = base::Load_Image(std::string("./asset/Enemy/Boar.png"));
+            pre::SlimeFrame = 10;
+            pre::RabbitFrame = 6;
+            pre::BoarFrame = 6;
             break;
         }
         case 1 :
         {
             pre::MapTexture     = base::Load_Image(std::string("./asset/Map/GraveYard.png"));
+            pre::SlimeTexture   = base::Load_Image(std::string("./asset/Enemy/Ghost.png"));
+            pre::RabbitTexture  = base::Load_Image(std::string("./asset/Enemy/Bat.png"));
+            pre::BoarTexture    = base::Load_Image(std::string("./asset/Enemy/Zombie.png"));
+            pre::SlimeFrame = 10;
+            pre::RabbitFrame = 6;
+            pre::BoarFrame = 6;
             break;
         }
         case 2 :
         {
             pre::MapTexture     = base::Load_Image(std::string("./asset/Map/Volcano.png"));
+            pre::SlimeTexture   = base::Load_Image(std::string("./asset/Enemy/FlameSlime.png"));
+            pre::RabbitTexture  = base::Load_Image(std::string("./asset/Enemy/CoalMonster.png"));
+            pre::BoarTexture    = base::Load_Image(std::string("./asset/Enemy/FireElement.png"));
+            pre::SlimeFrame = 8;
+            pre::RabbitFrame = 8;
+            pre::BoarFrame = 8;
             break;
         }
     }
-    pre::SlimeTexture   = base::Load_Image(std::string("./asset/Enemy/RedSlime.png"));
-    pre::RabbitTexture  = base::Load_Image(std::string("./asset/Enemy/Rabbit.png"));
-    pre::BoarTexture    = base::Load_Image(std::string("./asset/Enemy/Boar.png"));
+//    pre::SlimeTexture   = base::Load_Image(std::string("./asset/Enemy/RedSlime.png"));
+//    pre::RabbitTexture  = base::Load_Image(std::string("./asset/Enemy/Rabbit.png"));
+//    pre::BoarTexture    = base::Load_Image(std::string("./asset/Enemy/Boar.png"));
+
     pre::ExpTexture     = base::Load_Image(std::string("./asset/Enemy/exp.png"));
 
     pre::OrbTexture         = base::Load_Image(std::string("./asset/Power/orb.png"));

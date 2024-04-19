@@ -24,6 +24,11 @@ double func::GetAngle(double x, double y)
     return atan2(y, x)*180/M_PI;
 }
 
+std::pair<int, int> func::GetPosCircle( double angle, double R )
+{
+    return {R*cos(angle*M_PI/180), R*sin(angle*M_PI/180) };
+}
+
 bool Area::checkArea( Area rect )
 {
     return ((rect.x+rect.w >= x) &&

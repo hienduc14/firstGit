@@ -294,10 +294,10 @@
 	"../../Function/BasicFn/BasicFn.hpp"
 	"../BigObj/BigObj.hpp"
 
-1712736239 d:\codeblock\survivor\asset\imgtextload\imgtextload.hpp
+1713511836 d:\codeblock\survivor\asset\imgtextload\imgtextload.hpp
 	"../../src/Function/BasicFn/BasicFn.hpp"
 
-1712678554 d:\codeblock\survivor\gameplay\opponent\enemy\enemy.hpp
+1713408080 d:\codeblock\survivor\gameplay\opponent\enemy\enemy.hpp
 	"../../../src/Object/MovingObj/MovingObj.hpp"
 	"../../../src/Function/Func/Func.hpp"
 	"../../../asset/ImgTextLoad/ImgTextLoad.hpp"
@@ -308,12 +308,13 @@
 	"../../Function/Func/Func.hpp"
 	"../../TimeManage/Time.hpp"
 
-1712672382 d:\codeblock\survivor\src\function\func\func.hpp
+1713373820 d:\codeblock\survivor\src\function\func\func.hpp
 	"../BasicFn/BasicFn.hpp"
 	<valarray>
+	<utility>
 	<cmath>
 
-1712672382 d:\codeblock\survivor\gameplay\opponent\boss\boss.hpp
+1713373822 d:\codeblock\survivor\gameplay\opponent\boss\boss.hpp
 	"../Enemy/Enemy.hpp"
 
 1712676856 d:\codeblock\survivor\gameplay\power\orb\orb.hpp
@@ -347,7 +348,7 @@
 	"../../Power/Zone/Zone.hpp"
 	"../../Player/Player.hpp"
 
-1712679590 source:d:\codeblock\survivor\gameplay\opponent\boss\boss.cpp
+1713373821 source:d:\codeblock\survivor\gameplay\opponent\boss\boss.cpp
 	"Boss.hpp"
 
 1712679535 source:d:\codeblock\survivor\gameplay\opponent\wave\wave.cpp
@@ -357,7 +358,7 @@
 	"../../../src/Function/Func/Func.hpp"
 	<fstream>
 
-1712508420 source:d:\codeblock\survivor\gameplay\player\player.cpp
+1713366190 source:d:\codeblock\survivor\gameplay\player\player.cpp
 	"Player.hpp"
 
 1712677978 source:d:\codeblock\survivor\menu\menu.cpp
@@ -368,10 +369,10 @@
 	"../src/Object/Screen/Screen.hpp"
 	"../src/Object/Button/Button.hpp"
 
-1712736239 source:d:\codeblock\survivor\asset\imgtextload\imgtextload.cpp
+1713511868 source:d:\codeblock\survivor\asset\imgtextload\imgtextload.cpp
 	"./ImgTextLoad.hpp"
 
-1712736371 source:d:\codeblock\survivor\gameplay\game\game.cpp
+1713511462 source:d:\codeblock\survivor\gameplay\game\game.cpp
 	"Game.hpp"
 
 1712736239 d:\codeblock\survivor\gameplay\game\game.hpp
@@ -405,7 +406,7 @@
 1712677266 source:d:\codeblock\survivor\src\function\basicfn\basicfn.cpp
 	"BasicFn.hpp"
 
-1712078330 source:d:\codeblock\survivor\src\function\func\func.cpp
+1713373821 source:d:\codeblock\survivor\src\function\func\func.cpp
 	"Func.hpp"
 
 1712676856 source:d:\codeblock\survivor\src\object\bigobj\bigobj.cpp
@@ -442,7 +443,7 @@
 1711384176 source:d:\codeblock\survivor\gameplay\dmg\dmg.cpp
 	"Dmg.hpp"
 
-1712678929 source:d:\codeblock\survivor\gameplay\opponent\enemy\enemy.cpp
+1713511929 source:d:\codeblock\survivor\gameplay\opponent\enemy\enemy.cpp
 	"Enemy.hpp"
 
 1710322285 source:d:\codeblock\survivor\gameplay\opponent\exp\exp.cpp
