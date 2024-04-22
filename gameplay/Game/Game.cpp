@@ -85,13 +85,12 @@ void Game::play( int MapChoice ){
             // nhap thao tac tu ban phim
             player.ResetInput();
             player.KeyInput();
-
             // random sinh quai
             SpawnEnemy();
             // xu ly dan (neu co)
             Firing();
             //xu ly move cac Obj
-            player.Move(Map, enemies, orbs, fireBalls, exps, boss );
+            MoveAll();
 
             //cac obj move
             for( auto &enemy : enemies) enemy.MoveOccupy( enemies );
@@ -184,6 +183,19 @@ void Game::Prepare()
     TimeManager::Instance()->reset();
 }
 
+void Game::MoveAll()
+{
+    double a_x, a_y;
+    player.Move( a_x, a_y );
+    Map.MapMove( -a_x, -a_y );
+    for( auto &enemy : enemies ) {enemy.ChangeOccupy( -a_x, -a_y, enemies ); enemy.SetOccupy();}
+    for( auto &exp : exps ) exp.Change( -a_x, -a_y );
+    for( auto &orb : orbs ) orb.Change( -a_x, -a_y );
+    for( auto &fireBall : fireBalls )
+        if(fireBall.delayTime <= 0) fireBall.Change( -a_x, -a_y );
+    boss.Change( -a_x, -a_y );
+}
+
 void Game::LevelUp()
 {
     RenderGamePlay( 0 );
@@ -203,9 +215,10 @@ void Game::LevelUp()
 void Game::SpawnEnemy()
 {
 //    if(wave.WaveNum < wave.MaxWave ){
-    if(wave.WaveNum < 10){
+    if(wave.WaveNum < 0){
         if( wave.WaveNum > CurrentWave.second )
             CurrentWave.first += wave.GetAmount(), CurrentWave.second = wave.WaveNum;
+//        CurrentWave.first = 10;
         if( int(SDL_GetTicks()) - timeSpawn.first > timeSpawn.second && enemies.size() < wave.GetAmount() ){
             int number = func::random( 1, 5 );
             for( int i = 1; i <= number; i++ ){
@@ -328,7 +341,7 @@ void Game::PowerColision()
             }
         }
 
-        if(enemy.exist == true && enemy.RectOccupy.checkRect( player.GetRect() ) ){
+        if(enemy.exist == true && base::CanChoose == true && enemy.RectOccupy.checkRect( base::CenterRect ) ){
             if(enemy.CoolDown == EnemyCD ) {
                 player.Bleeding(enemy.damage);
                 if( player.HP <= 0 ) break;
@@ -336,10 +349,20 @@ void Game::PowerColision()
             enemy.CoolDown -= TimeStep;
             if(enemy.CoolDown <= 0 ) enemy.CoolDown = EnemyCD;
         }
+        if( player.kameha.state == 2 )
+        {
+            int KameDmg = player.kameha.CheckDmg(enemy.rect);
+            if( KameDmg )
+            {
+                enemy.HP -= KameDmg;
+                Dmg dmg( KameDmg, enemy.rect.x, enemy.rect.y );
+                dmgs.push_back( dmg );
+            }
+        }
     }
 
     // kiem tra voi boss
-    if( boss.phaseState == 1 || boss.phaseState == 4 ){
+    if( boss.Invicible == false ){
         SDL_Rect bossRect = boss.GetBossBody();
         for( auto &orb : orbs )
             {
@@ -370,24 +393,34 @@ void Game::PowerColision()
                 dmgs.push_back( dmg );
             }
         }
-
-        if(boss.exist == true && func::checkRect(bossRect, player.GetRect() )  ){
-            if(boss.phaseState == 4){
-                if(boss.CoolDown == BossCD ) {
-                    player.Bleeding(boss.damage);
-                }
-                boss.CoolDown -= TimeStep;
-                if(boss.CoolDown <= 0 ) boss.CoolDown = BossCD;
-
-                boss.SkillHit = false;
+        if(boss.exist == true && base::CanChoose == true && func::checkRect(bossRect, player.GetRect() )  ){
+            if(boss.CoolDown == BossCD ) {
+                player.Bleeding(boss.damage);
             }
-            else if( boss.phaseState == 3 )
-            {
-                if( boss.SkillHit == false )
+            boss.CoolDown -= TimeStep;
+            if(boss.CoolDown <= 0 ) boss.CoolDown = BossCD;
+
+
+            if( boss.BossType == 0 ){
+                if( boss.phaseState == 3 )
                 {
-                    player.Bleeding(boss.dmgSkill);
-                    boss.SkillHit = true;
+                    if( boss.SkillHit == false )
+                    {
+                        player.Bleeding(boss.dmgSkill);
+                        boss.SkillHit = true;
+                    }
                 }
+                else boss.SkillHit = false;
+            }
+        }
+        if( player.kameha.state == 2 )
+        {
+            int KameDmg = player.kameha.CheckDmg(bossRect);
+            if( KameDmg )
+            {
+                boss.HP -= KameDmg;
+                Dmg dmg( KameDmg, bossRect.x, bossRect.y );
+                dmgs.push_back( dmg );
             }
         }
     }
@@ -429,10 +462,11 @@ void Game::RenderGamePlay( int IsMoving )
     for( auto &fireBall : fireBalls ) if( fireBall.delayTime <= 0 ) fireBall.RenderMoving( IsMoving, 0, 1 );
     zone.drawObj();
     for( auto &exp : exps ) exp.drawObj();
-    player.renderPlayer();
+    player.renderPlayer( IsMoving );
 //    for( auto &enemy : enemies) enemy.drawObj();
     for( auto &enemy : enemies) enemy.RenderMoving( IsMoving, 1, 0 );
-    if( boss.exist == 1 )boss.RenderMoving( IsMoving, 1, 0 );
+    if( boss.exist == 1 ) boss.Print(IsMoving);
+
 
     for( auto &dmg : dmgs ) dmg.PopUp(IsMoving);
     timecount.Display();

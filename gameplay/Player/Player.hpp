@@ -11,6 +11,7 @@
 #include "../Power/FireBall/FireBall.hpp"
 #include "../Power/Zone/Zone.hpp"
 #include "../Opponent/Exp/Exp.hpp"
+#include "../Power/Kameha/Kameha.hpp"
 
 #include <vector>
 #define PlayerWidth 196
@@ -33,6 +34,27 @@ private :
     BigObj HealthBar;
     BigObj ExpPoint;
     BigObj ExpBar;
+
+public :
+    int aimDir;
+    Kameha kameha;
+public :
+    //animation
+    int phaseState, NumPhase = 3, NumF = 0;
+    // 0 standing 1 moving 2 jumping
+    SDL_Rect phaseRect[10][10];
+    std::pair<int, double> phaseFrame[10];
+    double frameTime;
+    int frameNum;
+    double timeCurrent;
+    std::pair<double,double> FlyTime = {0, 1000};
+    double v_Stand = 0;
+    double v_Move = 100;
+    double v_Jump = 400;
+    bool IsFlip = false;
+    void SetState();
+    void SetPhaseClip();
+    void Print( bool IsMoving );
 public :
     double HPMax = 30;
     double HP = 30;
@@ -48,7 +70,7 @@ public :
     void SetUp();
     void ResetInput();
     void KeyInput();
-    void Move( Screen &Map, std::list<Enemy> &enemies, std::list<Orb> &orbs, std::list<FireBall> &fireBalls, std::list<Exp> &exps, Boss &boss );
+    void Move( double &ax, double &ay );
 
     void SetDir();
     int GetDir();
@@ -67,6 +89,6 @@ public :
 
     void Bleeding( int dmg );
     int ExpAbsorb( Exp &exp );
-    void renderPlayer();
+    void renderPlayer( bool IsMoving );
     int checkCD( int t );
 };

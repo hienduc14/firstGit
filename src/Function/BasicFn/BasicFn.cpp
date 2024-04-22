@@ -23,6 +23,7 @@ namespace base
     SDL_Event g_event;
 
     SDL_Rect CenterRect;
+    bool CanChoose = true;
 //    int GameSpeed = 1;
     // Các hàm và mã khác...
 }

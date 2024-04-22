@@ -30,4 +30,9 @@ void Screen::MapMove(double u, double v){
     if( this->rect.y >= 0 ) this->rect.y-=MapHeight;
     if( this->rect.x <= -MapWidth*2 ) this->rect.x+=MapWidth;
     if( this->rect.y <= -MapHeight*2 ) this->rect.y+=MapHeight;
+
+    if( L_x >= 0 ) L_x-=MapWidth;
+    if( L_y >= 0 ) L_y-=MapHeight;
+    if( L_x <= -MapWidth*2 ) L_x+=MapWidth;
+    if( L_y <= -MapHeight*2 ) L_y+=MapHeight;
 }

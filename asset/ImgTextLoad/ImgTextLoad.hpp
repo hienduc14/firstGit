@@ -13,6 +13,12 @@ namespace pre
     extern SDL_Texture* OrbTexture;
     extern SDL_Texture* FireBallTexture;
     extern SDL_Texture* ZoneTexture;
+
+    extern SDL_Texture* KamehaTexture;
+    extern SDL_Texture* AimArrowTexture;
+    extern SDL_Texture* BossKamehaTexture;
+    extern SDL_Texture* BossAimArrowTexture;
+
     extern SDL_Texture* ExpTexture;
     extern SDL_Texture* PlayerTexture;
     extern SDL_Texture* HealthTexture;

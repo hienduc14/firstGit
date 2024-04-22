@@ -54,6 +54,7 @@ private :
 public :
     void play( int StartPower );
     void Prepare();
+    void MoveAll();
     void LevelUp();
     void SpawnEnemy();
     void Firing();

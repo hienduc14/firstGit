@@ -37,7 +37,8 @@ int Enemy::CheckOccupy( std::list<Enemy>& enemies )
     int dem = 0;
     for( auto enemy : enemies )
         if( RectOccupy.checkArea( enemy.RectOccupy ) ) dem++;
-    if( RectOccupy.checkRect(base::CenterRect) ) dem++;
+    if( base::CanChoose == true )
+        if( RectOccupy.checkRect(base::CenterRect) ) dem++;
     return dem;
 }
 

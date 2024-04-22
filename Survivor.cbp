@@ -58,6 +58,8 @@
 		<Unit filename="gameplay/Player/Player.hpp" />
 		<Unit filename="gameplay/Power/FireBall/FireBall.cpp" />
 		<Unit filename="gameplay/Power/FireBall/FireBall.hpp" />
+		<Unit filename="gameplay/Power/Kameha/Kameha.cpp" />
+		<Unit filename="gameplay/Power/Kameha/Kameha.hpp" />
 		<Unit filename="gameplay/Power/Orb/Orb.cpp" />
 		<Unit filename="gameplay/Power/Orb/Orb.hpp" />
 		<Unit filename="gameplay/Power/Zone/Zone.cpp" />

@@ -11,18 +11,42 @@ Player::~Player()
 
 void Player::SetUp()
 {
-    this->rectst = {0, 0, PlayerWidth, PlayerHeight};
-    this->rect.x = CENTER_X - 15;
-    this->rect.y = CENTER_Y - 9;
-    this->rect.w = 30;
-    this->rect.h = 18;
-    this->texture = pre::PlayerTexture;
+    // nhap texture
+    SetTexture(std::string("./asset/Player/Slime.png"));
+    // nhap thong so cac phase
+    NumPhase = 3; // 0 standing 1 moving 2 jumping
+    phaseFrame[0] = {8, 0.1};
+    phaseFrame[1] = {7, 0.1};
+    phaseFrame[2] = {11, 0.1};
+    phaseFrame[2].second = (double(FlyTime.second)/1000)/phaseFrame[2].first;
+
+    for( int i = 0; i < NumPhase; i++ ) NumF += phaseFrame[i].first;
+
+    // nhap thoi gian va phase bat dau
+    timeCurrent = 0;
+    phaseState =  0;
+
+    // nhap rect va xet clip cho tung phase
+//    RectOccupy = { 7, 144, 108, 223 };
+    SDL_QueryTexture(texture, NULL, NULL, &rectst.w, &rectst.h);
+
+    int X = 0, Y = 0, W = rectst.w/NumF, H = rectst.h;
+    for( int t = 0; t < NumPhase; t++)
+        for( int i = 0; i < phaseFrame[t].first; i++ )
+        {
+            phaseRect[t][i] = { X, Y, W, H };
+            X+=W;
+        }
+    rect.x = CENTER_X-W/2; rect.y = CENTER_Y-91*H/111;
+    rect.w = W; rect.h = H;
+    // dung de enemy bi can boi player, occupyrect
+    base::CenterRect = { CENTER_X - 51/2, CENTER_Y - 39/2, 51, 39 };
+
+    SetPhaseClip();
+
     this->dir = 1;
     SetHealthBar();
     SetExpBar();
-    // dung de enemy bi can boi player
-    int dis = 5;
-    base::CenterRect = {rect.x+dis, rect.y+dis, rect.w-dis*2, rect.h-dis*2};
 }
 
 void Player::ResetInput(){ a_x = 0; a_y = 0; }
@@ -30,13 +54,148 @@ void Player::ResetInput(){ a_x = 0; a_y = 0; }
 void Player::KeyInput()
 {
     const Uint8* state = SDL_GetKeyboardState(nullptr);
-    if( state[SDL_SCANCODE_W] || state[SDL_SCANCODE_UP] )       a_y -= v_Player*GameSpeed;
-    if( state[SDL_SCANCODE_S] || state[SDL_SCANCODE_DOWN] )     a_y += v_Player*GameSpeed;
-    if( state[SDL_SCANCODE_A] || state[SDL_SCANCODE_LEFT] )     a_x -= v_Player*GameSpeed;
-    if( state[SDL_SCANCODE_D] || state[SDL_SCANCODE_RIGHT] )    a_x += v_Player*GameSpeed;
-//    if( state[SDL_SCANCODE_H] && state[SDL_SCANCODE_I] && state[SDL_SCANCODE_E] && state[SDL_SCANCODE_N] )
-    if( a_x && a_y ) a_x/=1.414, a_y/=1.414;
+    if( phaseState != 2 ){
+        // neu ko jumping thi duoc kameha
+        switch (kameha.state)
+        {
+            case 0:
+            {
+                if( state[SDL_SCANCODE_W] || state[SDL_SCANCODE_UP] )       a_y -= v_Player;
+                if( state[SDL_SCANCODE_S] || state[SDL_SCANCODE_DOWN] )     a_y += v_Player;
+                if( state[SDL_SCANCODE_A] || state[SDL_SCANCODE_LEFT] )     a_x -= v_Player;
+                if( state[SDL_SCANCODE_D] || state[SDL_SCANCODE_RIGHT] )    a_x += v_Player;
+                if( a_x && a_y ) a_x/=1.414, a_y/=1.414;
+
+                if( state[SDL_SCANCODE_L] && !state[SDL_SCANCODE_O] ) kameha.state = 1, kameha.IsStateChange = true;
+    //            if( state[SDL_SCANCODE_L] && state[SDL_SCANCODE_O] ) kameha.state = 0, kameha.IsStateChange = false;
+                if( state[SDL_SCANCODE_J] ) {
+                    phaseState = 2;
+                    SetPhaseClip();
+                }
+                break;
+            }
+            case 1:
+            {
+                if( state[SDL_SCANCODE_W] || state[SDL_SCANCODE_UP] )       aimDir --;
+                if( state[SDL_SCANCODE_S] || state[SDL_SCANCODE_DOWN] )     aimDir ++;
+                aimDir = (aimDir%360 + 360)%360;
+                if( !state[SDL_SCANCODE_L] ) kameha.state = 2, kameha.IsStateChange = true;
+                if( state[SDL_SCANCODE_O] ) kameha.state = 0, kameha.IsStateChange = false;
+                break;
+            }
+            case 2:
+            {
+                kameha.StartRelease += TimeStep;
+                if( kameha.StartRelease >= kameha.EndRelease )
+                {
+                    kameha.StartRelease = 0;
+                    kameha.state = 0, kameha.IsStateChange = true;
+                }
+                break;
+            }
+        }
+    }
+    else{
+        if( state[SDL_SCANCODE_W] || state[SDL_SCANCODE_UP] )       a_y -= v_Player;
+        if( state[SDL_SCANCODE_S] || state[SDL_SCANCODE_DOWN] )     a_y += v_Player;
+        if( state[SDL_SCANCODE_A] || state[SDL_SCANCODE_LEFT] )     a_x -= v_Player;
+        if( state[SDL_SCANCODE_D] || state[SDL_SCANCODE_RIGHT] )    a_x += v_Player;
+        if( a_x && a_y ) a_x/=1.414, a_y/=1.414;
+    }
+//    SetPhaseClip();
 }
+
+void Player::SetState()
+{
+    bool IsChange = false;
+    bool Landing = false;
+    if(phaseState!=2)
+    {
+        if(a_x!=0 || a_y!=0) {
+            if(phaseState != 1){
+                phaseState = 1;
+                IsChange = true;
+            }
+        }
+        else {
+            if( phaseState ){
+                phaseState = 0;
+                IsChange = true;
+            }
+        }
+    }
+    switch (phaseState)
+    {
+        case 2:
+        {
+            FlyTime.first += TimeStep;
+            if( FlyTime.first >= FlyTime.second )
+            {
+                FlyTime.first = 0;
+                phaseState = 0;
+                IsChange = true;
+                Landing = true;
+                v_Player = v_Move;
+            }else{
+                v_Player = v_Jump;
+            }
+            break;
+        }
+        case 1:
+        {
+            v_Player = v_Move;
+            break;
+        }
+        case 0:
+        {
+//            v_Player = v_Stand;
+            break;
+        }
+    }
+    if(IsChange == true)    SetPhaseClip();
+    if( phaseState == 2 ) base::CanChoose = false;
+    else base::CanChoose = true;
+}
+void Player::SetPhaseClip()
+{
+//    std::cout << phaseState << '\n';
+    frameNum = phaseFrame[phaseState].first;
+    frameTime = phaseFrame[phaseState].second;
+    for( int i = 0; i < frameNum; i++ )
+    {
+        clip[i] = phaseRect[phaseState][i];
+    }
+    timeCurrent = 0;
+}
+
+void Player::Print( bool IsMoving )
+{
+    SetState();
+    if( a_x < 0 ) IsFlip = true;
+    if( a_x > 0 ) IsFlip = false;
+    if( IsMoving == false )
+    {
+        SDL_RendererFlip flip = SDL_FLIP_NONE;
+        if( IsFlip == true ) flip = SDL_FLIP_HORIZONTAL;
+        SDL_RenderCopyEx(base::renderer, texture, &rectst, &rect, 0, nullptr, flip);
+    }
+    else
+    {
+        //lay frame cua animation theo thoi gian
+        timeCurrent += TimeManager::Instance()->getElapsedTime();
+        while( timeCurrent >= frameTime*frameNum ) timeCurrent -= frameTime*frameNum;
+        int clipIndex = timeCurrent/frameTime;
+
+        SDL_RendererFlip flip = SDL_FLIP_NONE;
+        if( IsFlip == true ) flip = SDL_FLIP_HORIZONTAL;
+
+        SDL_RenderCopyEx(base::renderer, texture, &clip[clipIndex], &rect, 0, nullptr, flip);
+
+        // gan lai frame hien tai
+        rectst = clip[clipIndex];
+    }
+}
+
 void Player::SetDir(){
     if( a_x > 0 && a_y == 0 ) dir = 0;
     if( a_x > 0 && a_y > 0 ) dir = 1;
@@ -52,23 +211,17 @@ int Player::GetDir(){
     return this->dir;
 }
 
-void Player::Move( Screen &Map, std::list<Enemy> &enemies, std::list<Orb> &orbs, std::list<FireBall> &fireBalls, std::list<Exp> &exps, Boss &boss )
+void Player::Move( double &ax, double &ay )
 {
     SetDir();
-    Map.MapMove( -a_x, -a_y );
-    for( auto &enemy : enemies ) {enemy.ChangeOccupy( -a_x, -a_y, enemies ); enemy.SetOccupy();}
-    for( auto &exp : exps ) exp.Change( -a_x, -a_y );
-    for( auto &orb : orbs ) orb.Change( -a_x, -a_y );
-    for( auto &fireBall : fireBalls )
-        if(fireBall.delayTime <= 0) fireBall.Change( -a_x, -a_y );
-
-    boss.Change( -a_x, -a_y );
+    ax = a_x; ay = a_y;
 }
 
 void Player::SetPower( int x )
 {
     MyPower[x] = 1;
 }
+
 int Player::GetPower( int x ){return MyPower[x];}
 void Player::SetCD( int t, int x ){ CD[t] = x; }
 int Player::GetCD( int t ){ return CD[t]; }
@@ -77,10 +230,10 @@ void Player::SetHealthBar()
 {
     Health.texture = pre::HealthTexture;
     Health.rectst = {0, 0, HealthBarWidth, HealthBarHeight};
-    Health.rect = {CENTER_X-40,CENTER_Y+this->rect.h/2+10, HealthBarWidth, HealthBarHeight};
+    Health.rect = {CENTER_X-HealthBarWidth/2,this->rect.y+this->rect.h+10, HealthBarWidth, HealthBarHeight};
     HealthBar.texture = pre::HealthBarTexture;
-    HealthBar.rectst = {0, 0, HealthBarWidth, HealthBarHeight};
-    HealthBar.rect = {CENTER_X-40,CENTER_Y+this->rect.h/2+10, HealthBarWidth, HealthBarHeight};
+    HealthBar.rectst = Health.rectst;
+    HealthBar.rect = Health.rect;
 }
 
 void Player::SetExpBar()
@@ -126,12 +279,30 @@ int Player::ExpAbsorb( Exp &exp )
     return 0;
 }
 
-void Player::renderPlayer(){
-    this->drawObj();
+void Player::renderPlayer( bool IsMoving ){
+//    this->drawObj();
+    this->Print( IsMoving );
     Health.drawObj();
     HealthBar.drawObj();
     ExpPoint.drawObj();
     ExpBar.drawObj();
+
+
+    if( kameha.state == 2 )
+    {
+        if( kameha.IsStateChange == true ){
+            kameha.SetUp( 0 );
+            kameha.Aim(CENTER_X,CENTER_Y, aimDir);
+            kameha.IsStateChange = false;
+        }
+        kameha.Firing();
+    }
+    else if( kameha.state == 1 )
+    {
+        kameha.SetUp( 0 );
+        kameha.Aim(CENTER_X,CENTER_Y, aimDir);
+        kameha.Firing();
+    }
 }
 
 void Player::SetStartCD( int t ){ StartCD[t] = SDL_GetTicks(); }

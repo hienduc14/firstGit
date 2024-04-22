@@ -13,6 +13,13 @@ namespace pre
     SDL_Texture* OrbTexture= nullptr;
     SDL_Texture* FireBallTexture= nullptr;
     SDL_Texture* ZoneTexture= nullptr;
+
+    SDL_Texture* KamehaTexture= nullptr;
+    SDL_Texture* AimArrowTexture= nullptr;
+    SDL_Texture* BossKamehaTexture= nullptr;
+    SDL_Texture* BossAimArrowTexture= nullptr;
+
+
     SDL_Texture* ExpTexture= nullptr;
     SDL_Texture* PlayerTexture= nullptr;
     SDL_Texture* HealthTexture= nullptr;
@@ -78,6 +85,11 @@ void LoadAll::loading( int MapTerrain )
     pre::OrbTexture         = base::Load_Image(std::string("./asset/Power/orb.png"));
     pre::FireBallTexture    = base::Load_Image(std::string("./asset/Power/FireBalls.png"));
     pre::ZoneTexture        = base::Load_Image(std::string("./asset/Power/zone.png"));
+
+    pre::KamehaTexture      = base::Load_Image(std::string("./asset/Power/Kameha.png"));
+    pre::AimArrowTexture      = base::Load_Image(std::string("./asset/Power/AimArrow.png"));
+    pre::BossKamehaTexture      = base::Load_Image(std::string("./asset/Enemy/BossKameha.png"));
+    pre::BossAimArrowTexture      = base::Load_Image(std::string("./asset/Enemy/BossAimArrow.png"));
 
     pre::PlayerTexture      = base::Load_Image(std::string("./asset/Player/PlayerSlime.png"));
     pre::HealthTexture      = base::Load_Image(std::string("./asset/Player/hp.png"));

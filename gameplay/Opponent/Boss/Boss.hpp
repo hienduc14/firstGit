@@ -1,5 +1,6 @@
 #pragma once
 #include "../Enemy/Enemy.hpp"
+#include "../../Power/Kameha/Kameha.hpp"
 const double BossCD = 500;
 
 class Boss : public Enemy
@@ -26,11 +27,18 @@ public :
     double CoolDown = BossCD;
 
     int SummonWave = 0;
+    bool Invicible = false;
+    Kameha kameha;
+    double StartAim;
+    double aimTime; // random
+    double standTime;
+    double fireTime = 2.5;
 public:
     void SetUp( int x, int y, int type );
     void SetState();
     void SetPhaseClip();
     void Doing();
+    void Print( bool IsMoving );
     SDL_Rect GetBossBody();
 };
 

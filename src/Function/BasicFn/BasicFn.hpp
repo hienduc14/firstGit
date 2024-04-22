@@ -23,6 +23,7 @@ extern bool Quit;
 extern bool Dot[2001][2001];
 void SetDot(int x, int y, int tt);
 bool GetDot(int x, int y);
+
 namespace base
 {
     extern SDL_Window *window;
@@ -30,6 +31,7 @@ namespace base
     extern SDL_Event g_event;
     //player rect de ktra occupy voi enemy
     extern SDL_Rect CenterRect;
+    extern bool CanChoose;
 
     void initSDL();
     void quitSDL();
