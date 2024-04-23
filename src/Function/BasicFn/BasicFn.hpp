@@ -22,6 +22,8 @@ const int dy[8] = { 0, 1, 1, 1, 0, -1, -1, -1 };
 extern int GameSpeed;
 extern bool Quit;
 extern bool DmgAppear;
+extern double SoundEFPer;
+extern double MusicPer;
 extern bool Dot[2001][2001];
 void SetDot(int x, int y, int tt);
 bool GetDot(int x, int y);

@@ -30,7 +30,10 @@ private :
     Screen ExitMenu;
     Button Exit;
     Button TickBox;
-
+    BigObj SoundEFVolume;
+    Button SoundEFPoint;
+    BigObj MusicVolume;
+    Button MusicPoint;
     Mix_Chunk* ThemeSound = nullptr;
 private :
     MapChoose mapChoose;

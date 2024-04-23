@@ -46,8 +46,28 @@ Menu::Menu()
     TickBox.SetTexture(std::string("./menu/TickBox.png"));
     SDL_QueryTexture(TickBox.texture, nullptr, nullptr, &TickBox.rectst.w, &TickBox.rectst.h);
     TickBox.rect = {596, 278, 38, 37};
+//    Sound Control
+    SoundEFVolume.SetTexture(std::string("./menu/Volume.png"));
+    SDL_QueryTexture(SoundEFVolume.texture, nullptr, nullptr, &SoundEFVolume.rectst.w, &SoundEFVolume.rectst.h);
+    SoundEFVolume.rect = {389, 160, 225, 18};
 
+    SoundEFPoint.SetTexture(std::string("./menu/VolumePoint.png"));
+    SDL_QueryTexture(SoundEFPoint.texture, nullptr, nullptr, &SoundEFPoint.rectst.w, &SoundEFPoint.rectst.h);
+    SoundEFPoint.limit = {387, 0, 217, 0};
+    SoundEFPoint.rect = {SoundEFPoint.limit.x+SoundEFPoint.limit.w, 230-82, SoundEFPoint.rectst.w, SoundEFPoint.rectst.h };
+//    SoundEFPoint.luu_x = SoundEFPoint.rect.x;
+//    SoundEFPoint.luu_y = SoundEFPoint.rect.y;
 
+    MusicVolume.SetTexture(std::string("./menu/Volume.png"));
+    SDL_QueryTexture(MusicVolume.texture, nullptr, nullptr, &MusicVolume.rectst.w, &MusicVolume.rectst.h);
+    MusicVolume.rect = {389, 242, 225, 18};
+
+    MusicPoint.SetTexture(std::string("./menu/VolumePoint.png"));
+    SDL_QueryTexture(MusicPoint.texture, nullptr, nullptr, &MusicPoint.rectst.w, &MusicPoint.rectst.h);
+    MusicPoint.limit = {387, 0, 217, 0};
+    MusicPoint.rect = {MusicPoint.limit.x+MusicPoint.limit.w, 230, MusicPoint.rectst.w, MusicPoint.rectst.h };
+//    MusicPoint.luu_x = MusicPoint.rect.x;
+//    MusicPoint.luu_y = MusicPoint.rect.y;
 //  ThemeSound
     ThemeSound = Mix_LoadWAV("./asset/MenuTheme.WAV");
 }
@@ -80,8 +100,6 @@ int Menu::play()
         }
         Draw();
         SDL_RenderPresent(base::renderer);
-
-        std::cout << DmgAppear << '\n';
     }
     Mix_HaltChannel(-1);
     return 0;
@@ -113,6 +131,12 @@ void Menu::Draw()
             Exit.drawObj();
             Back.drawObj();
             TickBox.drawTick();
+
+            SoundEFVolume.drawObj();
+            MusicVolume.drawObj();
+
+            SoundEFPoint.drawHold();
+            MusicPoint.drawHold();
             break;
         }
     }
@@ -145,6 +169,19 @@ void Menu::Check()
             if( Exit.status == 1 ) Quit = 1;
             if( TickBox.status == 1 ) DmgAppear = false;
             else DmgAppear = true;
+
+            SoundEFPoint.CheckHold(base::g_event);
+            MusicPoint.CheckHold(base::g_event);
+            double per1 = double(SoundEFPoint.rect.x - SoundEFPoint.limit.x)/SoundEFPoint.limit.w;
+            double per2 = double(MusicPoint.rect.x - MusicPoint.limit.x)/MusicPoint.limit.w;
+            SoundEFVolume.rect.w = per1*SoundEFVolume.rectst.w;
+            MusicVolume.rect.w = per2*MusicVolume.rectst.w;
+
+            SoundEFPer = per1;
+            MusicPer = per2;
+            Mix_Volume(1, MIX_MAX_VOLUME*SoundEFPer);
+            Mix_Volume(0, MIX_MAX_VOLUME*MusicPer);
+
             break;
         }
     }

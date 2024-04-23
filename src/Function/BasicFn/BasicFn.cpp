@@ -2,6 +2,8 @@
 int GameSpeed = 1;
 bool Quit = false;
 bool DmgAppear = true;
+double SoundEFPer = 1;
+double MusicPer = 1;
 bool Dot[2001][2001];
 
 void SetDot(int x, int y, int tt)

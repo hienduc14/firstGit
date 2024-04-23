@@ -51,3 +51,34 @@ void Button::drawTick()
     if( status == 0 ) drawObj();
 }
 
+void Button::CheckHold(SDL_Event &e)
+{
+    int x, y;
+    SDL_GetMouseState( &x, &y );
+
+    if( status == 1 )
+    {
+        int u = x-luu_x;
+        if( rect.x + u >= limit.x && rect.x + u <= limit.x + limit.w )
+            rect.x += u;
+    }
+    luu_x = x; luu_y = y;
+
+    if( rect.x <= x && rect.x+rect.w >= x && rect.y <= y && rect.y+rect.h >= y ){
+        switch (e.type){
+            case SDL_MOUSEBUTTONDOWN:
+            {
+                status = 1;
+                luu_x = x; luu_y = y;
+//                std::cout << "YES-----------------\n";
+                break;
+            }
+        }
+    }
+    if(e.type == SDL_MOUSEBUTTONUP ) status = 0;
+}
+
+void Button::drawHold()
+{
+    drawObj();
+}
