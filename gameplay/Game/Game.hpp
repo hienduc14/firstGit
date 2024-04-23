@@ -51,6 +51,9 @@ private :
 
     Wave wave;
     std::pair<int, int> CurrentWave = {0, -1};
+
+    Mix_Chunk* ThemeSound = nullptr;
+    Mix_Chunk* HitSound = nullptr;
 public :
     void play( int StartPower );
     void Prepare();

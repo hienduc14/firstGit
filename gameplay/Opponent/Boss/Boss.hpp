@@ -33,6 +33,8 @@ public :
     double aimTime; // random
     double standTime;
     double fireTime = 2.5;
+
+    int IsAbove = 0;
 public:
     void SetUp( int x, int y, int type );
     void SetState();

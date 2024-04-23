@@ -55,6 +55,7 @@ public :
     void SetState();
     void SetPhaseClip();
     void Print( bool IsMoving );
+    std::pair<double, double> IsKame = {0, 1000};
 public :
     double HPMax = 30;
     double HP = 30;

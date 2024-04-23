@@ -16,12 +16,13 @@ Game::~Game()
 
 void Game::play( int MapChoice ){
     MapTerrain = MapChoice;
-
     Prepare();
-//    SDL_Delay(5000);
+    Mix_PlayChannel(0, ThemeSound, -1);
+
 //    player.MyPower[0] = 4;
 //    player.MyPower[1] = 4;
 //    player.MyPower[2] = 1;
+
     bool ok = 1;
     Exp exp;
     exp.SetUp( CENTER_X,CENTER_Y , -1);
@@ -42,13 +43,13 @@ void Game::play( int MapChoice ){
             {
                 case 0 :
                     pause.CheckMouse(base::g_event);
-                    if(pause.status == 1) GameState = 1;
+                    if(pause.status == 1) {GameState = 1; Mix_Pause(-1); }
                     break;
                 case 1 :
                     home.CheckMouse(base::g_event);
                     if(home.status == 1){GameQuit = true; break;}
                     resume.CheckMouse(base::g_event);
-                    if(resume.status == 1){GameState = 0;}
+                    if(resume.status == 1){GameState = 0; Mix_Resume(-1); }
                     break;
                 case 2 :
                     for(int i = 0; i <= 2; i++) card[i].CheckMouse(base::g_event);
@@ -75,6 +76,7 @@ void Game::play( int MapChoice ){
             PauseGame();
             int frameTime = SDL_GetTicks() - currentTime;
             if( frameTime < TimeStep ) SDL_Delay( TimeStep-frameTime );
+
             continue;
         }
         if(GameState == 0)
@@ -138,7 +140,7 @@ void Game::play( int MapChoice ){
     //        break;
         }
     }
-
+    Mix_HaltChannel(-1);
     if( player.HP <= 0 ){
         Screen GameOver;
         GameOver.SetTexture(std::string("GameOver.png"));
@@ -181,6 +183,22 @@ void Game::Prepare()
     player.SetUp();
     wave.SetUp("./asset/Enemy/Wave.txt");
     TimeManager::Instance()->reset();
+
+    switch (MapTerrain)
+    {
+    case 0 :
+        ThemeSound = Mix_LoadWAV("./asset/MenuTheme.WAV");
+        break;
+
+    case 1 :
+        ThemeSound = Mix_LoadWAV("./asset/GraveYardTheme.ogg");
+        break;
+
+    case 2 :
+        ThemeSound = Mix_LoadWAV("./asset/VolcanoTheme.ogg");
+        break;
+    }
+    HitSound = Mix_LoadWAV("./asset/Sound/Hit.WAV");
 }
 
 void Game::MoveAll()
@@ -423,6 +441,24 @@ void Game::PowerColision()
                 dmgs.push_back( dmg );
             }
         }
+        if( boss.BossType == 2 && boss.kameha.state == 2 && player.phaseState != 2 )
+        {
+            int KameDmg = boss.kameha.CheckDmg(base::CenterRect);
+            if( KameDmg && player.IsKame.first == 0 )
+            {
+                player.Bleeding(KameDmg);
+                if( player.IsKame.first >= player.IsKame.second ) player.IsKame.first = 0;
+                else player.IsKame.first += TimeStep;
+
+//                Dmg dmg( KameDmg, bossRect.x, bossRect.y );
+//                dmgs.push_back( dmg );
+                boss.IsAbove = 1000;
+            }
+        }
+        if(player.phaseState == 2 ) boss.IsAbove = 0;
+        if( boss.IsAbove > 0 ) boss.IsAbove -= TimeStep;
+        else boss.IsAbove = 0;
+
     }
 }
 
@@ -462,13 +498,22 @@ void Game::RenderGamePlay( int IsMoving )
     for( auto &fireBall : fireBalls ) if( fireBall.delayTime <= 0 ) fireBall.RenderMoving( IsMoving, 0, 1 );
     zone.drawObj();
     for( auto &exp : exps ) exp.drawObj();
+
+    if( boss.IsAbove == 0 ) boss.Print(IsMoving);
+
     player.renderPlayer( IsMoving );
 //    for( auto &enemy : enemies) enemy.drawObj();
     for( auto &enemy : enemies) enemy.RenderMoving( IsMoving, 1, 0 );
-    if( boss.exist == 1 ) boss.Print(IsMoving);
+    if( boss.IsAbove > 0 && boss.exist == 1 ) boss.Print(IsMoving);
 
 
-    for( auto &dmg : dmgs ) dmg.PopUp(IsMoving);
+    for( auto &dmg : dmgs ) {
+        if( dmg.HaveSound == false ){
+            Mix_PlayChannel(1, HitSound, 0);
+            dmg.HaveSound = true;
+        }
+        dmg.PopUp(IsMoving);
+    }
     timecount.Display();
     killcount.Display();
 }

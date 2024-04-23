@@ -7,16 +7,12 @@ int main( int argc, char* args[] )
 {
     // khoi tao window, renderer...
     base::initSDL();
-    Menu menu;
     srand(SDL_GetTicks());
     while( !Quit ){
+        Menu menu;
         int state = menu.play();
-        if( state == 1 ){
-            MapChoose maps;
-            int choice = maps.play();
-            Game game;
-            game.play( choice );
-        }
+        Game game;
+        game.play( state );
     }
     // thoat chuong trinh
     base::quitSDL();

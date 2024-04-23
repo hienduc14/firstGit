@@ -11,6 +11,7 @@ public :
     double FrameTime = 0.03;
     int FadeIn = 6; int Stay = 2; int FadeOut = 10;
     int FrameNum = FadeIn+Stay+FadeOut;
+    bool HaveSound = false;
 public :
     Dmg();
     Dmg(double num, int x, int y);

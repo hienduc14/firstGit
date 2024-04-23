@@ -47,6 +47,9 @@ void base::initSDL()
     //tao renderer
     base::renderer = SDL_CreateRenderer(base::window, -1, SDL_RENDERER_ACCELERATED);
     if(base::renderer == nullptr) SDL_Quit();
+
+    //tao music
+    Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048);
 }
 
 
