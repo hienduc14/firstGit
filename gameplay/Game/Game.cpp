@@ -233,7 +233,7 @@ void Game::LevelUp()
 void Game::SpawnEnemy()
 {
 //    if(wave.WaveNum < wave.MaxWave ){
-    if(wave.WaveNum < 0){
+    if(wave.WaveNum < 2){
         if( wave.WaveNum > CurrentWave.second )
             CurrentWave.first += wave.GetAmount(), CurrentWave.second = wave.WaveNum;
 //        CurrentWave.first = 10;
@@ -499,7 +499,7 @@ void Game::RenderGamePlay( int IsMoving )
     zone.drawObj();
     for( auto &exp : exps ) exp.drawObj();
 
-    if( boss.IsAbove == 0 ) boss.Print(IsMoving);
+    if( boss.IsAbove == 0 && boss.exist == 1 ) boss.Print(IsMoving);
 
     player.renderPlayer( IsMoving );
 //    for( auto &enemy : enemies) enemy.drawObj();
@@ -512,7 +512,7 @@ void Game::RenderGamePlay( int IsMoving )
             Mix_PlayChannel(1, HitSound, 0);
             dmg.HaveSound = true;
         }
-        dmg.PopUp(IsMoving);
+        if( DmgAppear == true ) dmg.PopUp(IsMoving);
     }
     timecount.Display();
     killcount.Display();

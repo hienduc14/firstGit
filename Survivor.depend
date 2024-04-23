@@ -274,7 +274,7 @@
 	"../Power/Kameha/Kameha.hpp"
 	<vector>
 
-1713840717 d:\codeblock\survivor\src\function\basicfn\basicfn.hpp
+1713883827 d:\codeblock\survivor\src\function\basicfn\basicfn.hpp
 	<SDL.h>
 	<SDL_image.h>
 	<SDL_ttf.h>
@@ -338,7 +338,7 @@
 1712672381 d:\codeblock\survivor\gameplay\opponent\exp\exp.hpp
 	"../Enemy/Enemy.hpp"
 
-1712679074 d:\codeblock\survivor\src\object\button\button.hpp
+1713883631 d:\codeblock\survivor\src\object\button\button.hpp
 	"../BigObj/BigObj.hpp"
 	"../../../asset/ImgTextLoad/ImgTextLoad.hpp"
 
@@ -364,10 +364,10 @@
 1713779146 source:d:\codeblock\survivor\gameplay\player\player.cpp
 	"Player.hpp"
 
-1713851882 source:d:\codeblock\survivor\menu\menu.cpp
+1713883833 source:d:\codeblock\survivor\menu\menu.cpp
 	"Menu.hpp"
 
-1713860949 d:\codeblock\survivor\menu\menu.hpp
+1713883395 d:\codeblock\survivor\menu\menu.hpp
 	"../src/Function/BasicFn/BasicFn.hpp"
 	"../src/Object/Screen/Screen.hpp"
 	"../src/Object/Button/Button.hpp"
@@ -376,7 +376,7 @@
 1713610623 source:d:\codeblock\survivor\asset\imgtextload\imgtextload.cpp
 	"./ImgTextLoad.hpp"
 
-1713854325 source:d:\codeblock\survivor\gameplay\game\game.cpp
+1713883966 source:d:\codeblock\survivor\gameplay\game\game.cpp
 	"Game.hpp"
 
 1713860949 d:\codeblock\survivor\gameplay\game\game.hpp
@@ -407,7 +407,7 @@
 	"../../src/Object/TextObj/TextObj.hpp"
 	"../../asset/ImgTextLoad/ImgTextLoad.hpp"
 
-1713850490 source:d:\codeblock\survivor\src\function\basicfn\basicfn.cpp
+1713883827 source:d:\codeblock\survivor\src\function\basicfn\basicfn.cpp
 	"BasicFn.hpp"
 
 1713373821 source:d:\codeblock\survivor\src\function\func\func.cpp
@@ -416,7 +416,7 @@
 1712676856 source:d:\codeblock\survivor\src\object\bigobj\bigobj.cpp
 	"BigObj.hpp"
 
-1711012727 source:d:\codeblock\survivor\src\object\button\button.cpp
+1713883851 source:d:\codeblock\survivor\src\object\button\button.cpp
 	"Button.hpp"
 
 1711352798 source:d:\codeblock\survivor\src\object\movingobj\movingobj.cpp
@@ -431,7 +431,7 @@
 1712077200 source:d:\codeblock\survivor\src\timemanage\time.cpp
 	"Time.hpp"
 
-1713845477 source:d:\codeblock\survivor\src\main.cpp
+1713883056 source:d:\codeblock\survivor\src\main.cpp
 	<SDL.h>
 	"Function/BasicFn/BasicFn.hpp"
 	"../gameplay/Game/Game.hpp"

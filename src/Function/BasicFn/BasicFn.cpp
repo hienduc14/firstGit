@@ -1,6 +1,7 @@
 #include "BasicFn.hpp"
 int GameSpeed = 1;
 bool Quit = false;
+bool DmgAppear = true;
 bool Dot[2001][2001];
 
 void SetDot(int x, int y, int tt)

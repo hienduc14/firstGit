@@ -8,6 +8,9 @@ public :
     ~Button();
 public :
     int status = 0;
+    int type = 0;
 public :
-    void CheckMouse(SDL_Event e);
+    void CheckMouse(SDL_Event &e);
+    void CheckTick(SDL_Event &e);
+    void drawTick();
 };

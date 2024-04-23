@@ -11,11 +11,26 @@ public :
     ~Menu();
 private :
     int MenuState = 0;
+//    bool ExitGame = false;
     void Draw();
     void Check();
-
+    //MenuState 0
     Screen MainMenu;
     Button Play;
+    Button Shop;
+    Button Collection;
+    Button Tutorial;
+    Button Options;
+
+    //MenuState != 0
+    Screen Blur;
+    Button Back;
+
+    //MenuState 1
+    Screen ExitMenu;
+    Button Exit;
+    Button TickBox;
+
     Mix_Chunk* ThemeSound = nullptr;
 private :
     MapChoose mapChoose;

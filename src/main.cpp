@@ -11,6 +11,7 @@ int main( int argc, char* args[] )
     while( !Quit ){
         Menu menu;
         int state = menu.play();
+        if( Quit ) break;
         Game game;
         game.play( state );
     }
