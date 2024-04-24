@@ -42,16 +42,35 @@ void Game::play( int MapChoice ){
             switch (GameState)
             {
                 case 0 :
-                    pause.CheckMouse(base::g_event);
-                    if(pause.status == 1) {GameState = 1; Mix_Pause(-1); }
+                {
+                    Pause.CheckMouse(base::g_event);
+                    if(Pause.status == 1) {GameState = 1; Mix_Pause(-1); }
                     break;
+                }
                 case 1 :
-                    home.CheckMouse(base::g_event);
-                    if(home.status == 1){GameQuit = true; break;}
-                    resume.CheckMouse(base::g_event);
-                    if(resume.status == 1){GameState = 0; Mix_Resume(-1); }
+                {
+                    Home.CheckMouse(base::g_event);
+                    if(Home.status == 1){GameQuit = true; break;}
+                    Resume.CheckMouse(base::g_event);
+                    if(Resume.status == 1){GameState = 0; Mix_Resume(-1); }
+                    TickBox.CheckTick(base::g_event);
+                    if( TickBox.status == 1 ) DmgAppear = false;
+
+                    SoundEFPoint.CheckHold(base::g_event);
+                    MusicPoint.CheckHold(base::g_event);
+                    double per1 = double(SoundEFPoint.rect.x - SoundEFPoint.limit.x)/SoundEFPoint.limit.w;
+                    double per2 = double(MusicPoint.rect.x - MusicPoint.limit.x)/MusicPoint.limit.w;
+                    SoundEFVolume.rect.w = per1*SoundEFVolume.rectst.w;
+                    MusicVolume.rect.w = per2*MusicVolume.rectst.w;
+
+                    SoundEFPer = per1;
+                    MusicPer = per2;
+                    Mix_Volume(1, MIX_MAX_VOLUME*SoundEFPer);
+                    Mix_Volume(0, MIX_MAX_VOLUME*MusicPer);
                     break;
+                }
                 case 2 :
+                {
                     for(int i = 0; i <= 2; i++) card[i].CheckMouse(base::g_event);
                     for(int i = 0; i <= 2; i++)
                         if( card[i].status == 1 )
@@ -62,6 +81,7 @@ void Game::play( int MapChoice ){
                             for(int i = 0; i <= 2; i++) card[i].content = -1;
                         }
                     break;
+                }
             }
         }
         if(GameState == 2)
@@ -125,7 +145,7 @@ void Game::play( int MapChoice ){
 
             // render
             RenderGamePlay( 1 );
-            pause.drawObj();
+            Pause.drawObj();
             SDL_RenderPresent(base::renderer);
 
             SDL_RenderClear(base::renderer);
@@ -157,32 +177,52 @@ void Game::Prepare()
 {
     LoadAll preload;
     preload.loading( MapTerrain );
-
     Map.SetMap();
-
-//    Button pause;
-    pause.texture = base::Load_Image("./asset/Screen/Pause.png");
-    pause.rectst = {0, 0, 131, 116};
-    pause.rect = {SCREEN_WIDTH-80,0, 80, 80};
-
-//    Button resume;
-    resume.texture = base::Load_Image("./asset/Screen/Resume.png");
-    resume.rectst = {0, 0, 401, 102};
-    resume.rect = {CENTER_X+300-200-20, CENTER_Y+250-50-20, 200, 50};
-
-//    Button home;
-    home.texture = base::Load_Image("./asset/Screen/Home.png");
-    home.rectst = {0, 0, 131, 116};
-    home.rect = {CENTER_X+300-200-60-20,CENTER_Y+250-50-20, 50, 50};
-
-//    Screen PauseMenu;
-    PauseMenu.texture = base::Load_Image("./asset/Screen/PauseMenu.png");
-    PauseMenu.rectst = {0, 0, 624, 480};
-    PauseMenu.rect = {CENTER_X-300, CENTER_Y-250, 600, 500};
-
     player.SetUp();
     wave.SetUp("./asset/Enemy/Wave.txt");
     TimeManager::Instance()->reset();
+
+//    screen PauseMenu
+    PauseMenu.SetTexture(std::string("./menu/PauseMenu.png"));
+
+//    Button pause;
+    Pause.texture = base::Load_Image("./menu/Pause.png");
+    SDL_QueryTexture(Pause.texture, nullptr, nullptr, &Pause.rectst.w, &Pause.rectst.h);
+    Pause.rect = {SCREEN_WIDTH-20-Pause.rectst.w, 20, Pause.rectst.w, Pause.rectst.h};
+
+//    Button resume;
+    Resume.texture = base::Load_Image("./menu/Resume.png");
+    SDL_QueryTexture(Resume.texture, nullptr, nullptr, &Resume.rectst.w, &Resume.rectst.h);
+    Resume.rect = {370, 421, 196, 66};
+
+//    Button Home;
+    Home.texture = base::Load_Image("./menu/Home.png");
+    SDL_QueryTexture(Home.texture, nullptr, nullptr, &Home.rectst.w, &Home.rectst.h);
+    Home.rect = {577, 422, 63, 62};
+
+//    Button TickBox
+    TickBox.SetTexture(std::string("./menu/TickBox.png"));
+    SDL_QueryTexture(TickBox.texture, nullptr, nullptr, &TickBox.rectst.w, &TickBox.rectst.h);
+    TickBox.rect = {596, 278, 38, 37};
+    TickBox.status = 1 - DmgAppear;
+//    Sound Control
+    SoundEFVolume.SetTexture(std::string("./menu/Volume.png"));
+    SDL_QueryTexture(SoundEFVolume.texture, nullptr, nullptr, &SoundEFVolume.rectst.w, &SoundEFVolume.rectst.h);
+    SoundEFVolume.rect = {389, 160, 225, 18};
+
+    SoundEFPoint.SetTexture(std::string("./menu/VolumePoint.png"));
+    SDL_QueryTexture(SoundEFPoint.texture, nullptr, nullptr, &SoundEFPoint.rectst.w, &SoundEFPoint.rectst.h);
+    SoundEFPoint.limit = {387, 0, 217, 0};
+    SoundEFPoint.rect = {SoundEFPoint.limit.x+SoundEFPoint.limit.w, 230-82, SoundEFPoint.rectst.w, SoundEFPoint.rectst.h };
+
+    MusicVolume.SetTexture(std::string("./menu/Volume.png"));
+    SDL_QueryTexture(MusicVolume.texture, nullptr, nullptr, &MusicVolume.rectst.w, &MusicVolume.rectst.h);
+    MusicVolume.rect = {389, 242, 225, 18};
+
+    MusicPoint.SetTexture(std::string("./menu/VolumePoint.png"));
+    SDL_QueryTexture(MusicPoint.texture, nullptr, nullptr, &MusicPoint.rectst.w, &MusicPoint.rectst.h);
+    MusicPoint.limit = {387, 0, 217, 0};
+    MusicPoint.rect = {MusicPoint.limit.x+MusicPoint.limit.w, 230, MusicPoint.rectst.w, MusicPoint.rectst.h };
 
     switch (MapTerrain)
     {
@@ -486,8 +526,15 @@ void Game::PauseGame()
 {
     RenderGamePlay( 0 );
     PauseMenu.drawObj();
-    resume.drawObj();
-    home.drawObj();
+
+    TickBox.drawTick();
+    Resume.drawObj();
+    Home.drawObj();
+    SoundEFVolume.drawObj();
+    MusicVolume.drawObj();
+
+    SoundEFPoint.drawHold();
+    MusicPoint.drawHold();
     SDL_RenderPresent(base::renderer);
 }
 

@@ -39,10 +39,6 @@ private :
     std::list<Dmg> dmgs;
     Zone zone;
     Screen Map;
-    Button pause;
-    Button resume;
-    Button home;
-    Screen PauseMenu;
     Card card[3];
     std::pair<int, int> timeSpawn = {-2000, 1000};
 
@@ -54,6 +50,21 @@ private :
 
     Mix_Chunk* ThemeSound = nullptr;
     Mix_Chunk* HitSound = nullptr;
+
+    //MenuState 1
+//    Button pause;
+//    Button resume;
+//    Button home;
+    Screen PauseMenu;
+    Button Pause;
+    Button Home;
+    Button Resume;
+    Button TickBox;
+    BigObj SoundEFVolume;
+    Button SoundEFPoint;
+    BigObj MusicVolume;
+    Button MusicPoint;
+//    Mix_Chunk* ThemeSound = nullptr;
 public :
     void play( int StartPower );
     void Prepare();
