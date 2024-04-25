@@ -12,7 +12,8 @@ Player::~Player()
 void Player::SetUp()
 {
     // nhap texture
-    SetTexture(std::string("./asset/Player/Slime.png"));
+    std::string SlimePath = "./asset/Player/Slime0.png";    SlimePath[20] = char(SkinOption+'0');
+    SetTexture(SlimePath);
     // nhap thong so cac phase
     NumPhase = 3; // 0 standing 1 moving 2 jumping
     phaseFrame[0] = {8, 0.1};
@@ -40,8 +41,12 @@ void Player::SetUp()
     rect.x = CENTER_X-W/2; rect.y = CENTER_Y-91*H/111;
     rect.w = W; rect.h = H;
     // dung de enemy bi can boi player, occupyrect
-    base::CenterRect = { CENTER_X - 51/2, CENTER_Y - 39/2, 51, 39 };
-
+    Body = { CENTER_X - 48/2, CENTER_Y - 36/2, 48, 36 };
+    base::CenterRect = Body;
+    base::CenterRect.x += 5;
+    base::CenterRect.y += 5;
+    base::CenterRect.w -= 5*2;
+    base::CenterRect.h -= 5*2;
     SetPhaseClip();
 
     this->dir = 1;
@@ -257,20 +262,42 @@ void Player::Bleeding( int dmg )
 int Player::ExpAbsorb( Exp &exp )
 {
     if( func::dist( exp.c_x, exp.c_y, CENTER_X, CENTER_Y) <= 10 ){
-        EXP += ExpGain*exp.stat;
-        exp.exist = 0;
-
-        int addLevel = 0;
-        while( EXP >= ExpRequire[Level] )
+        switch (exp.type)
         {
-            EXP -= ExpRequire[Level];
-            addLevel++;
-            Level++;
-        }
+            case 1 :
+            {
+                EXP += ExpGain*exp.stat;
+                exp.exist = 0;
 
-        double per = double(EXP)/ExpRequire[Level];
-        ExpPoint.rect.w = double(ExpBar.rect.w)*per;
-        return addLevel;
+                int addLevel = 0;
+                while( EXP >= ExpRequire[Level] )
+                {
+                    EXP -= ExpRequire[Level];
+                    addLevel++;
+                    Level++;
+                }
+
+                double per = double(EXP)/ExpRequire[Level];
+                ExpPoint.rect.w = double(ExpBar.rect.w)*per;
+                return addLevel;
+            }
+            case 2 :
+            {
+                Coin++;
+                exp.exist = 0;
+                return 0;
+            }
+            case 3 :
+            {
+                HP += 10;
+                if( HP > HPMax) HP = HPMax;
+
+                double per = double(HP)/HPMax;
+                Health.rect.w = double(HealthBar.rect.w)*per;
+                exp.exist = 0;
+                return 0;
+            }
+        }
     }
     if( func::dist( exp.c_x, exp.c_y, CENTER_X, CENTER_Y) <= PlayerR ) {
         exp.Chase();
@@ -295,13 +322,13 @@ void Player::renderPlayer( bool IsMoving ){
             kameha.Aim(CENTER_X,CENTER_Y, aimDir);
             kameha.IsStateChange = false;
         }
-        kameha.Firing();
+        kameha.Firing( IsMoving );
     }
     else if( kameha.state == 1 )
     {
         kameha.SetUp( 0 );
         kameha.Aim(CENTER_X,CENTER_Y, aimDir);
-        kameha.Firing();
+        kameha.Firing( IsMoving );
     }
 }
 

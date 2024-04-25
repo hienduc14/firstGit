@@ -36,6 +36,10 @@ private :
     BigObj ExpBar;
 
 public :
+    //rect collision
+    SDL_Rect Body;
+
+public :
     int aimDir;
     Kameha kameha;
 public :
