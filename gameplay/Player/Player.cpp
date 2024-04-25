@@ -88,7 +88,12 @@ void Player::KeyInput()
                 if( state[SDL_SCANCODE_W] || state[SDL_SCANCODE_UP] )       aimDir --;
                 if( state[SDL_SCANCODE_S] || state[SDL_SCANCODE_DOWN] )     aimDir ++;
                 aimDir = (aimDir%360 + 360)%360;
-                if( !state[SDL_SCANCODE_L] ) kameha.state = 2, kameha.IsStateChange = true;
+                if( !state[SDL_SCANCODE_L] ) {
+                    kameha.state = 2;
+                    kameha.IsStateChange = true;
+                    HP /= 2;
+                    Health.rect.w /= 2;
+                }
                 if( state[SDL_SCANCODE_O] ) kameha.state = 0, kameha.IsStateChange = false;
                 break;
             }
