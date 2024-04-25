@@ -30,7 +30,7 @@ void Game::play( int MapChoice ){
 
     int GameState = 0;
     int Upgrades = 0;
-    bool GameQuit = false, GameWin = false;
+    bool GameQuit = false;
     while(!GameQuit)
     {
         TimeManager::Instance()->process();
@@ -130,7 +130,8 @@ void Game::play( int MapChoice ){
 
             //Hap thu kinh nghiem
             for( auto &exp : exps )
-                if(exp.exist == true) {
+                if(exp.exist == true)
+                {
                     Upgrades += player.ExpAbsorb( exp );
                     if( Upgrades ) GameState = 2;
                 }
@@ -147,30 +148,25 @@ void Game::play( int MapChoice ){
             RenderGamePlay( 1 );
             Pause.drawObj();
             SDL_RenderPresent(base::renderer);
-
+//            if( !GameQuit )
             SDL_RenderClear(base::renderer);
 
             if( player.HP <= 0 ) break;
 
             //xoa quai va dan
             RemoveThing();
+            if( boss.HP <= 0 ) {
+                GameWin = true;
+                GameQuit = true;
+            }
+
 
             int frameTime = SDL_GetTicks() - currentTime;
             if( frameTime < TimeStep ) SDL_Delay( TimeStep-frameTime );
     //        break;
         }
     }
-    Mix_HaltChannel(-1);
-    if( player.HP <= 0 ){
-        Screen GameOver;
-        GameOver.SetTexture(std::string("GameOver.png"));
-        GameOver.rect.w = SCREEN_WIDTH;
-        GameOver.rect.h = SCREEN_HEIGHT;
-        GameOver.drawObj();
-        SDL_RenderPresent(base::renderer);
-        SDL_Delay(5000);
-    }
-    return ;
+    EndGame();
 }
 
 void Game::Prepare()
@@ -239,6 +235,9 @@ void Game::Prepare()
         break;
     }
     HitSound = Mix_LoadWAV("./asset/Sound/Hit.WAV");
+
+    timecount.color = (MapTerrain == 1 ? White : Black);
+    killcount.color = (MapTerrain == 1 ? White : Black);
 }
 
 void Game::MoveAll()
@@ -246,7 +245,11 @@ void Game::MoveAll()
     double a_x, a_y;
     player.Move( a_x, a_y );
     Map.MapMove( -a_x, -a_y );
-    for( auto &enemy : enemies ) {enemy.ChangeOccupy( -a_x, -a_y, enemies ); enemy.SetOccupy();}
+    for( auto &enemy : enemies ) {
+        enemy.ChangeOccupy( -a_x, -a_y, enemies );
+        enemy.SetOccupy();
+
+    }
     for( auto &exp : exps ) exp.Change( -a_x, -a_y );
     for( auto &orb : orbs ) orb.Change( -a_x, -a_y );
     for( auto &fireBall : fireBalls )
@@ -273,7 +276,7 @@ void Game::LevelUp()
 void Game::SpawnEnemy()
 {
 //    if(wave.WaveNum < wave.MaxWave ){
-    if(wave.WaveNum < 2){
+    if(wave.WaveNum < 0){
         if( wave.WaveNum > CurrentWave.second )
             CurrentWave.first += wave.GetAmount(), CurrentWave.second = wave.WaveNum;
 //        CurrentWave.first = 10;
@@ -399,7 +402,7 @@ void Game::PowerColision()
             }
         }
 
-        if(enemy.exist == true && base::CanChoose == true && enemy.RectOccupy.checkRect( base::CenterRect ) ){
+        if(enemy.exist == true && base::CanChoose == true && enemy.RectOccupy.checkRect( player.Body ) ){
             if(enemy.CoolDown == EnemyCD ) {
                 player.Bleeding(enemy.damage);
                 if( player.HP <= 0 ) break;
@@ -410,11 +413,11 @@ void Game::PowerColision()
         if( player.kameha.state == 2 )
         {
             int KameDmg = player.kameha.CheckDmg(enemy.rect);
-            if( KameDmg )
+            if( KameDmg != -1 )
             {
-                enemy.HP -= KameDmg;
-                Dmg dmg( KameDmg, enemy.rect.x, enemy.rect.y );
+                Dmg dmg( enemy.HP, enemy.rect.x, enemy.rect.y );
                 dmgs.push_back( dmg );
+                enemy.HP = 0;
             }
         }
     }
@@ -451,7 +454,7 @@ void Game::PowerColision()
                 dmgs.push_back( dmg );
             }
         }
-        if(boss.exist == true && base::CanChoose == true && func::checkRect(bossRect, player.GetRect() )  ){
+        if(boss.exist == true && base::CanChoose == true && func::checkRect(bossRect, player.Body )  ){
             if(boss.CoolDown == BossCD ) {
                 player.Bleeding(boss.damage);
             }
@@ -474,7 +477,7 @@ void Game::PowerColision()
         if( player.kameha.state == 2 )
         {
             int KameDmg = player.kameha.CheckDmg(bossRect);
-            if( KameDmg )
+            if( KameDmg > 0 )
             {
                 boss.HP -= KameDmg;
                 Dmg dmg( KameDmg, bossRect.x, bossRect.y );
@@ -484,15 +487,17 @@ void Game::PowerColision()
         if( boss.BossType == 2 && boss.kameha.state == 2 && player.phaseState != 2 )
         {
             int KameDmg = boss.kameha.CheckDmg(base::CenterRect);
-            if( KameDmg && player.IsKame.first == 0 )
-            {
-                player.Bleeding(KameDmg);
-                if( player.IsKame.first >= player.IsKame.second ) player.IsKame.first = 0;
-                else player.IsKame.first += TimeStep;
+            if( KameDmg != -1 ){
+                if( KameDmg && player.IsKame.first == 0 )
+                {
+                    player.Bleeding(KameDmg);
+                    if( player.IsKame.first >= player.IsKame.second ) player.IsKame.first = 0;
+                    else player.IsKame.first += TimeStep;
 
-//                Dmg dmg( KameDmg, bossRect.x, bossRect.y );
-//                dmgs.push_back( dmg );
-                boss.IsAbove = 1000;
+    //                Dmg dmg( KameDmg, bossRect.x, bossRect.y );
+    //                dmgs.push_back( dmg );
+                    boss.IsAbove = 1000;
+                }
             }
         }
         if(player.phaseState == 2 ) boss.IsAbove = 0;
@@ -582,9 +587,34 @@ void Game::RemoveThing()
     auto enemy = enemies.begin();
     while (enemy!= enemies.end()){
         if(enemy->HP <= 0) {
-            Exp exp;
-            exp.SetUp(enemy->GetRect().x, enemy->GetRect().y, -1);
-            exps.push_back( exp );
+            int DropType = func::random(1, 4);
+            switch (DropType)
+            {
+                case 1 :
+                {
+                    Exp exp;
+                    exp.type = DropType;
+                    exp.SetUp(enemy->GetRect().x, enemy->GetRect().y, -DropType);
+                    exps.push_back( exp );
+                    break;
+                }
+                case 2 :
+                {
+                    Exp exp;
+                    exp.type = DropType;
+                    exp.SetUp(enemy->GetRect().x, enemy->GetRect().y, -DropType);
+                    exps.push_back( exp );
+                    break;
+                }
+                case 3 :
+                {
+                    Exp exp;
+                    exp.type = DropType;
+                    exp.SetUp(enemy->GetRect().x, enemy->GetRect().y, -DropType);
+                    exps.push_back( exp );
+                    break;
+                }
+            }
             enemy = enemies.erase(enemy);
             killcount.Add();
         }
@@ -609,4 +639,31 @@ void Game::RemoveThing()
 //    delete dmg;
 }
 
+void Game::EndGame()
+{
+    base::UpdateData();
+    bool GameQuit = false;
+    Screen background;
+    if( GameWin == true ) background.SetTexture(std::string("./asset/Screen/YOUWIN.png"));
+    else background.SetTexture(std::string("./asset/Screen/YOULOSE.png"));
+    background.rectst = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
+    background.rect = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
+    while(!GameQuit)
+    {
+        while(SDL_PollEvent(&base::g_event))
+        {
+            if( base::g_event.type == SDL_QUIT){GameQuit = Quit = true;break;}
+            if( base::g_event.type == SDL_KEYDOWN && base::g_event.key.keysym.sym == SDLK_RETURN)
+            {
+                GameQuit = 1;
+                break;
+            }
+
+        }
+        RenderGamePlay( 0 );
+        background.drawObj();
+        SDL_RenderPresent(base::renderer);
+    }
+    return ;
+}
 

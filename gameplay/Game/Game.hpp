@@ -64,6 +64,7 @@ private :
     Button SoundEFPoint;
     BigObj MusicVolume;
     Button MusicPoint;
+    bool GameWin = false;
 //    Mix_Chunk* ThemeSound = nullptr;
 public :
     void play( int StartPower );
@@ -77,4 +78,5 @@ public :
     void PauseGame();
     void RenderGamePlay( int IsMoving );
     void RemoveThing();
+    void EndGame();
 };
