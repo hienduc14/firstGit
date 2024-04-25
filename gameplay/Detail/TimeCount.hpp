@@ -8,6 +8,8 @@ public :
     double minute = 0, second = 0;
     std::string clock;
 public :
+    SDL_Color color = Black;
+public :
     TimeCount();
     ~TimeCount();
 

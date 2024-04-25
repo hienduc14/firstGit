@@ -37,7 +37,7 @@ std::string TimeCount::TimeToStr()
 
 void TimeCount::Display()
 {
-    SetTTF(clock, 0, 0, pre::CountFont, Black);
+    SetTTF(clock, 0, 0, pre::CountFont, color);
     rect.x = CENTER_X - rect.w/2;
     drawObj();
 }

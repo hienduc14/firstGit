@@ -6,6 +6,8 @@ class KillCount : public TextObj
 private :
     int Count = 0;
 public :
+    SDL_Color color = Black;
+public :
     KillCount();
     ~KillCount();
 

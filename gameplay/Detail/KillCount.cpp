@@ -17,7 +17,7 @@ void KillCount::Add()
 
 void KillCount::Display()
 {
-    SetTTF(std::to_string(Count), 10, 0, pre::CountFont, Black);
+    SetTTF(std::to_string(Count), 10, 0, pre::CountFont, color);
     drawObj();
     SDL_Rect ST, EN;
     ST = {0, 0, 16, 15};
