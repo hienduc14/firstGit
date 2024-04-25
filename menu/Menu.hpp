@@ -2,6 +2,7 @@
 #include "../src/Function/BasicFn/BasicFn.hpp"
 #include "../src/Object/Screen/Screen.hpp"
 #include "../src/Object/Button/Button.hpp"
+#include "../src/Object/TextObj/TextObj.hpp"
 #include "MapChoose.hpp"
 
 class Menu
@@ -26,7 +27,7 @@ private :
     Screen Blur;
     Button Back;
 
-    //MenuState 1
+    //MenuState 2 Options
     Screen ExitMenu;
     Button Exit;
     Button TickBox;
@@ -35,6 +36,18 @@ private :
     BigObj MusicVolume;
     Button MusicPoint;
     Mix_Chunk* ThemeSound = nullptr;
+
+    //MenuState 3 Shop
+    Screen ShopMenu;
+    int NumChoice = 2;
+    Button SkinChoice[4];
+    bool IsBought[4] = {1, 0, 0, 0};
+    Button Buy[4];
+    int BuyCost[4] = { 10, 10, 10, 10 };
+    Button Used;
+
+    TTF_Font* CoinFont;
+    TextObj CoinShow;
 private :
     MapChoose mapChoose;
     int MapChoice = -1;

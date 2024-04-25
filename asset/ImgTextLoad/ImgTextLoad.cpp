@@ -21,6 +21,9 @@ namespace pre
 
 
     SDL_Texture* ExpTexture= nullptr;
+    SDL_Texture* CoinTexture= nullptr;
+    SDL_Texture* HeartTexture= nullptr;
+
     SDL_Texture* PlayerTexture= nullptr;
     SDL_Texture* HealthTexture= nullptr;
     SDL_Texture* HealthBarTexture= nullptr;
@@ -80,7 +83,9 @@ void LoadAll::loading( int MapTerrain )
 //    pre::RabbitTexture  = base::Load_Image(std::string("./asset/Enemy/Rabbit.png"));
 //    pre::BoarTexture    = base::Load_Image(std::string("./asset/Enemy/Boar.png"));
 
-    pre::ExpTexture     = base::Load_Image(std::string("./asset/Enemy/exp.png"));
+    pre::ExpTexture     = base::Load_Image(std::string("./asset/Enemy/Exp.png"));
+    pre::CoinTexture     = base::Load_Image(std::string("./asset/Enemy/Coin.png"));
+    pre::HeartTexture     = base::Load_Image(std::string("./asset/Enemy/Heart.png"));
 
     pre::OrbTexture         = base::Load_Image(std::string("./asset/Power/orb.png"));
     pre::FireBallTexture    = base::Load_Image(std::string("./asset/Power/FireBalls.png"));

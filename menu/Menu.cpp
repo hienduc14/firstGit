@@ -6,6 +6,7 @@ Menu::Menu()
     MainMenu.SetTexture(std::string("./menu/Menu.png"));
     Blur.SetTexture(std::string("./menu/Blur.png"));
     ExitMenu.SetTexture(std::string("./menu/ExitMenu.png"));
+    ShopMenu.SetTexture(std::string("./menu/Shop/ShopMenu.png"));
 
 //    Button Play;
     Play.SetTexture(std::string("./menu/play.png"));
@@ -66,6 +67,56 @@ Menu::Menu()
     MusicPoint.limit = {387, 0, 217, 0};
     MusicPoint.rect = {MusicPoint.limit.x+MusicPoint.limit.w, 230, MusicPoint.rectst.w, MusicPoint.rectst.h };
 
+//    ShopMenu
+    SkinChoice[0].SetTexture(std::string("./menu/Shop/Skin0Bought.png"));
+    SkinChoice[0].QuerySetup();
+    SkinChoice[0].rect = {157, 163, 104, 96};
+    for( int i = 1; i < NumChoice; i++ ){
+        if( SkinBought[i] == false ){
+            std::string u = "./menu/Shop/Skin1.png";     u[16] = char(i+'0');
+            SkinChoice[i].SetTexture(u);
+            SkinChoice[i].QuerySetup();
+            SkinChoice[i].rect = {157+(104+30)*i, 163, 104, 96};
+            SkinChoice[i].CanPress = 0;
+        }else
+        {
+            std::string u = "./menu/Shop/Skin1Bought.png";     u[16] = char(i+'0');
+            SkinChoice[i].SetTexture(u);
+            SkinChoice[i].QuerySetup();
+            SkinChoice[i].rect = {157+(104+30)*i, 163, 104, 96};
+            SkinChoice[i].CanPress = true;
+        }
+    }
+    for( int i = 0; i < NumChoice; i++ ){
+        if( SkinBought[i] == false ){
+            Buy[i].SetTexture(std::string("./menu/Shop/Buy.png"));
+            Buy[i].QuerySetup();
+            Buy[i].rect = SkinChoice[i].rect;
+            Buy[i].rect = { Buy[i].rect.x + Buy[i].rect.w/2 - Buy[i].rectst.w/2,
+                            Buy[i].rect.y + Buy[i].rect.h +10,
+                            Buy[i].rectst.w,
+                            Buy[i].rectst.h };
+            Buy[i].CanPress = 1;
+        }else{
+            Buy[i].SetTexture(std::string("./menu/Shop/Buy.png"));
+            Buy[i].QuerySetup();
+            Buy[i].rect = SkinChoice[i].rect;
+            Buy[i].rect = { Buy[i].rect.x + Buy[i].rect.w/2 - Buy[i].rectst.w/2,
+                            Buy[i].rect.y + Buy[i].rect.h +10,
+                            Buy[i].rectst.w,
+                            Buy[i].rectst.h };
+            Buy[i].CanPress = 0;
+        }
+    }
+    Buy[0].CanPress = 0;
+
+    Used.SetTexture(std::string("./menu/Shop/Used.png"));
+    Used.QuerySetup();
+    Used.rect = Buy[SkinOption].rect;
+
+    CoinFont = TTF_OpenFont("./menu/Shop/FreshMan.ttf", 35);
+
+
 //  ThemeSound
     ThemeSound = Mix_LoadWAV("./asset/MenuTheme.WAV");
 }
@@ -120,6 +171,7 @@ void Menu::Draw()
         case 1:
         {
             mapChoose.Draw();
+            Back.drawObj();
             break;
         }
         case 2:
@@ -137,6 +189,26 @@ void Menu::Draw()
             MusicPoint.drawHold();
             break;
         }
+        case 3:
+        {
+            //shop
+            Blur.drawObj();
+            ShopMenu.drawObj();
+            Back.drawObj();
+            for( int i = 0; i < NumChoice; i++ ) SkinChoice[i].drawChoice();
+            for( int i = 0; i < NumChoice; i++ ) if( Buy[i].CanPress == 1 ) Buy[i].drawChoice();
+
+            std::string CoinNum = std::to_string(Coin) + " $";
+            CoinShow.SetTTF(CoinNum, 0, 0, CoinFont, Black );
+            CoinShow.rect.x = 1000 - 20 - CoinShow.rectst.w;
+            CoinShow.rect.y = 20;
+            CoinShow.drawObj();
+            std::cout << SkinOption << '\n';
+            Used.drawObj();
+//            for( int i = 0; i < NumChoice; i++ ) std::cout << SkinBought[i] << " "; std::cout << '\n';
+            break;
+        }
+
     }
 }
 
@@ -148,23 +220,33 @@ void Menu::Check()
         {
 
             Play.CheckMouse(base::g_event);
+            if( Play.status == 1    ) MenuState = 1;
+
             Options.CheckMouse(base::g_event);
-            if( Play.status == 1 ) MenuState = 1;
             if( Options.status == 1 ) MenuState = 2;
+
+            Shop.CheckMouse(base::g_event);
+            if( Shop.status == 1    ) MenuState = 3;
             break;
         }
         case 1 :
         {
             MapChoice = mapChoose.play();
+
+            Back.CheckMouse(base::g_event);
+            if( Back.status == 1 ) MenuState = 0;
+
             break;
         }
         case 2 :
         {
             Back.CheckMouse(base::g_event);
-            Exit.CheckMouse(base::g_event);
-            TickBox.CheckTick(base::g_event);
             if( Back.status == 1 ) MenuState = 0;
+
+            Exit.CheckMouse(base::g_event);
             if( Exit.status == 1 ) Quit = 1;
+
+            TickBox.CheckTick(base::g_event);
             if( TickBox.status == 1 ) DmgAppear = false;
             else DmgAppear = true;
 
@@ -179,6 +261,36 @@ void Menu::Check()
             MusicPer = per2;
             Mix_Volume(1, MIX_MAX_VOLUME*SoundEFPer);
             Mix_Volume(0, MIX_MAX_VOLUME*MusicPer);
+
+            break;
+        }
+        case 3 :
+        {
+            Back.CheckMouse(base::g_event);
+            if( Back.status == 1 ) MenuState = 0;
+
+            for( int i = 0; i < NumChoice; i++ ) if( SkinChoice[i].CanPress == true ) {
+                SkinChoice[i].CheckMouse(base::g_event);
+                if( SkinChoice[i].status == 1 ) SkinOption = i;
+                Used.rect = Buy[SkinOption].rect;
+            }
+            for( int i = 0; i < NumChoice; i++ ) if( Buy[i].CanPress == true ) {
+                int test = 1;
+                Buy[i].CheckChoice(base::g_event, test, 0);
+                if( test != Buy[i].CanPress && Coin >= BuyCost[i] )
+                {
+                    Buy[i].CanPress = test;
+                    // minus cost
+                    Coin -= BuyCost[i];
+
+                    // change skinoption to bought
+                    std::string u = "./menu/Shop/Skin1Bought.png";     u[16] = char(i+'0');
+                    SkinChoice[i].SetTexture(u);
+                    SkinChoice[i].CanPress = true;
+                    SkinBought[i] = true;
+                    base::UpdateData();
+                }
+            }
 
             break;
         }

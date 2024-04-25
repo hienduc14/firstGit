@@ -4,6 +4,7 @@
 #include <SDL_ttf.h>
 #include <SDL_mixer.h>
 #include <iostream>
+#include <fstream>
 #include <list>
 #include <string>
 #include <cstring>
@@ -24,6 +25,9 @@ extern bool Quit;
 extern bool DmgAppear;
 extern double SoundEFPer;
 extern double MusicPer;
+extern int Coin;
+extern int SkinOption;
+extern bool SkinBought[6];
 extern bool Dot[2001][2001];
 void SetDot(int x, int y, int tt);
 bool GetDot(int x, int y);
@@ -41,4 +45,7 @@ namespace base
     void quitSDL();
     SDL_Texture *Load_Image( const std::string filePath );
     SDL_Texture *Load_Text( const std::string text, TTF_Font *font, SDL_Color TextColor );
+
+    void GetData();
+    void UpdateData();
 }

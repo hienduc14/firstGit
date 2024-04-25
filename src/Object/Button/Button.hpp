@@ -9,7 +9,10 @@ public :
 public :
     int status = 0;
     int type = 0;
+    bool CanPress = 1;
 public :
+    void QuerySetup();
+
     void CheckMouse(SDL_Event &e);
 
     void CheckTick(SDL_Event &e);
@@ -19,4 +22,7 @@ public :
     int luu_x, luu_y;
     void CheckHold(SDL_Event &e);
     void drawHold();
+
+    void CheckChoice(SDL_Event &e, int &NeedChange, int Changed);
+    void drawChoice();
 };

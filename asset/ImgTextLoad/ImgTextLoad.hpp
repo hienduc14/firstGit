@@ -20,6 +20,9 @@ namespace pre
     extern SDL_Texture* BossAimArrowTexture;
 
     extern SDL_Texture* ExpTexture;
+    extern SDL_Texture* CoinTexture;
+    extern SDL_Texture* HeartTexture;
+
     extern SDL_Texture* PlayerTexture;
     extern SDL_Texture* HealthTexture;
     extern SDL_Texture* HealthBarTexture;

@@ -35,6 +35,12 @@ public :
     double fireTime = 2.5;
 
     int IsAbove = 0;
+
+
+    double HPMax = 30;
+    BigObj Health;
+    BigObj HealthBar;
+    void SetHealthBar();
 public:
     void SetUp( int x, int y, int type );
     void SetState();

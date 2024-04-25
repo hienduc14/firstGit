@@ -4,8 +4,10 @@ bool Quit = false;
 bool DmgAppear = true;
 double SoundEFPer = 1;
 double MusicPer = 1;
+int Coin = 0;
+int SkinOption = 0;
+bool SkinBought[6] = { 1, 0, 0, 0, 0, 0 };
 bool Dot[2001][2001];
-
 void SetDot(int x, int y, int tt)
 {
     if( x < 0 || x > SCREEN_WIDTH ) return;
@@ -78,4 +80,23 @@ SDL_Texture *base::Load_Text( const std::string text, TTF_Font *font, SDL_Color 
     SDL_Texture *texture = SDL_CreateTextureFromSurface(base::renderer, surface);
     SDL_FreeSurface(surface);
     return texture;
+}
+
+void base::GetData()
+{
+    std::ifstream fin("data.txt", std::ios::in);
+    fin >> Coin;
+    for( int i = 0; i < 6; i++ ) fin >> SkinBought[i];
+    fin >> SkinOption;
+    fin.close();
+}
+
+void base::UpdateData()
+{
+    std::ofstream fout("data.txt", std::ios::out | std::ios::trunc);
+    fout << Coin << '\n';
+    for( int i = 0; i < 6; i++ ) fout << SkinBought[i] << " ";
+    fout << SkinOption;
+    fout.close();
+
 }

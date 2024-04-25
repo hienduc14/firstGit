@@ -9,6 +9,11 @@ Button::~Button()
 
 }
 
+void Button::QuerySetup()
+{
+    SDL_QueryTexture(texture, nullptr, nullptr, &rectst.w, &rectst.h);
+}
+
 void Button::CheckMouse(SDL_Event &e)
 {
     int x, y;
@@ -79,6 +84,27 @@ void Button::CheckHold(SDL_Event &e)
 }
 
 void Button::drawHold()
+{
+    drawObj();
+}
+
+void Button::CheckChoice(SDL_Event &e, int &NeedChange, int Changed)
+{
+    if(CanPress == 0) return;
+    int x, y;
+    SDL_GetMouseState( &x, &y );
+    if( rect.x <= x && rect.x+rect.w >= x && rect.y <= y && rect.y+rect.h >= y ){
+        switch (e.type){
+            case SDL_MOUSEBUTTONDOWN:
+            {
+                NeedChange = Changed;
+                break;
+            }
+        }
+    }
+}
+
+void Button::drawChoice()
 {
     drawObj();
 }

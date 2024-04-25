@@ -54,7 +54,7 @@ void Boss::SetUp( int x, int y, int type )
             // nhap thong so Boss
             v_Obj = 30; v_Fly = 60;
             damage = 5; dmgSkill = 20;
-            HP = 400;
+            HPMax = HP = 601;
 
             break;
         }
@@ -101,7 +101,7 @@ void Boss::SetUp( int x, int y, int type )
             // nhap thong so Boss
             v_Obj = 30; v_Fly = 60;
             damage = 5; dmgSkill = 20;
-            HP = 400;
+            HPMax = HP = 601;
             SummonWave = 1;
             break;
         }
@@ -142,7 +142,7 @@ void Boss::SetUp( int x, int y, int type )
             // nhap thong so Boss
             v_Obj = 60; v_Fly = 60;
             damage = 5; dmgSkill = 20;
-            HP = 400;
+            HPMax = HP = 601;
             break;
         }
     }
@@ -211,6 +211,12 @@ void Boss::Doing()
                 Invicible = false;
             }
             Located();
+
+            if( phaseState == 2 )
+            {
+                IsAbove = 1;
+            }else IsAbove = 0;
+
             break;
         }
         case 1 :
@@ -349,12 +355,14 @@ void Boss::Print( bool IsMoving )
         {
             RenderMoving( IsMoving, 1, 0 );
             if( phaseState == 1 ){
-                kameha.Firing();
-                std::cout << kameha.state << '\n';
+                kameha.Firing( IsMoving);
+//                std::cout << kameha.state << '\n';
             }
             break;
         }
     }
+    SetHealthBar();
+    Health.drawObj(); HealthBar.drawObj();
 }
 
 SDL_Rect Boss::GetBossBody()
@@ -365,4 +373,20 @@ SDL_Rect Boss::GetBossBody()
     BossRect.w = RectOccupy.w;
     BossRect.h = RectOccupy.h;
     return BossRect;
+}
+
+void Boss::SetHealthBar()
+{
+    if( Health.texture == nullptr ){
+        int W, H;
+        Health.texture = pre::HealthTexture;
+        SDL_QueryTexture(Health.texture, nullptr, nullptr, &W, &H );
+        Health.rectst = {0, 0, W, H};
+        Health.rect = {CENTER_X - 500/2, 90, 500, 40};
+        HealthBar.texture = pre::HealthBarTexture;
+        HealthBar.rectst = Health.rectst;
+        HealthBar.rect = Health.rect;
+    }
+    double per = double(HP)/HPMax;
+    Health.rect.w = HealthBar.rect.w*per;
 }
