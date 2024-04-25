@@ -7,21 +7,22 @@ Menu::Menu()
     Blur.SetTexture(std::string("./menu/Blur.png"));
     ExitMenu.SetTexture(std::string("./menu/ExitMenu.png"));
     ShopMenu.SetTexture(std::string("./menu/Shop/ShopMenu.png"));
+    TutorialMenu.SetTexture(std::string("./menu/TutorialMenu.png"));
 
 //    Button Play;
     Play.SetTexture(std::string("./menu/play.png"));
     SDL_QueryTexture(Play.texture, nullptr, nullptr, &Play.rectst.w, &Play.rectst.h);
-    Play.rect = {351, 350, 299, 69};
+    Play.rect = {351, 458, 299, 69};
 
 //    Button Shop
     Shop.SetTexture(std::string("./menu/Shop.png"));
     SDL_QueryTexture(Shop.texture, nullptr, nullptr, &Shop.rectst.w, &Shop.rectst.h);
-    Shop.rect = {395, 458, 209, 69};
+    Shop.rect = {116, 458, 209, 69};
 
-//    Button Collection
-    Collection.SetTexture(std::string("./menu/Collection.png"));
-    SDL_QueryTexture(Collection.texture, nullptr, nullptr, &Collection.rectst.w, &Collection.rectst.h);
-    Collection.rect = {116, 458, 209, 69};
+////    Button Collection
+//    Collection.SetTexture(std::string("./menu/Collection.png"));
+//    SDL_QueryTexture(Collection.texture, nullptr, nullptr, &Collection.rectst.w, &Collection.rectst.h);
+//    Collection.rect = {116, 458, 209, 69};
 
 //    Button Tutorial
     Tutorial.SetTexture(std::string("./menu/Tutorial.png"));
@@ -163,7 +164,7 @@ void Menu::Draw()
             MainMenu.drawObj();
             Play.drawObj();
             Shop.drawObj();
-            Collection.drawObj();
+//            Collection.drawObj();
             Tutorial.drawObj();
             Options.drawObj();
             break;
@@ -208,7 +209,13 @@ void Menu::Draw()
 //            for( int i = 0; i < NumChoice; i++ ) std::cout << SkinBought[i] << " "; std::cout << '\n';
             break;
         }
-
+        case 4 :
+        {
+            Blur.drawObj();
+            Back.drawObj();
+            TutorialMenu.drawObj();
+            break;
+        }
     }
 }
 
@@ -226,7 +233,10 @@ void Menu::Check()
             if( Options.status == 1 ) MenuState = 2;
 
             Shop.CheckMouse(base::g_event);
-            if( Shop.status == 1    ) MenuState = 3;
+            if( Shop.status ==   1    ) MenuState = 3;
+
+            Tutorial.CheckMouse(base::g_event);
+            if( Tutorial.status ==   1    ) MenuState = 4;
             break;
         }
         case 1 :
@@ -292,6 +302,12 @@ void Menu::Check()
                 }
             }
 
+            break;
+        }
+        case 4 :
+        {
+            Back.CheckMouse(base::g_event);
+            if( Back.status == 1 ) MenuState = 0;
             break;
         }
     }

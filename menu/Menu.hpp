@@ -19,7 +19,7 @@ private :
     Screen MainMenu;
     Button Play;
     Button Shop;
-    Button Collection;
+//    Button Collection;
     Button Tutorial;
     Button Options;
 
@@ -48,6 +48,9 @@ private :
 
     TTF_Font* CoinFont;
     TextObj CoinShow;
+
+    //Menustate 4 tutorial
+    Screen TutorialMenu;
 private :
     MapChoose mapChoose;
     int MapChoice = -1;
