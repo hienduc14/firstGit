@@ -20,7 +20,7 @@ public :
 
     void SetUp( int type );
     void Aim( int x, int y, double goc );
-    void Firing();
+    void Firing( bool IsMoving);
     int CheckDmg( SDL_Rect target );
     int StartDmg = 0, EndDmg = 500;
 };

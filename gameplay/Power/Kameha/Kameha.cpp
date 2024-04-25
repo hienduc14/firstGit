@@ -2,7 +2,7 @@
 
 Kameha::Kameha()
 {
-    damage = 100;
+    damage = 50;
 }
 
 Kameha::~Kameha()
@@ -96,7 +96,7 @@ void Kameha::Aim(int x, int y, double goc)
 //    std::cout << x << " " << y << " " << goc << '\n';
 }
 
-void Kameha::Firing()
+void Kameha::Firing( bool IsMoving )
 {
     if(state == 1 )
     {
@@ -111,23 +111,34 @@ void Kameha::Firing()
     if( state == 2 )
     {
         if( startPoint.x == CENTER_X && startPoint.y == CENTER_Y ){
-            timeCurrent += TimeManager::Instance()->getElapsedTime();
-            while( timeCurrent >= frameTime*frameNum ) timeCurrent -= frameTime*frameNum;
-            int clipIndex = timeCurrent/frameTime;
-            SDL_Point centerPoint = { startPoint.x - rect.x, startPoint.y - rect.y };
-            SDL_RenderCopyEx(base::renderer, texture, &clip[clipIndex], &rect, angle, &centerPoint, SDL_FLIP_NONE);
+            if( IsMoving == false )
+            {
+                SDL_Point centerPoint = { startPoint.x - rect.x, startPoint.y - rect.y };
+                SDL_RenderCopyEx(base::renderer, texture, &rectst, &rect, angle, &centerPoint, SDL_FLIP_NONE);
+            }
+            else{
+                timeCurrent += TimeManager::Instance()->getElapsedTime();
+                while( timeCurrent >= frameTime*frameNum ) timeCurrent -= frameTime*frameNum;
+                int clipIndex = timeCurrent/frameTime;
+                SDL_Point centerPoint = { startPoint.x - rect.x, startPoint.y - rect.y };
+                SDL_RenderCopyEx(base::renderer, texture, &clip[clipIndex], &rect, angle, &centerPoint, SDL_FLIP_NONE);
+                rectst = clip[clipIndex];
+            }
         }
         else{
-            timeCurrent += TimeManager::Instance()->getElapsedTime();
-            while( timeCurrent >= frameTime*frameNum ) timeCurrent -= frameTime*frameNum;
-            int clipIndex = timeCurrent/frameTime;
-            SDL_Point centerPoint = { startPoint.x - rect.x, startPoint.y - rect.y };
-
-//            SDL_Rect nR = rect;
-//            if( nR.x < 0 - 50 ){
-//                    nR.x +=
-//            }
-            SDL_RenderCopyEx(base::renderer, texture, &clip[clipIndex], &rect, angle, &centerPoint, SDL_FLIP_NONE);
+            if( IsMoving == false )
+            {
+                SDL_Point centerPoint = { startPoint.x - rect.x, startPoint.y - rect.y };
+                SDL_RenderCopyEx(base::renderer, texture, &rectst, &rect, angle, &centerPoint, SDL_FLIP_NONE);
+            }
+            else{
+                timeCurrent += TimeManager::Instance()->getElapsedTime();
+                while( timeCurrent >= frameTime*frameNum ) timeCurrent -= frameTime*frameNum;
+                int clipIndex = timeCurrent/frameTime;
+                SDL_Point centerPoint = { startPoint.x - rect.x, startPoint.y - rect.y };
+                SDL_RenderCopyEx(base::renderer, texture, &clip[clipIndex], &rect, angle, &centerPoint, SDL_FLIP_NONE);
+                rectst = clip[clipIndex];
+            }
         }
     }
 
@@ -154,16 +165,16 @@ int Kameha::CheckDmg( SDL_Rect target )
     double angleDis = angle - targetAngle;
 
     if( angleDis < 0 ) angleDis = -angleDis;
-    if( angleDis > 90 ) return 0;
+    if( angleDis > 90 ) return -1;
 
     double opSide = sin(angleDis*M_PI/180)*hypotenuse;
     double adjSide = sqrt(hypotenuse*hypotenuse - opSide*opSide);
     if( opSide < r +rect.h/2 && adjSide > Dis ){
         if( StartDmg == 0 ){
-            std::cout << angleDis << '\n';
+//            std::cout << angleDis << '\n';
             return damage;
         }
         return 0;
     }
-    else return 0;
+    else return -1;
 }
