@@ -169,7 +169,7 @@ int Kameha::CheckDmg( SDL_Rect target )
 
     double opSide = sin(angleDis*M_PI/180)*hypotenuse;
     double adjSide = sqrt(hypotenuse*hypotenuse - opSide*opSide);
-    if( opSide < r +rect.h/2 && adjSide > Dis ){
+    if( opSide < r +rect.h/2 && adjSide > Dis && adjSide <= rect.w ){
         if( StartDmg == 0 ){
 //            std::cout << angleDis << '\n';
             return damage;

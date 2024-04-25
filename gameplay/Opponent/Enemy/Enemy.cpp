@@ -1,7 +1,7 @@
 #include "Enemy.hpp"
 Enemy::Enemy()
 {
-    v_Obj = 0;
+    v_Obj = 50;
     damage = 5;
     HP = 4;
     this->rectst.w = EnemyW;

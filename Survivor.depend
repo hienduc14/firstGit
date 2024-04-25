@@ -260,7 +260,7 @@
 	"../../../src/Function/Func/Func.hpp"
 	"../../../asset/ImgTextLoad/ImgTextLoad.hpp"
 
-1713982835 d:\codeblock\survivor\gameplay\player\player.hpp
+1714046381 d:\codeblock\survivor\gameplay\player\player.hpp
 	"../../src/Function/BasicFn/BasicFn.hpp"
 	"../../src/Object/BigObj/BigObj.hpp"
 	"../../src/Object/Screen/Screen.hpp"
@@ -352,7 +352,7 @@
 	"../../Power/Zone/Zone.hpp"
 	"../../Player/Player.hpp"
 
-1714034266 source:d:\codeblock\survivor\gameplay\opponent\boss\boss.cpp
+1714045005 source:d:\codeblock\survivor\gameplay\opponent\boss\boss.cpp
 	"Boss.hpp"
 
 1712679535 source:d:\codeblock\survivor\gameplay\opponent\wave\wave.cpp
@@ -362,10 +362,10 @@
 	"../../../src/Function/Func/Func.hpp"
 	<fstream>
 
-1714025024 source:d:\codeblock\survivor\gameplay\player\player.cpp
+1714046730 source:d:\codeblock\survivor\gameplay\player\player.cpp
 	"Player.hpp"
 
-1714038569 source:d:\codeblock\survivor\menu\menu.cpp
+1714042902 source:d:\codeblock\survivor\menu\menu.cpp
 	"Menu.hpp"
 
 1714038423 d:\codeblock\survivor\menu\menu.hpp
@@ -378,10 +378,10 @@
 1713937428 source:d:\codeblock\survivor\asset\imgtextload\imgtextload.cpp
 	"./ImgTextLoad.hpp"
 
-1714033345 source:d:\codeblock\survivor\gameplay\game\game.cpp
+1714043123 source:d:\codeblock\survivor\gameplay\game\game.cpp
 	"Game.hpp"
 
-1714033346 d:\codeblock\survivor\gameplay\game\game.hpp
+1714043123 d:\codeblock\survivor\gameplay\game\game.hpp
 	<SDL.h>
 	"../Player/Player.hpp"
 	"../LevelUp/Card/Card.hpp"
@@ -449,7 +449,7 @@
 1711384176 source:d:\codeblock\survivor\gameplay\dmg\dmg.cpp
 	"Dmg.hpp"
 
-1714019415 source:d:\codeblock\survivor\gameplay\opponent\enemy\enemy.cpp
+1714042024 source:d:\codeblock\survivor\gameplay\opponent\enemy\enemy.cpp
 	"Enemy.hpp"
 
 1713933307 source:d:\codeblock\survivor\gameplay\opponent\exp\exp.cpp
@@ -472,7 +472,7 @@
 	"../src/Object/Screen/Screen.hpp"
 	"../src/Object/Button/Button.hpp"
 
-1714033505 source:d:\codeblock\survivor\gameplay\power\kameha\kameha.cpp
+1714043287 source:d:\codeblock\survivor\gameplay\power\kameha\kameha.cpp
 	"Kameha.hpp"
 
 1714024956 d:\codeblock\survivor\gameplay\power\kameha\kameha.hpp

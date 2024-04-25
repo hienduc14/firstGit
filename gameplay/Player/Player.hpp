@@ -42,6 +42,8 @@ public :
 public :
     int aimDir;
     Kameha kameha;
+    std::pair<int, int> JumpCD = {0, 3000};
+    std::pair<int, int> KamehaCD = {0, 60000};
 public :
     //animation
     int phaseState, NumPhase = 3, NumF = 0;

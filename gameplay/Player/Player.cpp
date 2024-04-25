@@ -74,9 +74,13 @@ void Player::KeyInput()
                 if( state[SDL_SCANCODE_L] && !state[SDL_SCANCODE_O] ) kameha.state = 1, kameha.IsStateChange = true;
     //            if( state[SDL_SCANCODE_L] && state[SDL_SCANCODE_O] ) kameha.state = 0, kameha.IsStateChange = false;
                 if( state[SDL_SCANCODE_J] ) {
-                    phaseState = 2;
-                    SetPhaseClip();
+                    if( JumpCD.first <= 0 ){
+                        phaseState = 2;
+                        SetPhaseClip();
+                        JumpCD.first = JumpCD.second;
+                    }
                 }
+                if( JumpCD.first > 0 ) JumpCD.first -= TimeStep;
                 break;
             }
             case 1:

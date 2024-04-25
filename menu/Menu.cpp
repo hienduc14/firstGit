@@ -52,21 +52,21 @@ Menu::Menu()
 //    Sound Control
     SoundEFVolume.SetTexture(std::string("./menu/Volume.png"));
     SDL_QueryTexture(SoundEFVolume.texture, nullptr, nullptr, &SoundEFVolume.rectst.w, &SoundEFVolume.rectst.h);
-    SoundEFVolume.rect = {389, 160, 225, 18};
+    SoundEFVolume.rect = {389, 160, 225*SoundEFPer, 18};
 
     SoundEFPoint.SetTexture(std::string("./menu/VolumePoint.png"));
     SDL_QueryTexture(SoundEFPoint.texture, nullptr, nullptr, &SoundEFPoint.rectst.w, &SoundEFPoint.rectst.h);
     SoundEFPoint.limit = {387, 0, 217, 0};
-    SoundEFPoint.rect = {SoundEFPoint.limit.x+SoundEFPoint.limit.w, 230-82, SoundEFPoint.rectst.w, SoundEFPoint.rectst.h };
+    SoundEFPoint.rect = {SoundEFPoint.limit.x+SoundEFPoint.limit.w*SoundEFPer, 230-82, SoundEFPoint.rectst.w, SoundEFPoint.rectst.h };
 
     MusicVolume.SetTexture(std::string("./menu/Volume.png"));
     SDL_QueryTexture(MusicVolume.texture, nullptr, nullptr, &MusicVolume.rectst.w, &MusicVolume.rectst.h);
-    MusicVolume.rect = {389, 242, 225, 18};
+    MusicVolume.rect = {389, 242, 225*MusicPer, 18};
 
     MusicPoint.SetTexture(std::string("./menu/VolumePoint.png"));
     SDL_QueryTexture(MusicPoint.texture, nullptr, nullptr, &MusicPoint.rectst.w, &MusicPoint.rectst.h);
     MusicPoint.limit = {387, 0, 217, 0};
-    MusicPoint.rect = {MusicPoint.limit.x+MusicPoint.limit.w, 230, MusicPoint.rectst.w, MusicPoint.rectst.h };
+    MusicPoint.rect = {MusicPoint.limit.x+MusicPoint.limit.w*MusicPer, 230, MusicPoint.rectst.w, MusicPoint.rectst.h };
 
 //    ShopMenu
     SkinChoice[0].SetTexture(std::string("./menu/Shop/Skin0Bought.png"));

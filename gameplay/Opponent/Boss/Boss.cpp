@@ -123,7 +123,7 @@ void Boss::SetUp( int x, int y, int type )
             exist = 1;
 
             // nhap rect va xet clip cho tung phase
-            RectOccupy = { 6, 19, 24, 54 };
+            RectOccupy = { 4, 15, 67, 134 };
             SDL_QueryTexture(texture, NULL, NULL, &rectst.w, &rectst.h);
 
             int X = 0, Y = 0, W = rectst.w/NumF, H = rectst.h;
@@ -324,12 +324,28 @@ void Boss::Doing()
             }
             else
             if( phaseState == 0 ){
+
+
                 double Dist = func::dist(aim_x , aim_y, c_x, c_y );
                 if( Dist == 0 ) return;
                 Change(( v_Obj*(CENTER_X-c_x)/Dist ), ( v_Obj*(CENTER_Y-c_y)/Dist ) );
                 Located();
                 Invicible = false;
                 kameha.state = 0;
+
+//                 // dich chuyen
+//                if(Dist >= 3000)
+//                {
+//                    int dif = 500;
+//                    int edge = func::random(1, 4), x, y;
+//                    if( edge == 1 ) x = func::random(0, SCREEN_WIDTH),  y = -dif;
+//                    if( edge == 2 ) x = -dif,                           y = func::random(0, SCREEN_HEIGHT);
+//                    if( edge == 3 ) x = func::random(0, SCREEN_WIDTH),  y = SCREEN_HEIGHT+dif;
+//                    if( edge == 4 ) x = SCREEN_WIDTH+dif,               y = (func::random(0, SCREEN_HEIGHT) );
+//                    double dis_x =x-rect.x, dis_y = y-rect.y;
+//                    Change( dis_x, dis_y );
+//                }
+//                Located();
             }
             Located();
             break;

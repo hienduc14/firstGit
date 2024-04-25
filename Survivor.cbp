@@ -56,7 +56,6 @@
 		<Unit filename="gameplay/Opponent/Wave/Wave.hpp" />
 		<Unit filename="gameplay/Player/Player.cpp" />
 		<Unit filename="gameplay/Player/Player.hpp" />
-		<Unit filename="gameplay/Power/Clone.hpp" />
 		<Unit filename="gameplay/Power/FireBall/FireBall.cpp" />
 		<Unit filename="gameplay/Power/FireBall/FireBall.hpp" />
 		<Unit filename="gameplay/Power/Kameha/Kameha.cpp" />
