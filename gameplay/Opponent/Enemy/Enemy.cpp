@@ -1,7 +1,7 @@
 #include "Enemy.hpp"
 Enemy::Enemy()
 {
-    v_Obj = 30;
+    v_Obj = 0;
     damage = 5;
     HP = 4;
     this->rectst.w = EnemyW;
@@ -44,6 +44,8 @@ int Enemy::CheckOccupy( std::list<Enemy>& enemies )
 
 void Enemy::MoveOccupy( std::list<Enemy>& enemies )
 {
+    double CheckDist = func::dist(CENTER_X, CENTER_Y, c_x, c_y );
+    if( CheckDist <= 10) return;
     if( IsThrough == false ){
         double Dist = func::dist(CENTER_X, CENTER_Y, c_x, c_y );
         if( Dist == 0 ) return;
@@ -78,6 +80,7 @@ void Enemy::MoveOccupy( std::list<Enemy>& enemies )
         double Dist = func::dist(aim_x, aim_y, c_x, c_y );
         if( Dist == 0 ) return;
         Change(( v_Obj*(aim_x-c_x)/Dist ), ( v_Obj*(aim_y-c_y)/Dist ) );
+        SetOccupy();
         Located();
     }
 }
@@ -90,31 +93,45 @@ void Enemy::ChangeOccupy( double ax, double ay, std::list<Enemy>& enemies )
     SetOccupy();
     Located();
 
-    if( CheckOccupy( enemies ) > 1 )
-    {
-        L_x = preL_x;
-        rect.x = L_x;
-        SetOccupy();
-        Located();
-    }
+//    if( CheckOccupy( enemies ) > 1 )
+//    {
+//        L_x = preL_x;
+//        rect.x = L_x;
+//        SetOccupy();
+//        Located();
+//    }
     L_y += ay*TimeManager::Instance()->getElapsedTime()*GameSpeed;
     rect.y = L_y;
     SetOccupy();
     Located();
-    if( CheckOccupy( enemies ) > 1 )
-    {
-        L_y = preL_y;
-        rect.y = L_y;
-        SetOccupy();
-        Located();
-    }
+//    if( CheckOccupy( enemies ) > 1 )
+//    {
+//        L_y = preL_y;
+//        rect.y = L_y;
+//        SetOccupy();
+//        Located();
+//    }
 }
 
 void Enemy::SetUp(int x, int y, int type){
     switch (type)
     {
+        case -3:{
+            texture = pre::HeartTexture;
+            SDL_QueryTexture(texture, nullptr, nullptr, &rectst.w, &rectst.h);
+            rect.w = rectst.w; rect.h = rectst.h;
+            break;
+        }
+        case -2:{
+            texture = pre::CoinTexture;
+            SDL_QueryTexture(texture, nullptr, nullptr, &rectst.w, &rectst.h);
+            rect.w = rectst.w; rect.h = rectst.h;
+            break;
+        }
         case -1:{
             texture = pre::ExpTexture;
+            SDL_QueryTexture(texture, nullptr, nullptr, &rectst.w, &rectst.h);
+            rect.w = rectst.w; rect.h = rectst.h;
             break;
         }
         case 0:{
