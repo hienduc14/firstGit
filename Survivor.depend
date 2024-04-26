@@ -1,278 +1,9 @@
 # depslib dependency file v1.0
-1709385854 source:d:\codeblock\gameprojectltnc\main.cpp
-	<iostream>
-	<SDL.h>
+1714136160 source:d:\codeblock\survivor\asset\imgtextload\imgtextload.cpp
+	"./ImgTextLoad.hpp"
 
-1711733652 source:d:\codeblock\survivor\main.cpp
-	<SDL.h>
-	"BasicFn.hpp"
-	"Game.hpp"
-	"Menu.hpp"
-	"Button.hpp"
-	"TextObj.hpp"
-	"Dmg.hpp"
-	"Wave.hpp"
-
-1712080377 d:\codeblock\survivor\basicfn.hpp
-	<SDL.h>
-	<SDL_image.h>
-	<SDL_ttf.h>
-	<iostream>
-	<list>
-	<string>
-	<cstring>
-	"Time.hpp"
-
-1712080515 source:d:\codeblock\survivor\basicfn.cpp
-	"BasicFn.hpp"
-
-1711181993 source:d:\codeblock\survivor\bigobj.cpp
-	"BigObj.hpp"
-
-1711252597 d:\codeblock\survivor\bigobj.hpp
-	"BasicFn.hpp"
-	"ImgTexture.hpp"
-
-1712508420 d:\codeblock\survivor\player.hpp
-	"BasicFn.hpp"
-	"BigObj.hpp"
-	"Screen.hpp"
-	"Enemy.hpp"
-	"Boss.hpp"
-	"Orb.hpp"
-	"FireBall.hpp"
-	"Zone.hpp"
-	"Exp.hpp"
-	"ImgTexture.hpp"
-	<vector>
-
-1712508420 source:d:\codeblock\survivor\player.cpp
-	"Player.hpp"
-
-1709885579 source:d:\codeblock\survivor\map.cpp
-	"Map.hpp"
-
-1710168713 d:\codeblock\survivor\map.hpp
-	"BasicFn.hpp"
-	"BigObj.hpp"
-
-1709873564 d:\codeblock\survivor\ammo.hpp
-	"BasicFn.hpp"
-	"BigObj.hpp"
-	"Touch.hpp"
-
-1709832720 source:d:\codeblock\survivor\ammo.cpp
-	"Ammo.hpp"
-
-1709832260 d:\codeblock\survivor\touch.hpp
-	"BasicFn.hpp"
-
-1709831343 source:d:\codeblock\survivor\touch.cpp
-	"Touch.hpp"
-
-1712078330 source:d:\codeblock\survivor\func.cpp
-	"Func.hpp"
-
-1712078330 d:\codeblock\survivor\func.hpp
-	"BasicFn.hpp"
-	<valarray>
-	<cmath>
-
-1711352798 source:d:\codeblock\survivor\movingobj.cpp
-	"MovingObj.hpp"
-
-1711253976 d:\codeblock\survivor\movingobj.hpp
-	"BasicFn.hpp"
-	"BigObj.hpp"
-	"Func.hpp"
-
-1712126916 source:d:\codeblock\survivor\enemy.cpp
-	"Enemy.hpp"
-
-1712081481 d:\codeblock\survivor\enemy.hpp
-	"MovingObj.hpp"
-	"Func.hpp"
-
-1710312364 source:d:\codeblock\survivor\power.cpp
-	"Power.hpp"
-
-1710264969 d:\codeblock\survivor\power.hpp
-	"MovingObj.hpp"
-
-1711010835 source:d:\codeblock\survivor\orb.cpp
-	"Orb.hpp"
-
-1711010835 d:\codeblock\survivor\orb.hpp
-	"MovingObj.hpp"
-
-1710322285 source:d:\codeblock\survivor\exp.cpp
-	"Exp.hpp"
-
-1710581255 d:\codeblock\survivor\exp.hpp
-	"Enemy.hpp"
-
-1712508018 d:\codeblock\survivor\game.hpp
-	<SDL.h>
-	"BasicFn.hpp"
-	"Func.hpp"
-	"BigObj.hpp"
-	"Player.hpp"
-	"Screen.hpp"
-	"Enemy.hpp"
-	"Orb.hpp"
-	"FireBall.hpp"
-	"Zone.hpp"
-	"Exp.hpp"
-	"Card.hpp"
-	"PowerUp.hpp"
-	"ImgTexture.hpp"
-	"Button.hpp"
-	"Dmg.hpp"
-	"TimeCount.hpp"
-	"KillCount.hpp"
-	"Wave.hpp"
-	"Boss.hpp"
-	<utility>
-
-1712566933 source:d:\codeblock\survivor\game.cpp
-	"Game.hpp"
-
-1711012727 source:d:\codeblock\survivor\button.cpp
-	"Button.hpp"
-
-1710318906 d:\codeblock\survivor\screen.hpp
-	"BasicFn.hpp"
-	"BigObj.hpp"
-
-1712421792 source:d:\codeblock\survivor\screen.cpp
-	"Screen.hpp"
-
-1710337770 d:\codeblock\survivor\button.hpp
-	"BigObj.hpp"
-
-1710258570 source:c:\users\admin\desktop\lt.c
-	<stdio.h>
-	<math.h>
-
-1712077200 d:\codeblock\survivor\time.hpp
-	"BasicFn.hpp"
-
-1712077200 source:d:\codeblock\survivor\time.cpp
-	"Time.hpp"
-
-1711734804 d:\codeblock\survivor\imgtexture.hpp
-	"BasicFn.hpp"
-
-1711734803 source:d:\codeblock\survivor\imgtexture.cpp
-	"ImgTexture.hpp"
-
-1710385210 source:d:\codeblock\survivor\menu.cpp
-	"Menu.hpp"
-
-1710384852 d:\codeblock\survivor\menu.hpp
-	"BasicFn.hpp"
-	"Screen.hpp"
-	"Button.hpp"
-
-1711253749 d:\codeblock\survivor\fireball.hpp
-	"MovingObj.hpp"
-	"Func.hpp"
-
-1711253787 source:d:\codeblock\survivor\fireball.cpp
-	"FireBall.hpp"
-
-1712563856 d:\codeblock\survivor\zone.hpp
-	"MovingObj.hpp"
-	"Func.hpp"
-	"Enemy.hpp"
-	"Boss.hpp"
-
-1712564433 source:d:\codeblock\survivor\zone.cpp
-	"Zone.hpp"
-
-1711013574 d:\codeblock\survivor\card.hpp
-	"Player.hpp"
-	"Enemy.hpp"
-	"Exp.hpp"
-	"Button.hpp"
-	"Func.hpp"
-	"ImgTexture.hpp"
-
-1711013697 source:d:\codeblock\survivor\card.cpp
-	"Card.hpp"
-
-1711012241 d:\codeblock\survivor\powerup.hpp
-	"Orb.hpp"
-	"FireBall.hpp"
-	"Zone.hpp"
-	"Player.hpp"
-
-1711190778 source:d:\codeblock\survivor\powerup.cpp
-	"PowerUp.hpp"
-
-1711380854 source:d:\codeblock\survivor\textobj.cpp
-	"TextObj.hpp"
-
-1711380854 d:\codeblock\survivor\textobj.hpp
-	"BasicFn.hpp"
-	"BigObj.hpp"
-
-1711384176 source:d:\codeblock\survivor\dmg.cpp
-	"Dmg.hpp"
-
-1711384211 d:\codeblock\survivor\dmg.hpp
-	"TextObj.hpp"
-
-1711735534 d:\codeblock\survivor\timecount.hpp
-	"TextObj.hpp"
-	"Time.hpp"
-
-1711383914 source:d:\codeblock\survivor\timecount.cpp
-	"TimeCount.hpp"
-
-1711389645 source:d:\codeblock\survivor\killcount.cpp
-	"KillCount.hpp"
-
-1711389355 d:\codeblock\survivor\killcount.hpp
-	"TextObj.hpp"
-
-1712561599 d:\codeblock\survivor\wave.hpp
-	"Func.hpp"
-	<fstream>
-
-1712561618 source:d:\codeblock\survivor\wave.cpp
-	"Wave.hpp"
-
-1712566920 source:d:\codeblock\survivor\boss.cpp
-	"Boss.hpp"
-
-1712564442 d:\codeblock\survivor\boss.hpp
-	"Enemy.hpp"
-
-1714119525 source:d:\codeblock\survivor\gameplay\levelup\card\card.cpp
-	"Card.hpp"
-
-1712671956 d:\codeblock\survivor\gameplay\levelup\card\card.hpp
-	"../../Player/Player.hpp"
-	"../../Opponent/Enemy/Enemy.hpp"
-	"../../Opponent/Exp/Exp.hpp"
-	"../../../src/Object/Button/Button.hpp"
-	"../../../src/Function/Func/Func.hpp"
-	"../../../asset/ImgTextLoad/ImgTextLoad.hpp"
-
-1714137325 d:\codeblock\survivor\gameplay\player\player.hpp
+1714136160 d:\codeblock\survivor\asset\imgtextload\imgtextload.hpp
 	"../../src/Function/BasicFn/BasicFn.hpp"
-	"../../src/Object/BigObj/BigObj.hpp"
-	"../../src/Object/Screen/Screen.hpp"
-	"../../asset/ImgTextLoad/ImgTextLoad.hpp"
-	"../Opponent/Enemy/Enemy.hpp"
-	"../Opponent/Boss/Boss.hpp"
-	"../Power/Orb/Orb.hpp"
-	"../Power/FireBall/FireBall.hpp"
-	"../Power/Zone/Zone.hpp"
-	"../Opponent/Exp/Exp.hpp"
-	"../Power/Kameha/Kameha.hpp"
-	<vector>
 
 1713930837 d:\codeblock\survivor\src\function\basicfn\basicfn.hpp
 	<SDL.h>
@@ -289,16 +20,67 @@
 1712672381 d:\codeblock\survivor\src\timemanage\time.hpp
 	"../Function/BasicFn/BasicFn.hpp"
 
+1714104793 source:d:\codeblock\survivor\gameplay\detail\killcount.cpp
+	"KillCount.hpp"
+
+1714032809 d:\codeblock\survivor\gameplay\detail\killcount.hpp
+	"../../src/Object/TextObj/TextObj.hpp"
+	"../../asset/ImgTextLoad/ImgTextLoad.hpp"
+
+1712672382 d:\codeblock\survivor\src\object\textobj\textobj.hpp
+	"../../Function/BasicFn/BasicFn.hpp"
+	"../BigObj/BigObj.hpp"
+
 1712678929 d:\codeblock\survivor\src\object\bigobj\bigobj.hpp
 	"../../Function/BasicFn/BasicFn.hpp"
 	"../../../asset/ImgTextLoad/ImgTextLoad.hpp"
 
+1714032835 source:d:\codeblock\survivor\gameplay\detail\timecount.cpp
+	"TimeCount.hpp"
+
+1714032810 d:\codeblock\survivor\gameplay\detail\timecount.hpp
+	"../../src/Object/TextObj/TextObj.hpp"
+	"../../src/TimeManage/Time.hpp"
+	"../../asset/ImgTextLoad/ImgTextLoad.hpp"
+
+1711384176 source:d:\codeblock\survivor\gameplay\dmg\dmg.cpp
+	"Dmg.hpp"
+
+1713861149 d:\codeblock\survivor\gameplay\dmg\dmg.hpp
+	"../../src/Object/TextObj/TextObj.hpp"
+	"../../asset/ImgTextLoad/ImgTextLoad.hpp"
+
+1714137541 source:d:\codeblock\survivor\gameplay\game\game.cpp
+	"Game.hpp"
+
+1714124010 d:\codeblock\survivor\gameplay\game\game.hpp
+	<SDL.h>
+	"../Player/Player.hpp"
+	"../LevelUp/Card/Card.hpp"
+	"../LevelUp/PowerUp/PowerUp.hpp"
+	"../Dmg/Dmg.hpp"
+	"../Detail/TimeCount.hpp"
+	"../Detail/KillCount.hpp"
+	"../Opponent/Wave/Wave.hpp"
+	<utility>
+
+1714137325 d:\codeblock\survivor\gameplay\player\player.hpp
+	"../../src/Function/BasicFn/BasicFn.hpp"
+	"../../src/Object/BigObj/BigObj.hpp"
+	"../../src/Object/Screen/Screen.hpp"
+	"../../asset/ImgTextLoad/ImgTextLoad.hpp"
+	"../Opponent/Enemy/Enemy.hpp"
+	"../Opponent/Boss/Boss.hpp"
+	"../Power/Orb/Orb.hpp"
+	"../Power/FireBall/FireBall.hpp"
+	"../Power/Zone/Zone.hpp"
+	"../Opponent/Exp/Exp.hpp"
+	"../Power/Kameha/Kameha.hpp"
+	<vector>
+
 1712681752 d:\codeblock\survivor\src\object\screen\screen.hpp
 	"../../Function/BasicFn/BasicFn.hpp"
 	"../BigObj/BigObj.hpp"
-
-1714136160 d:\codeblock\survivor\asset\imgtextload\imgtextload.hpp
-	"../../src/Function/BasicFn/BasicFn.hpp"
 
 1713776141 d:\codeblock\survivor\gameplay\opponent\enemy\enemy.hpp
 	"../../../src/Object/MovingObj/MovingObj.hpp"
@@ -321,6 +103,10 @@
 	"../Enemy/Enemy.hpp"
 	"../../Power/Kameha/Kameha.hpp"
 
+1714024956 d:\codeblock\survivor\gameplay\power\kameha\kameha.hpp
+	"../../../asset/ImgTextLoad/ImgTextLoad.hpp"
+	"../../../src/Object/MovingObj/MovingObj.hpp"
+
 1712676856 d:\codeblock\survivor\gameplay\power\orb\orb.hpp
 	"../../../src/Object/MovingObj/MovingObj.hpp"
 	"../../../asset/ImgTextLoad/ImgTextLoad.hpp"
@@ -339,12 +125,17 @@
 1713936829 d:\codeblock\survivor\gameplay\opponent\exp\exp.hpp
 	"../Enemy/Enemy.hpp"
 
+1712671956 d:\codeblock\survivor\gameplay\levelup\card\card.hpp
+	"../../Player/Player.hpp"
+	"../../Opponent/Enemy/Enemy.hpp"
+	"../../Opponent/Exp/Exp.hpp"
+	"../../../src/Object/Button/Button.hpp"
+	"../../../src/Function/Func/Func.hpp"
+	"../../../asset/ImgTextLoad/ImgTextLoad.hpp"
+
 1713927505 d:\codeblock\survivor\src\object\button\button.hpp
 	"../BigObj/BigObj.hpp"
 	"../../../asset/ImgTextLoad/ImgTextLoad.hpp"
-
-1711190778 source:d:\codeblock\survivor\gameplay\levelup\powerup\powerup.cpp
-	"PowerUp.hpp"
 
 1712671989 d:\codeblock\survivor\gameplay\levelup\powerup\powerup.hpp
 	"../../Power/Orb/Orb.hpp"
@@ -352,18 +143,42 @@
 	"../../Power/Zone/Zone.hpp"
 	"../../Player/Player.hpp"
 
-1714119682 source:d:\codeblock\survivor\gameplay\opponent\boss\boss.cpp
-	"Boss.hpp"
-
-1712679535 source:d:\codeblock\survivor\gameplay\opponent\wave\wave.cpp
-	"Wave.hpp"
-
 1712679416 d:\codeblock\survivor\gameplay\opponent\wave\wave.hpp
 	"../../../src/Function/Func/Func.hpp"
 	<fstream>
 
+1714119525 source:d:\codeblock\survivor\gameplay\levelup\card\card.cpp
+	"Card.hpp"
+
+1711190778 source:d:\codeblock\survivor\gameplay\levelup\powerup\powerup.cpp
+	"PowerUp.hpp"
+
+1714119682 source:d:\codeblock\survivor\gameplay\opponent\boss\boss.cpp
+	"Boss.hpp"
+
+1714119682 source:d:\codeblock\survivor\gameplay\opponent\enemy\enemy.cpp
+	"Enemy.hpp"
+
+1714119682 source:d:\codeblock\survivor\gameplay\opponent\exp\exp.cpp
+	"Exp.hpp"
+
+1712679535 source:d:\codeblock\survivor\gameplay\opponent\wave\wave.cpp
+	"Wave.hpp"
+
 1714136320 source:d:\codeblock\survivor\gameplay\player\player.cpp
 	"Player.hpp"
+
+1714105226 source:d:\codeblock\survivor\gameplay\power\fireball\fireball.cpp
+	"FireBall.hpp"
+
+1714098288 source:d:\codeblock\survivor\gameplay\power\kameha\kameha.cpp
+	"Kameha.hpp"
+
+1711010835 source:d:\codeblock\survivor\gameplay\power\orb\orb.cpp
+	"Orb.hpp"
+
+1712564433 source:d:\codeblock\survivor\gameplay\power\zone\zone.cpp
+	"Zone.hpp"
 
 1714136203 source:d:\codeblock\survivor\menu\menu.cpp
 	"Menu.hpp"
@@ -374,45 +189,18 @@
 	"../src/Object/Button/Button.hpp"
 	"../src/Object/TextObj/TextObj.hpp"
 
-1714136160 source:d:\codeblock\survivor\asset\imgtextload\imgtextload.cpp
-	"./ImgTextLoad.hpp"
-
-1714137541 source:d:\codeblock\survivor\gameplay\game\game.cpp
-	"Game.hpp"
-
-1714124010 d:\codeblock\survivor\gameplay\game\game.hpp
-	<SDL.h>
-	"../Player/Player.hpp"
-	"../LevelUp/Card/Card.hpp"
-	"../LevelUp/PowerUp/PowerUp.hpp"
-	"../Dmg/Dmg.hpp"
-	"../Detail/TimeCount.hpp"
-	"../Detail/KillCount.hpp"
-	"../Opponent/Wave/Wave.hpp"
-	<utility>
-
-1713861149 d:\codeblock\survivor\gameplay\dmg\dmg.hpp
-	"../../src/Object/TextObj/TextObj.hpp"
-	"../../asset/ImgTextLoad/ImgTextLoad.hpp"
-
-1712672382 d:\codeblock\survivor\src\object\textobj\textobj.hpp
-	"../../Function/BasicFn/BasicFn.hpp"
-	"../BigObj/BigObj.hpp"
-
-1714032810 d:\codeblock\survivor\gameplay\detail\timecount.hpp
-	"../../src/Object/TextObj/TextObj.hpp"
-	"../../src/TimeManage/Time.hpp"
-	"../../asset/ImgTextLoad/ImgTextLoad.hpp"
-
-1714032809 d:\codeblock\survivor\gameplay\detail\killcount.hpp
-	"../../src/Object/TextObj/TextObj.hpp"
-	"../../asset/ImgTextLoad/ImgTextLoad.hpp"
-
 1713981251 source:d:\codeblock\survivor\src\function\basicfn\basicfn.cpp
 	"BasicFn.hpp"
 
 1713373821 source:d:\codeblock\survivor\src\function\func\func.cpp
 	"Func.hpp"
+
+1714117916 source:d:\codeblock\survivor\src\main.cpp
+	<SDL.h>
+	"Function/BasicFn/BasicFn.hpp"
+	"../gameplay/Game/Game.hpp"
+	"../menu/Menu.hpp"
+	"../asset/ImgTextLoad/ImgTextLoad.hpp"
 
 1714119895 source:d:\codeblock\survivor\src\object\bigobj\bigobj.cpp
 	"BigObj.hpp"
@@ -431,52 +219,4 @@
 
 1712077200 source:d:\codeblock\survivor\src\timemanage\time.cpp
 	"Time.hpp"
-
-1714117916 source:d:\codeblock\survivor\src\main.cpp
-	<SDL.h>
-	"Function/BasicFn/BasicFn.hpp"
-	"../gameplay/Game/Game.hpp"
-	"../menu/Menu.hpp"
-	"../asset/ImgTextLoad/ImgTextLoad.hpp"
-
-1714032835 source:d:\codeblock\survivor\gameplay\detail\timecount.cpp
-	"TimeCount.hpp"
-
-1714104793 source:d:\codeblock\survivor\gameplay\detail\killcount.cpp
-	"KillCount.hpp"
-
-1711384176 source:d:\codeblock\survivor\gameplay\dmg\dmg.cpp
-	"Dmg.hpp"
-
-1714119682 source:d:\codeblock\survivor\gameplay\opponent\enemy\enemy.cpp
-	"Enemy.hpp"
-
-1714119682 source:d:\codeblock\survivor\gameplay\opponent\exp\exp.cpp
-	"Exp.hpp"
-
-1712564433 source:d:\codeblock\survivor\gameplay\power\zone\zone.cpp
-	"Zone.hpp"
-
-1714105226 source:d:\codeblock\survivor\gameplay\power\fireball\fireball.cpp
-	"FireBall.hpp"
-
-1711010835 source:d:\codeblock\survivor\gameplay\power\orb\orb.cpp
-	"Orb.hpp"
-
-1714123458 source:d:\codeblock\survivor\menu\mapchoose.cpp
-	"MapChoose.hpp"
-
-1714118325 d:\codeblock\survivor\menu\mapchoose.hpp
-	"../src/Function/BasicFn/BasicFn.hpp"
-	"../src/Object/Screen/Screen.hpp"
-	"../src/Object/Button/Button.hpp"
-
-1714098288 source:d:\codeblock\survivor\gameplay\power\kameha\kameha.cpp
-	"Kameha.hpp"
-
-1714024956 d:\codeblock\survivor\gameplay\power\kameha\kameha.hpp
-	"../../../asset/ImgTextLoad/ImgTextLoad.hpp"
-	"../../../src/Object/MovingObj/MovingObj.hpp"
-
-1713770133 source:d:\codeblock\survivor\clone.cpp
 
