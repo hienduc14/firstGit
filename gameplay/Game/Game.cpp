@@ -65,6 +65,8 @@ void Game::play( int MapChoice ){
 
                     SoundEFPer = per1;
                     MusicPer = per2;
+                    Mix_Volume(3, MIX_MAX_VOLUME*SoundEFPer);
+                    Mix_Volume(2, MIX_MAX_VOLUME*SoundEFPer);
                     Mix_Volume(1, MIX_MAX_VOLUME*SoundEFPer);
                     Mix_Volume(0, MIX_MAX_VOLUME*MusicPer);
                     break;
@@ -280,9 +282,11 @@ void Game::SpawnEnemy()
     if(wave.WaveNum < 0){
         if( wave.WaveNum > CurrentWave.second )
             CurrentWave.first += wave.GetAmount(), CurrentWave.second = wave.WaveNum;
-//        CurrentWave.first = 10;
-        if( int(SDL_GetTicks()) - timeSpawn.first > timeSpawn.second && enemies.size() < wave.GetAmount() ){
-            int number = func::random( 1, 5 );
+        //test
+//        CurrentWave.first = 1;
+        //test
+        if( int(SDL_GetTicks()) - timeSpawn.first > timeSpawn.second && enemies.size() < CurrentWave.first ){
+            int number = func::random( 1, 10 );
             for( int i = 1; i <= number; i++ ){
                 for( int j = 1; j <= 10; j++ ){
                     Enemy enemy;
@@ -419,6 +423,7 @@ void Game::PowerColision()
                 Dmg dmg( enemy.HP, enemy.rect.x, enemy.rect.y );
                 dmgs.push_back( dmg );
                 enemy.HP = 0;
+                enemy.exist = false;
             }
         }
     }

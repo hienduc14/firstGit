@@ -345,7 +345,7 @@ void Player::renderPlayer( bool IsMoving ){
     }
 }
 
-void Player::SetStartCD( int t ){ StartCD[t] = SDL_GetTicks(); }
+void Player::SetStartCD( int t ){ StartCD[t] = CD[t]; }
 int Player::GetStartCD( int t ){ return StartCD[t]; }
 
 int Player::checkCD(int t)
@@ -353,9 +353,12 @@ int Player::checkCD(int t)
     if( StartCD[t] == -1 ){
         return 1;
     }else{
-        if( int(SDL_GetTicks()) - StartCD[t] >= CD[t] ){
+        if( StartCD[t] == 0 ){
             return 1;
+        }else{
+            StartCD[t] -= TimeManager::Instance()->getElapsedTime();
+            if( StartCD[t] <= 0 ) StartCD[t] = 0;
+            return 0;
         }
-        return 0;
     }
 }

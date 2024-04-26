@@ -153,25 +153,32 @@ void Kameha::Firing( bool IsMoving )
 
 int Kameha::CheckDmg( SDL_Rect target )
 {
-    int x, y, r;
+    int x, y; double r;
     x = target.x + target.w/2;
     y = target.y + target.h/2;
-    r = (target.w/2 > target.h/2 ? target.h/2 : target.w/2);
+    r = ( target.h > target.w ? target.w : target.h )/2;
+//    r = sqrt(target.w*target.w < target.h*target.h)/4;
 
     // sin = opposite side/hypotenuse
     double hypotenuse = func::dist( x, y, startPoint.x, startPoint.y );
     double targetAngle = func::GetAngle(x-startPoint.x, y-startPoint.y);
     if( targetAngle < 0 ) targetAngle += 360;
+//    double left = std::fmod(std::fmod(angle - 90, 360)+360, 360);
+//    double right = std::fmod(angle + 90, 360);
+//    if( targetAngle < left && targetAngle > right ) return -1;
+
     double angleDis = angle - targetAngle;
 
     if( angleDis < 0 ) angleDis = -angleDis;
+    if( angleDis > 180 ) angleDis = 360 - angleDis;
+//    std::cout << angleDis <<'\n';
     if( angleDis > 90 ) return -1;
 
     double opSide = sin(angleDis*M_PI/180)*hypotenuse;
     double adjSide = sqrt(hypotenuse*hypotenuse - opSide*opSide);
-    if( opSide < r +rect.h/2 && adjSide > Dis && adjSide <= rect.w ){
+//    std::cout << angleDis << " " << adjSide <<'\n';
+    if( opSide < r +rect.h/2 && adjSide > Dis ){
         if( StartDmg == 0 ){
-//            std::cout << angleDis << '\n';
             return damage;
         }
         return 0;

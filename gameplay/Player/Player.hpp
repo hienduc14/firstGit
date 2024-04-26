@@ -69,7 +69,7 @@ public :
     int Level = 0;
     int MyPower[5] = {0, 0, 0, 0, 0};
     double StartCD[5] = {-1, -1, -1, -1, -1};
-    double CD[5] = {1*1000, FireBallCD, ZoneCD, 0, 0};
+    double CD[5] = {1, FireBallCD/1000, ZoneCD/1000, 0, 0};
     int dir = 0;
     double Defense = 1;
     double ExpGain = 1;
