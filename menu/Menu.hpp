@@ -3,7 +3,7 @@
 #include "../src/Object/Screen/Screen.hpp"
 #include "../src/Object/Button/Button.hpp"
 #include "../src/Object/TextObj/TextObj.hpp"
-#include "MapChoose.hpp"
+//#include "MapChoose.hpp"
 
 class Menu
 {
@@ -26,6 +26,9 @@ private :
     //MenuState != 0
     Screen Blur;
     Button Back;
+
+    //MenuState 1 MapChoose
+    Button MapOptions[3];
 
     //MenuState 2 Options
     Screen ExitMenu;
@@ -52,7 +55,7 @@ private :
     //Menustate 4 tutorial
     Screen TutorialMenu;
 private :
-    MapChoose mapChoose;
+//    MapChoose mapChoose;
     int MapChoice = -1;
 
 public :

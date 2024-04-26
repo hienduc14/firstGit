@@ -7,6 +7,7 @@ BigObj::BigObj(){
 }
 
 BigObj::~BigObj(){
+    texture = nullptr;
 //    SDL_DestroyTexture(this->texture);
 }
 void BigObj::SetRectSt(int x, int y){this->rectst.x = x; this->rectst.y = y;}

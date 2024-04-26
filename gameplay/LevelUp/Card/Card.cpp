@@ -13,7 +13,7 @@ Card::Card()
 
 Card::~Card()
 {
-
+    texture = nullptr;
 }
 
 void Card::Appear( int tt )
@@ -29,6 +29,11 @@ void Card::Random()
         content = func::random( 1, 6 );
     }while( 4 <= content && content <= 6 && pre::OptionUsed[content] > 3 );
     this->texture = pre::Option[content][pre::OptionUsed[content]];
+
+    if( texture == nullptr ){
+        std::cout << content << " " << pre::OptionUsed[content] << '\n';
+
+    }
     return;
 }
 

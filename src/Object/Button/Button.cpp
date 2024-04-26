@@ -6,7 +6,8 @@ Button::Button()
 }
 Button::~Button()
 {
-
+    texture = nullptr;
+//    SDL_DestroyTexture(texture);
 }
 
 void Button::QuerySetup()

@@ -9,7 +9,8 @@ Screen::Screen()
 
 Screen::~Screen()
 {
-
+    texture = nullptr;
+//    SDL_DestroyTexture(texture);
 }
 
 void Screen::SetMap()

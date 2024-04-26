@@ -13,7 +13,7 @@ Enemy::Enemy()
 
 Enemy::~Enemy()
 {
-
+    texture = nullptr;
 }
 
 

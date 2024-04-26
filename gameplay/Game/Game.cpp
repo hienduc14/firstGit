@@ -12,6 +12,7 @@ Game::~Game()
     orbs.clear();
     fireBalls.clear();
     exps.clear();
+
 }
 
 void Game::play( int MapChoice ){
@@ -157,7 +158,7 @@ void Game::play( int MapChoice ){
 
             //xoa quai va dan
             RemoveThing();
-            if( boss.HP <= 0 ) {
+            if( boss.exist == true && boss.HP <= 0 ) {
                 GameWin = true;
                 GameQuit = true;
             }
@@ -173,54 +174,81 @@ void Game::play( int MapChoice ){
 
 void Game::Prepare()
 {
-    LoadAll preload;
-    preload.loading( MapTerrain );
+    memset(pre::OptionUsed, 0, sizeof(pre::OptionUsed));
+    memset(Dot, 0, sizeof(Dot));
+    pre::MapTexture     = pre::Opponent[0][MapTerrain];
+    pre::SlimeTexture   = pre::Opponent[1][MapTerrain];
+    pre::RabbitTexture  = pre::Opponent[2][MapTerrain];
+    pre::BoarTexture    = pre::Opponent[3][MapTerrain];
+    switch (MapTerrain)
+    {
+        case 0 :
+        {
+            pre::SlimeFrame = 10;
+            pre::RabbitFrame = 6;
+            pre::BoarFrame = 6;
+            break;
+        }
+        case 1 :
+        {
+            pre::SlimeFrame = 10;
+            pre::RabbitFrame = 6;
+            pre::BoarFrame = 6;
+            break;
+        }
+        case 2 :
+        {
+            pre::SlimeFrame = 8;
+            pre::RabbitFrame = 8;
+            pre::BoarFrame = 8;
+            break;
+        }
+    }
     Map.SetMap();
     player.SetUp();
     wave.SetUp("./asset/Enemy/Wave.txt");
     TimeManager::Instance()->reset();
 
 //    screen PauseMenu
-    PauseMenu.SetTexture(std::string("./menu/PauseMenu.png"));
+    PauseMenu.texture = pre::PauseMenu;
 
 //    Button pause;
-    Pause.texture = base::Load_Image("./menu/Pause.png");
+    Pause.texture = pre::Pause;
     SDL_QueryTexture(Pause.texture, nullptr, nullptr, &Pause.rectst.w, &Pause.rectst.h);
     Pause.rect = {SCREEN_WIDTH-20-Pause.rectst.w, 20, Pause.rectst.w, Pause.rectst.h};
 
 //    Button resume;
-    Resume.texture = base::Load_Image("./menu/Resume.png");
+    Resume.texture = pre::Resume;
     SDL_QueryTexture(Resume.texture, nullptr, nullptr, &Resume.rectst.w, &Resume.rectst.h);
     Resume.rect = {370, 421, 196, 66};
 
 //    Button Home;
-    Home.texture = base::Load_Image("./menu/Home.png");
+    Home.texture = pre::Home;
     SDL_QueryTexture(Home.texture, nullptr, nullptr, &Home.rectst.w, &Home.rectst.h);
     Home.rect = {577, 422, 63, 62};
 
 //    Button TickBox
-    TickBox.SetTexture(std::string("./menu/TickBox.png"));
+    TickBox.texture = pre::TickBoxTexture;
     SDL_QueryTexture(TickBox.texture, nullptr, nullptr, &TickBox.rectst.w, &TickBox.rectst.h);
     TickBox.rect = {596, 278, 38, 37};
     TickBox.status = 1 - DmgAppear;
 //    Sound Control
-    SoundEFVolume.SetTexture(std::string("./menu/Volume.png"));
+    SoundEFVolume.texture = pre::SoundEFVoloumeTexture;
     SDL_QueryTexture(SoundEFVolume.texture, nullptr, nullptr, &SoundEFVolume.rectst.w, &SoundEFVolume.rectst.h);
     SoundEFVolume.rect = {389, 160, 225*SoundEFPer, 18};
 
-    SoundEFPoint.SetTexture(std::string("./menu/VolumePoint.png"));
+    SoundEFPoint.texture = pre::SoundEFPointTexture;
     SDL_QueryTexture(SoundEFPoint.texture, nullptr, nullptr, &SoundEFPoint.rectst.w, &SoundEFPoint.rectst.h);
     SoundEFPoint.limit = {387, 0, 217, 0};
     SoundEFPoint.rect = {SoundEFPoint.limit.x+SoundEFPoint.limit.w*SoundEFPer, 230-82, SoundEFPoint.rectst.w, SoundEFPoint.rectst.h };
 
-    MusicVolume.SetTexture(std::string("./menu/Volume.png"));
+    MusicVolume.texture = pre::MusicVoloumeTexture;
     SDL_QueryTexture(MusicVolume.texture, nullptr, nullptr, &MusicVolume.rectst.w, &MusicVolume.rectst.h);
     MusicVolume.rect = {389, 242, 225*MusicPer, 18};
 
-    MusicPoint.SetTexture(std::string("./menu/VolumePoint.png"));
+    MusicPoint.texture = pre::MusicPointTexture;
     SDL_QueryTexture(MusicPoint.texture, nullptr, nullptr, &MusicPoint.rectst.w, &MusicPoint.rectst.h);
     MusicPoint.limit = {387, 0, 217, 0};
-    std::cout << MusicPer << '\n';
     MusicPoint.rect = {MusicPoint.limit.x+MusicPoint.limit.w*MusicPer, 230, MusicPoint.rectst.w, MusicPoint.rectst.h };
 
     switch (MapTerrain)
@@ -279,7 +307,7 @@ void Game::LevelUp()
 void Game::SpawnEnemy()
 {
 //    if(wave.WaveNum < wave.MaxWave ){
-    if(wave.WaveNum < 0){
+    if(wave.WaveNum < 5){
         if( wave.WaveNum > CurrentWave.second )
             CurrentWave.first += wave.GetAmount(), CurrentWave.second = wave.WaveNum;
         //test
@@ -385,7 +413,6 @@ void Game::PowerColision()
                 enemy.HP -= orb.damage;
                 Dmg dmg( orb.damage, enemy.rect.x, enemy.rect.y );
                 dmgs.push_back( dmg );
-                orb.SetTexture(std::string("orb_explode.png"));
             }
         }
         for( auto &fireBall : fireBalls )
@@ -396,7 +423,6 @@ void Game::PowerColision()
                 enemy.HP -= fireBall.damage;
                 Dmg dmg( fireBall.damage, enemy.rect.x, enemy.rect.y );
                 dmgs.push_back( dmg );
-                fireBall.SetTexture(std::string("FireBall_explode.png"));
             }
         }
         if( player.GetPower( 2 ) && zone.CanDmg == 1 ){
@@ -594,6 +620,11 @@ void Game::RemoveThing()
     while (enemy!= enemies.end()){
         if(enemy->HP <= 0) {
             int DropType = func::random(1, 4);
+            int percent = func::random(1, 100);
+            if( 1 <= percent && percent <= 50 ) DropType = 1;
+            if( 51 <= percent && percent <= 80 ) DropType = 2;
+            if( 81 <= percent && percent <= 90 ) DropType = 3;
+            if( 91 <= percent && percent <= 100 ) DropType = 4;
             switch (DropType)
             {
                 case 1 :
@@ -647,9 +678,12 @@ void Game::RemoveThing()
 
 void Game::EndGame()
 {
+    if( pre::MapTexture == nullptr ) std::cout << "yes\n";
     Mix_HaltChannel(-1);
     base::UpdateData();
-    if( GameWin == -1 ) return;
+    if( GameWin == -1 ){
+        return;
+    }
     bool GameQuit = false;
     Screen background;
     if( GameWin == true ) background.SetTexture(std::string("./asset/Screen/YOUWIN.png"));
@@ -672,6 +706,7 @@ void Game::EndGame()
         background.drawObj();
         SDL_RenderPresent(base::renderer);
     }
+    SDL_RenderClear(base::renderer);
     return ;
 }
 

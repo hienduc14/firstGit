@@ -12,8 +12,9 @@ Player::~Player()
 void Player::SetUp()
 {
     // nhap texture
-    std::string SlimePath = "./asset/Player/Slime0.png";    SlimePath[20] = char(SkinOption+'0');
-    SetTexture(SlimePath);
+//    std::string SlimePath = "./asset/Player/Slime0.png";    SlimePath[20] = char(SkinOption+'0');
+//    SetTexture(SlimePath);
+    texture = pre::PlayerSlime[SkinOption];
     // nhap thong so cac phase
     NumPhase = 3; // 0 standing 1 moving 2 jumping
     phaseFrame[0] = {8, 0.1};
@@ -87,8 +88,9 @@ void Player::KeyInput()
             }
             case 1:
             {
-                if( state[SDL_SCANCODE_W] || state[SDL_SCANCODE_UP] )       aimDir --;
-                if( state[SDL_SCANCODE_S] || state[SDL_SCANCODE_DOWN] )     aimDir ++;
+                if( state[SDL_SCANCODE_O] ) kameha.state = 0, kameha.IsStateChange = false;
+                if( state[SDL_SCANCODE_W] || state[SDL_SCANCODE_UP] )       aimDir -= 2;
+                if( state[SDL_SCANCODE_S] || state[SDL_SCANCODE_DOWN] )     aimDir += 2;
                 aimDir = (aimDir%360 + 360)%360;
                 if( !state[SDL_SCANCODE_L] ) {
                     kameha.state = 2;
@@ -97,7 +99,6 @@ void Player::KeyInput()
                     Health.rect.w /= 2;
                     Mix_PlayChannel(2, pre::KamehaSound, 0);
                 }
-                if( state[SDL_SCANCODE_O] ) kameha.state = 0, kameha.IsStateChange = false;
                 break;
             }
             case 2:

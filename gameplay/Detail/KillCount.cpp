@@ -23,6 +23,6 @@ void KillCount::Display()
     ST = {0, 0, 16, 15};
     EN.w = 40; EN.h = 40;
     EN.x = rect.x + rect.w + 10;
-    EN.y = 10;
+    EN.y = 25;
     SDL_RenderCopy(base::renderer, pre::SkullIcon,&ST, &EN );
 }

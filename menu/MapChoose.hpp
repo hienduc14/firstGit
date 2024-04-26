@@ -11,7 +11,7 @@ public :
     ~MapChoose();
 private :
     Screen BackGround;
-    Button Option[3];
+    Button MapOption[3];
 public :
     void Draw();
     int play();

@@ -29,7 +29,7 @@ public :
 private :
     double a_x = 0, a_y = 0;
     double v_Player = 100;
-    int ExpRequire[10] = { 1, 10, 15, 20, 25, 30, 35, 40, 45, 50 };
+    int ExpRequire[10] = { 1, 5, 6, 8, 9, 12, 13, 15, 15, 15 };
     BigObj Health;
     BigObj HealthBar;
     BigObj ExpPoint;

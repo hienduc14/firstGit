@@ -7,7 +7,7 @@ Boss::Boss()
 
 Boss::~Boss()
 {
-
+    texture = nullptr;
 }
 
 void Boss::SetUp( int x, int y, int type )

@@ -9,5 +9,5 @@ Exp::Exp()
 
 Exp::~Exp()
 {
-
+    texture = nullptr;
 }

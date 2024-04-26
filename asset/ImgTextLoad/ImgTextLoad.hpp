@@ -3,8 +3,9 @@
 
 namespace pre
 {
-    extern SDL_Texture* MapTexture;
+    extern SDL_Texture* Opponent[4][3];
 
+    extern SDL_Texture* MapTexture;
     extern SDL_Texture* SlimeTexture;
     extern SDL_Texture* RabbitTexture;
     extern SDL_Texture* BoarTexture;
@@ -40,6 +41,32 @@ namespace pre
     extern Mix_Chunk* KamehaSound;
     extern Mix_Chunk* JumpSound;
 
+    extern SDL_Texture* MainMenuTexture;
+    extern SDL_Texture* PlayTexture;
+    extern SDL_Texture* ShopTexture;
+    extern SDL_Texture* TutorialTexture;
+    extern SDL_Texture* OptionsTexture;
+    extern SDL_Texture* BlurTexture;
+    extern SDL_Texture* BackTexture;
+    extern SDL_Texture* ExitMenuTexture;
+    extern SDL_Texture* ExitTexture;
+    extern SDL_Texture* TickBoxTexture;
+    extern SDL_Texture* SoundEFVoloumeTexture;
+    extern SDL_Texture* SoundEFPointTexture;
+    extern SDL_Texture* MusicVoloumeTexture;
+    extern SDL_Texture* MusicPointTexture;
+    extern SDL_Texture* ShopMenuTexture;
+    extern SDL_Texture* SkinTexture[4];
+    extern SDL_Texture* SkinBoughtTexture[4];
+    extern SDL_Texture* BuyTexture;
+    extern SDL_Texture* UsedTexture;
+    extern SDL_Texture* TutorialMenuTexture;
+    extern SDL_Texture* MapOptionTexture[3];
+    extern SDL_Texture* PauseMenu;
+    extern SDL_Texture* Pause;
+    extern SDL_Texture* Resume;
+    extern SDL_Texture* Home;
+    extern SDL_Texture* PlayerSlime[4];
 }
 
 class LoadAll
@@ -47,5 +74,6 @@ class LoadAll
 public:
     LoadAll();
     ~LoadAll();
-    void loading( int MapTerrain );
+    void loading();
+    void release();
 };
