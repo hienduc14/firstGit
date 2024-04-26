@@ -37,6 +37,9 @@ namespace pre
     TTF_Font* DmgFont = nullptr;
     TTF_Font* CountFont = nullptr;
     SDL_Texture* SkullIcon = nullptr;
+
+    Mix_Chunk* KamehaSound = nullptr;
+    Mix_Chunk* JumpSound = nullptr;
 }
 
 LoadAll::LoadAll(){}
@@ -120,4 +123,7 @@ void LoadAll::loading( int MapTerrain )
     pre::DmgFont    = TTF_OpenFont("./asset/CountFont.ttf", 40);
     pre::CountFont  = TTF_OpenFont("./asset/CountFont.ttf", 70);
     pre::SkullIcon  = base::Load_Image(std::string("./asset/Screen/Skull.png"));
+
+    pre::KamehaSound = Mix_LoadWAV("./asset/Sound/KamehaSound.WAV");
+    pre::JumpSound = Mix_LoadWAV("./asset/Sound/JumpSound.WAV");
 }

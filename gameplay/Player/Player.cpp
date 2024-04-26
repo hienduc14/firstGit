@@ -52,6 +52,7 @@ void Player::SetUp()
     this->dir = 1;
     SetHealthBar();
     SetExpBar();
+    kameha.EndRelease = 3000;
 }
 
 void Player::ResetInput(){ a_x = 0; a_y = 0; }
@@ -78,6 +79,7 @@ void Player::KeyInput()
                         phaseState = 2;
                         SetPhaseClip();
                         JumpCD.first = JumpCD.second;
+                        Mix_PlayChannel(1, pre::JumpSound, 0);
                     }
                 }
                 if( JumpCD.first > 0 ) JumpCD.first -= TimeStep;
@@ -93,6 +95,7 @@ void Player::KeyInput()
                     kameha.IsStateChange = true;
                     HP /= 2;
                     Health.rect.w /= 2;
+                    Mix_PlayChannel(2, pre::KamehaSound, 0);
                 }
                 if( state[SDL_SCANCODE_O] ) kameha.state = 0, kameha.IsStateChange = false;
                 break;
@@ -104,6 +107,7 @@ void Player::KeyInput()
                 {
                     kameha.StartRelease = 0;
                     kameha.state = 0, kameha.IsStateChange = true;
+                    Mix_HaltChannel(2);
                 }
                 break;
             }

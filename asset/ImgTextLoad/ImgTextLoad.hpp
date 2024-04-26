@@ -36,6 +36,10 @@ namespace pre
     extern TTF_Font* DmgFont;
     extern TTF_Font* CountFont;
     extern SDL_Texture* SkullIcon;
+
+    extern Mix_Chunk* KamehaSound;
+    extern Mix_Chunk* JumpSound;
+
 }
 
 class LoadAll

@@ -29,6 +29,8 @@ public :
     int SummonWave = 0;
     bool Invicible = false;
     Kameha kameha;
+    bool MusicPlay = false;
+
     double StartAim;
     double aimTime; // random
     double standTime;

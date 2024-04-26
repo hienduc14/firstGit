@@ -267,6 +267,14 @@ void Boss::Doing()
         {
             // 0 Moving 1 Kameha in a fixed time and divided to 3 parts ( 1.1 Aiming (Random time) 1.2 Standing (Fixed time) 1.3 Firing (Fixed time) )
             // random second aiming; at least 0.5 second standing; 2.5 second firing
+            if( kameha.state == 0 )
+            {
+                if( MusicPlay == true ){
+                    Mix_HaltChannel(3);
+                    MusicPlay = false;
+                }
+
+            }
             if(phaseState == 1)
             {
                 switch (kameha.state)
@@ -303,6 +311,10 @@ void Boss::Doing()
                                 kameha.state = 2;
                                 kameha.IsStateChange = true;
                                 StartAim = 0;
+                                if( MusicPlay == false ){
+                                    Mix_PlayChannel(3, pre::KamehaSound, 0);
+                                    MusicPlay = true;
+                                }
                             }
                         }
 

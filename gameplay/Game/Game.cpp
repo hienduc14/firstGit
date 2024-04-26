@@ -642,6 +642,7 @@ void Game::RemoveThing()
 
 void Game::EndGame()
 {
+    Mix_HaltChannel(-1);
     base::UpdateData();
     if( GameWin == -1 ) return;
     bool GameQuit = false;
