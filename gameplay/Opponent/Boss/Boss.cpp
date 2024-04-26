@@ -123,7 +123,7 @@ void Boss::SetUp( int x, int y, int type )
             exist = 1;
 
             // nhap rect va xet clip cho tung phase
-            RectOccupy = { 4, 15, 67, 134 };
+            RectOccupy = { 17, 47, 53, 102 };
             SDL_QueryTexture(texture, NULL, NULL, &rectst.w, &rectst.h);
 
             int X = 0, Y = 0, W = rectst.w/NumF, H = rectst.h;

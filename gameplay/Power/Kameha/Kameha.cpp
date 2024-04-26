@@ -54,7 +54,7 @@ void Kameha::SetUp( int type )
         {
             if( state == 2 ){
                 texture = pre::BossKamehaTexture;
-                frameNum = 8;
+                frameNum = 4;
                 frameTime = 0.1;
                 int W, H;
                 SDL_QueryTexture(texture, NULL, NULL, &W, &H);
