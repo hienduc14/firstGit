@@ -17,7 +17,8 @@ void Boss::SetUp( int x, int y, int type )
         case 0 :
         {
             // nhap texture
-            SetTexture(std::string("./asset/Enemy/SlimeBoss.png"));
+            texture = pre::BossTexture[0];
+//            SetTexture(std::string("./asset/Enemy/SlimeBoss.png"));
 
             // nhap thong so cac phase
             NumPhase = 5; // 0 prepare; 1 jumping; 2 floating; 3 landing; 4 moving
@@ -61,7 +62,8 @@ void Boss::SetUp( int x, int y, int type )
         case 1 :
         {
             // nhap texture
-            SetTexture(std::string("./asset/Enemy/GhostBoss.png"));
+            texture = pre::BossTexture[1];
+//            SetTexture(std::string("./asset/Enemy/GhostBoss.png"));
 
             // nhap thong so cac phase
             NumPhase = 6; // 0 Disappearing 1 Invisible 2 Appearing 3 Standing 4 Summoning 5 Moving
@@ -108,7 +110,8 @@ void Boss::SetUp( int x, int y, int type )
         case 2 :
         {
             // nhap texture
-            SetTexture(std::string("./asset/Enemy/FlameBoss.png"));
+            texture = pre::BossTexture[2];
+//            SetTexture(std::string("./asset/Enemy/FlameBoss.png"));
             // nhap thong so cac phase
             NumPhase = 2; // 0 Moving 1 Kameha in a fixed time and divided to 3 parts ( 1.1 Aiming (Random time) 1.2 Standing (Fixed time)  1.3 Firing (Fixed time) )
 

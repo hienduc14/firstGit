@@ -69,6 +69,7 @@ namespace pre
     SDL_Texture* Home = nullptr;
 
     SDL_Texture* PlayerSlime[4];
+    SDL_Texture* BossTexture[3];
 }
 
 LoadAll::LoadAll(){}
@@ -87,6 +88,9 @@ void LoadAll::loading()
     pre::Opponent[3][0]  = base::Load_Image(std::string("./asset/Enemy/Boar.png"));
     pre::Opponent[3][1]  = base::Load_Image(std::string("./asset/Enemy/Zombie.png"));
     pre::Opponent[3][2]  = base::Load_Image(std::string("./asset/Enemy/CoalMonster.png"));
+    pre::BossTexture[0] = base::Load_Image(std::string("./asset/Enemy/SlimeBoss.png"));
+    pre::BossTexture[1] = base::Load_Image(std::string("./asset/Enemy/GhostBoss.png"));
+    pre::BossTexture[2] = base::Load_Image(std::string("./asset/Enemy/FlameBoss.png"));
 //    switch (MapTerrain)
 //    {
 //        case 0 :

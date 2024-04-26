@@ -67,6 +67,7 @@ namespace pre
     extern SDL_Texture* Resume;
     extern SDL_Texture* Home;
     extern SDL_Texture* PlayerSlime[4];
+    extern SDL_Texture* BossTexture[3];
 }
 
 class LoadAll

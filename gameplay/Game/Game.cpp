@@ -56,6 +56,7 @@ void Game::play( int MapChoice ){
                     if(Resume.status == 1){GameState = 0; Mix_Resume(-1); }
                     TickBox.CheckTick(base::g_event);
                     if( TickBox.status == 1 ) DmgAppear = false;
+                    else DmgAppear = true;
 
                     SoundEFPoint.CheckHold(base::g_event);
                     MusicPoint.CheckHold(base::g_event);
@@ -307,7 +308,7 @@ void Game::LevelUp()
 void Game::SpawnEnemy()
 {
 //    if(wave.WaveNum < wave.MaxWave ){
-    if(wave.WaveNum < 5){
+    if(wave.WaveNum < 6){
         if( wave.WaveNum > CurrentWave.second )
             CurrentWave.first += wave.GetAmount(), CurrentWave.second = wave.WaveNum;
         //test
