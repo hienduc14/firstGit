@@ -15,13 +15,17 @@ Game survival nhiều màn chơi đa dạng, điều khiển Slime né tránh, g
 - [5. Về source code của game](#5-về-source-code-của-game)
 
 ## 0. Cách tải game
-**Bước 1:** Clone repo này về hoặc chọn Code -> Download Zip
+  - **Bước 1:** Đầu tiên, Cài codeblocks-20.03mingw và những thứ cần thiết để chạy được SDL2 trên CodeBlocks, bao gồm SDL2, SDL_Image, SDL_Mixer, SDL_TTF
 
-**Bước 2:** Cài codeblocks-20.03mingw
-
-**Bước 3:** Thêm các file SDL2.dll, SDL2_image.dll, SDL2_mixer.dll, SDL2_ttf.dll vào thư mục gốc.
-
-**Bước 4:** Chạy file [Survivor.exe](Survivor.exe) hoặc mở file [Survivor.cbp](Survivor.cbp) và chạy game bằng phím F9
+    Tham khảo tại [lazyfoo.net](https://lazyfoo.net/tutorials/SDL/index.php)
+    
+  - **Bước 2:** Tải file Game:
+      * Nếu CodeBlocks 32 bit:
+         + Chọn Code -> Rồi Download File Zip của repo này về
+      * Nếu CodeBlocks 64 bit:
+         + Tải file rar (đầu tiên) từ release này về [https://github.com/hienduc14/firstGit/releases/tag/download)
+     
+  - **Bước 3:** Click vào file Survivor.exe để chơi
 
 ## 1. Bắt đầu game
 
