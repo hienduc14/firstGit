@@ -106,7 +106,8 @@ Game survival nhiều màn chơi đa dạng, điều khiển Slime né tránh, g
     + Screen: đối tượng chứa hình ảnh màn hình
     + TextObj: đối tượng có thể viết lên màn hình
   * TimeManage: bộ điều khiển, xử lý thời gian trong quá trình chơi game
-- Folder menu: lưu màn hình bắt đầu của game, điều hướng các hoạt động trước khi gameplay.
+- Folder menu: lưu màn hình bắt đầu của game, điều hướng các hoạt động trước khi gameplay, chọn map
+
 - Folder gameplay: lưu toàn bộ hoạt động trong lúc chơi game
   * Game: điều khiển, xử lý game
   * Player: xử lý thao tác, hình ảnh của người chơi
