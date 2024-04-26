@@ -75,6 +75,7 @@ void Game::play( int MapChoice ){
                 }
                 case 2 :
                 {
+                    Mix_Pause(-1);
                     for(int i = 0; i <= 2; i++) card[i].CheckMouse(base::g_event);
                     for(int i = 0; i <= 2; i++)
                         if( card[i].status == 1 )
@@ -83,6 +84,7 @@ void Game::play( int MapChoice ){
                             Upgrades--;
                             if(Upgrades <= 0) GameState = 0;
                             for(int i = 0; i <= 2; i++) card[i].content = -1;
+                            Mix_Resume(-1);
                         }
                     break;
                 }
